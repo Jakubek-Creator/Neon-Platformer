@@ -1,4 +1,6 @@
 {
- "name": "Neon Platformer",
- "levels": []
+  "name": "Neon Platformer",
+  "levels": [
+    "01-level-test-neon.json"
+  ]
 }
