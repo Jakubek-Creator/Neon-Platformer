@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Neon Platformer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="A neon action platformer with a built-in level editor — fight enemies and minibosses, dodge rising lava, and build your own levels.">
+<meta name="theme-color" content="#0a0a0f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="textures/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:title" content="Neon Platformer">
+<meta property="og:description" content="A neon action platformer with a built-in level editor.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0f'/%3E%3Crect x='10' y='9' width='12' height='15' rx='2' fill='%2363c916'/%3E%3Crect x='13' y='13' width='2' height='2' fill='%233B6D11'/%3E%3Crect x='18' y='13' width='2' height='2' fill='%233B6D11'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/game.css">
+</head><body>
+<div id="toast"></div>
+<div id="rotate"><div class="ph"></div>ROTATE YOUR DEVICE<br><span style="color:#444;font-size:10px;letter-spacing:2px">THE GAME PLAYS IN LANDSCAPE</span></div>
+<div id="wrap">
+<div id="bar">
+  <button id="bPlay" class="on" onclick="setMode(mode==='play'?'edit':'play')">▶ PLAY</button>
+  <button onclick="showLS()" style="color:#EF9F27;border-color:#8a5e00">🗺 LEVELS</button>
+  <button id="bPause" onclick="togglePause()" style="color:#AFA9EC;border-color:#7F77DD" title="Pause (ESC / P)">⏸</button>
+  <span id="editTools" style="display:none;gap:4px;align-items:center">
+    <button id="bBlocks" onclick="toggleSB()" style="color:#AFA9EC;border-color:#7F77DD">📦 BLOCKS</button>
+    <span class="sep"></span>
+    <span id="curTile">✕ ERASE</span>
+    <span class="sep"></span>
+    <span class="thpick" id="themePick">
+      <span class="thlbl">🎨</span>
+      <span class="thsw tson" id="th0" style="background:#7F77DD" title="Neon (default)"  onclick="setTheme(0)"></span>
+      <span class="thsw"      id="th1" style="background:#44AAFF" title="Ice"             onclick="setTheme(1)"></span>
+      <span class="thsw"      id="th2" style="background:#FF5533" title="Lava"            onclick="setTheme(2)"></span>
+      <span class="thsw"      id="th3" style="background:#44DD55" title="Toxic"           onclick="setTheme(3)"></span>
+      <span class="thsw"      id="th4" style="background:#EE22EE" title="Void"            onclick="setTheme(4)"></span>
+      <span class="thsw"      id="th5" style="background:#FFAA11" title="Solar"           onclick="setTheme(5)"></span>
+      <span class="thsw"      id="th6" style="background:#00CCEE" title="Deep Sea"        onclick="setTheme(6)"></span>
+      <span class="thtw" id="twBtn" title="World twist for this theme — click to turn on/off" onclick="toggleTwist()" style="display:none"></span>
+    </span>
+    <span class="thpick" id="lavaRiseCtl" style="display:none">
+      <span class="thlbl" title="Lava rises this fast (0 = off)">🌋</span>
+      <input type="range" id="lavaRiseSlider" min="0" max="0.5" step="0.01" value="0" style="width:90px;vertical-align:middle" oninput="setLavaRise(this.value)">
+      <span id="lavaRiseVal" style="font-size:10px;color:#FF8855;min-width:30px;display:inline-block">OFF</span>
+    </span><button onclick="addCols(20)" style="color:#63c916;border-color:#3B6D11" title="Add 20 columns">+20W</button><button onclick="addRows(5)" style="color:#63c916;border-color:#3B6D11" title="Add 5 rows">+5H</button><button onclick="setLevelDimensions()" style="color:#00FFEE;border-color:#008877" title="Set exact level size">&#128208;<span id="dimsDisp">100&#215;20</span></button>
+    <button onclick="newLevel()" style="color:#E24B4A;border-color:#A32D2D" title="Clear all and start a blank level">🆕 New</button>
+    <button id="bSlot"   onclick="saveToSlot()"       style="color:#FF88FF;border-color:#882288" title="Save to campaign slot">📌 Slot</button>
+    <button id="bSaveLv" onclick="saveAsLevel()"      style="color:#EF9F27;border-color:#8a5e00" title="Save with a custom name">💾 Level</button>
+    <button id="bPickLv" onclick="showLevelLibrary()" style="color:#AFA9EC;border-color:#7F77DD" title="Browse saved levels">📂 Pick</button>
+    <button id="bSaveAs" onclick="saveAsFile()"       style="color:#63c916;border-color:#3B6D11" title="Export to JSON file">⬇ Save As…</button>
+    <button id="bCamp"   onclick="showCampaignBuilder()" style="color:#FFD700;border-color:#886600" title="Campaign Builder">🏆 Campaign</button>
+    <button onclick="document.getElementById('fileIn').click()" style="color:#378ADD;border-color:#185FA5" title="Import JSON file">⬆</button>
+    <span id="autoSaveInd">✓ autosaved</span>
+  </span>
+  <input type="file" id="fileIn"   accept=".json" style="display:none" onchange="importFile(event)">
+  <input type="file" id="campFileIn" accept=".json" style="display:none" onchange="importCampaign(event)">
+  <!-- V3.0 SLOT PICKER MODAL -->
+  <div id="slotPickModal" onclick="if(event.target===this)hideSlotPicker()">
+    <div class="sp-box">
+      <div class="sp-title">📌 SAVE TO SLOT</div>
+      <div class="sp-sub">Pick a campaign slot — green = has level · purple = current</div>
+      <div id="spWorlds"></div>
+      <div class="sp-foot">
+        <button onclick="hideSlotPicker()" style="color:#666;border-color:#2a2a3a;background:#0d0d1c;font-family:monospace;font-size:10px;padding:5px 14px;border-radius:3px;cursor:pointer">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2.4 LEVEL LIBRARY -->
+  <div id="lvLibModal" class="modal-ov">
+    <div class="mbox">
+      <div class="mhdr">
+        <span class="mhdr-title">📂 LEVEL LIBRARY</span>
+        <span id="lvLibCount" style="font-size:9px;color:#444;font-family:monospace"></span>
+        <button class="mhdr-close" onclick="hideLevelLibrary()">✕</button>
+      </div>
+      <div class="lvlib-wrap">
+        <div id="lvLibGrid" class="lvlib-grid"></div>
+        <div id="lvLibEmpty" style="display:none;padding:40px;text-align:center;color:#2a2a44;font-family:monospace;font-size:11px;">
+          No saved levels yet.<br><br>Use <b style="color:#EF9F27">💾 Level</b> to save your first level.
+        </div>
+      </div>
+      <div class="mfooter">
+        <button onclick="document.getElementById('fileIn').click()" style="color:#378ADD;border-color:#185FA5">⬆ Import JSON</button>
+        <span style="flex:1"></span>
+        <button onclick="recoverAutosave()" style="color:#3B6D11;border-color:#1a3a08" id="btnRecover">🔄 Recover Autosave</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- V2.4 CAMPAIGN BUILDER -->
+  <div id="campModal" class="modal-ov">
+    <div class="mbox wide" style="height:82vh">
+      <div class="mhdr">
+        <span class="mhdr-title">🏆 CAMPAIGN BUILDER</span>
+        <input id="campName" placeholder="Campaign name…" style="background:#0d0d1c;border:1px solid #2a2a44;color:#FFD700;font-family:monospace;font-size:11px;padding:3px 8px;border-radius:3px;width:180px;outline:none">
+        <button class="mhdr-close" onclick="hideCampaignBuilder()">✕</button>
+      </div>
+      <div class="cb-panels">
+        <!-- Left: level library to pick from -->
+        <div class="cb-left">
+          <div class="cb-ptitle">YOUR SAVED LEVELS — click to add</div>
+          <div class="cb-scroll" id="cbLibList"></div>
+        </div>
+        <!-- Right: campaign order -->
+        <div class="cb-right">
+          <div class="cb-ptitle">CAMPAIGN ORDER <span id="cbSlotCount" style="color:#7F77DD"></span></div>
+          <div class="cb-scroll" id="cbSlotList"></div>
+        </div>
+      </div>
+      <div class="mfooter">
+        <button onclick="exportCampaign()" style="color:#FFD700;border-color:#886600">⬇ Export Campaign</button>
+        <button onclick="document.getElementById('campFileIn').click()" style="color:#378ADD;border-color:#185FA5">⬆ Import Campaign</button>
+        <span style="flex:1"></span>
+        <button onclick="pushCampaignToSlots()" style="color:#63c916;border-color:#3B6D11;font-weight:bold" title="Write campaign levels directly to game slots 1-N">▶ Push to Slots</button>
+        <button onclick="clearCampaignSlots()" style="color:#E24B4A;border-color:#A32D2D">✕ Clear All</button>
+      </div>
+    </div>
+  </div>
+  <div id="hud">
+    <span id="powerupHud"></span>
+    <span id="levelName">CUSTOM LEVEL</span>
+    <span id="hpTxt" style="letter-spacing:1px"><span style="color:#ff5555">♥♥♥</span></span>
+    <span id="livesTxt" style="color:#FF88AA">✖<b>3</b></span>
+    <span>★<b id="scTxt">0</b></span>
+  </div>
+</div>
+<div id="playBar"><span id="pbName">LEVEL</span><span id="pbHp" style="letter-spacing:1px;color:#ff5555">♥♥♥</span><span id="pbLives" style="color:#FF88AA">✖<b>3</b></span><span id="pbCoins">★<b>0</b></span><span id="pbPups"></span><span id="pbWeapon">🔫 blaster</span><button class="pb-edit" onclick="setMode('edit')">✎ EDITOR</button></div>
+<div id="canvasWrap">
+  <div id="sb">
+    <div id="sbHead"><span>📦 BLOCK PALETTE</span><button id="sbClose" onclick="toggleSB()">✕</button></div>
+    <div id="sbSW"><input type="text" id="sbSearch" placeholder="🔍 search..." oninput="filterTiles(this.value)"></div>
+    <div id="sbRecent"><div class="rl">RECENT</div><div class="rt" id="sbRT"></div></div>
+    <div id="sbBody">
+      <div style="padding:4px 7px;border-bottom:1px solid #0e0e20">
+        <div class="eraser on" id="stb0" onclick="pick(0)">✕ &nbsp;ERASE</div>
+      </div>
+      <!-- TERRAIN -->
+      <div class="fld" id="fld-terrain">
+        <div class="fh open" onclick="togF('terrain')"><span class="arr">▶</span><span class="fi">⬜</span><span class="fn">TERRAIN</span></div>
+        <div class="fb open" id="fb-terrain">
+          <div class="stb" id="stb1"  onclick="pick(1)"  style="background:#1a1830;border-color:#7F77DD">SOL<span class="sl">Solid</span></div>
+          <div class="stb" id="stb2"  onclick="pick(2)"  style="background:#071528;border-color:#378ADD">H2O<span class="sl">Water</span></div>
+          <div class="stb" id="stb40" onclick="pick(40)" style="background:#1a1830;border-color:#AFA9EC">◥<span class="sl">Slope /</span></div>
+          <div class="stb" id="stb41" onclick="pick(41)" style="background:#1a1830;border-color:#AFA9EC">◤<span class="sl">Slope \</span></div>
+          <div class="stb" id="stb44" onclick="pick(44)" style="background:#001a00;border-color:#63c916">🏠<span class="sl">Spawn</span></div>
+          <div class="stb" id="stb24" onclick="pick(24)" style="background:#002211;border-color:#00FF88">🚩<span class="sl">Check</span></div>
+          <div class="stb" id="stb25" onclick="pick(25)" style="background:#1a1000;border-color:#AA8855">🧱<span class="sl">Break</span></div>
+          <div class="stb" id="stb42" onclick="pick(42)" style="background:#1a0a0a;border-color:#CC6633">💀<span class="sl">Crumble</span></div>
+        </div>
+      </div>
+      <!-- HAZARDS -->
+      <div class="fld" id="fld-hazards">
+        <div class="fh" onclick="togF('hazards')"><span class="arr">▶</span><span class="fi">⚠️</span><span class="fn">HAZARDS</span></div>
+        <div class="fb" id="fb-hazards">
+          <div class="stb" id="stb3"  onclick="pick(3)"  style="background:#2a0500;border-color:#D85A30">LAV<span class="sl">Lava</span></div>
+          <div class="stb" id="stb45" onclick="pick(45)" style="background:#061500;border-color:#44DD22">ACD<span class="sl">Acid</span></div>
+          <div class="stb" id="stb52" onclick="pick(52)" style="background:#061500;border-color:#44DD22">💧<span class="sl">AcidDrip</span></div>
+          <div class="stb" id="stb53" onclick="pick(53)" style="background:#1a0500;border-color:#D85A30">💧<span class="sl">LavaDrip</span></div>
+          <div class="stb" id="stb48" onclick="pick(48)" style="background:#0a0a12;border-color:#AAAAAA">⚙<span class="sl">Saw</span></div>
+          <div class="stb" id="stb49" onclick="pick(49)" style="background:#1a0800;border-color:#FF6600">🔥▲<span class="sl">FlameUp</span></div>
+          <div class="stb" id="stb50" onclick="pick(50)" style="background:#1a0800;border-color:#FF6600">🔥▼<span class="sl">FlameDn</span></div>
+          <div class="stb" id="stb51" onclick="pick(51)" style="background:#1a1008;border-color:#AA6633">🪨<span class="sl">FallRock</span></div>
+          <div class="stb" id="stb46" onclick="pick(46)" style="background:#1a0010;border-color:#FF0055">&#x27A1;<span class="sl">LaserR</span></div>
+          <div class="stb" id="stb47" onclick="pick(47)" style="background:#1a0010;border-color:#FF0055">&#x2B05;<span class="sl">LaserL</span></div>
+          <div class="stb" id="stb4"  onclick="pick(4)"  style="background:#1a0505;border-color:#E24B4A">▲<span class="sl">Spike</span></div>
+          <div class="stb" id="stb22" onclick="pick(22)" style="background:#330000;border-color:#FF4400">💥<span class="sl">Crusher</span></div>
+          <div class="stb" id="stb23" onclick="pick(23)" style="background:#200800;border-color:#FF6600">🌋<span class="sl">Vent</span></div>
+        </div>
+      </div>
+      <!-- PLATFORMS -->
+      <div class="fld" id="fld-platforms">
+        <div class="fh" onclick="togF('platforms')"><span class="arr">▶</span><span class="fi">🏃</span><span class="fn">PLATFORMS</span></div>
+        <div class="fb" id="fb-platforms">
+          <div class="stb" id="stb5"  onclick="pick(5)"  style="background:#051a05;border-color:#63c916">↑↑↑<span class="sl">Bounce</span></div>
+          <div class="stb" id="stb13" onclick="pick(13)" style="background:#1a001a;border-color:#FF44AA">M-H<span class="sl">Mov H</span></div>
+          <div class="stb" id="stb14" onclick="pick(14)" style="background:#1a001a;border-color:#FF44AA">M-V<span class="sl">Mov V</span></div>
+        </div>
+      </div>
+      <!-- SURFACES -->
+      <div class="fld" id="fld-surfaces">
+        <div class="fh" onclick="togF('surfaces')"><span class="arr">▶</span><span class="fi">🧊</span><span class="fn">SURFACES</span></div>
+        <div class="fb" id="fb-surfaces">
+          <div class="stb" id="stb8"  onclick="pick(8)"  style="background:#001a1a;border-color:#00FFEE">ICE<span class="sl">Ice</span></div>
+          <div class="stb" id="stb9"  onclick="pick(9)"  style="background:#1a0d00;border-color:#FF8800">►<span class="sl">Push R</span></div>
+          <div class="stb" id="stb10" onclick="pick(10)" style="background:#1a0d00;border-color:#FF8800">◄<span class="sl">Push L</span></div>
+        </div>
+      </div>
+      <!-- FX -->
+      <div class="fld" id="fld-fx">
+        <div class="fh" onclick="togF('fx')"><span class="arr">▶</span><span class="fi">✨</span><span class="fn">FX / PORTALS</span></div>
+        <div class="fb" id="fb-fx">
+          <div class="stb" id="stb6"  onclick="pick(6)"  style="background:#1a1200;border-color:#EF9F27">?<span class="sl">Rand PU</span></div>
+          <div class="stb" id="stb7"  onclick="pick(7)"  style="background:#1a001a;border-color:#FF44FF">END<span class="sl">Portal</span></div>
+          <div class="stb" id="stb11" onclick="pick(11)" style="background:#001a0d;border-color:#00FF99">TP-A<span class="sl">Tele A</span></div>
+          <div class="stb" id="stb12" onclick="pick(12)" style="background:#001a0d;border-color:#00FF99">TP-B<span class="sl">Tele B</span></div>
+        </div>
+      </div>
+      <!-- LOCKS -->
+      <div class="fld" id="fld-locks">
+        <div class="fh" onclick="togF('locks')"><span class="arr">▶</span><span class="fi">🔐</span><span class="fn">LOCKS &amp; KEYS</span></div>
+        <div class="fb" id="fb-locks">
+          <div class="stb" id="stb16" onclick="pick(16)" style="background:#1a0000;border-color:#FF4444">🔑R<span class="sl">Red Key</span></div>
+          <div class="stb" id="stb17" onclick="pick(17)" style="background:#00001a;border-color:#4444FF">🔑B<span class="sl">Blue Key</span></div>
+          <div class="stb" id="stb18" onclick="pick(18)" style="background:#2a0000;border-color:#FF2222">🚪R<span class="sl">Red Dr</span></div>
+          <div class="stb" id="stb19" onclick="pick(19)" style="background:#00002a;border-color:#2222FF">🚪B<span class="sl">Blue Dr</span></div>
+          <div class="stb" id="stb20" onclick="pick(20)" style="background:#1a0000;border-color:#FF5555">🔘R<span class="sl">Red Sw</span></div>
+          <div class="stb" id="stb21" onclick="pick(21)" style="background:#00001a;border-color:#5555FF">🔘B<span class="sl">Blue Sw</span></div>
+        </div>
+      </div>
+      <!-- ENEMIES -->
+      <div class="fld" id="fld-enemies">
+        <div class="fh" onclick="togF('enemies')"><span class="arr">▶</span><span class="fi">👾</span><span class="fn">ENEMIES</span></div>
+        <div class="fb" id="fb-enemies">
+          <div class="stb" id="stb15" onclick="pick(15)" style="background:#0d0d1a;border-color:#FF0000">👾<span class="sl">Drone</span></div>
+          <div class="stb" id="stb26" onclick="pick(26)" style="background:#1a0d00;border-color:#FF8800">🛸<span class="sl">Turret</span></div>
+          <div class="stb" id="stb27" onclick="pick(27)" style="background:#000a1a;border-color:#4488FF">🛡<span class="sl">Shield</span></div>
+          <div class="stb" id="stb28" onclick="pick(28)" style="background:#1a001a;border-color:#AA44AA">🚶<span class="sl">Walker</span></div>
+          <div class="stb" id="stb43" onclick="pick(43)" style="background:#1a0015;border-color:#FF0055">🎯<span class="sl">Sniper</span></div>
+          <div class="stb" id="stb55" onclick="pick(55)" style="background:#1a0d00;border-color:#FF8800">⚡<span class="sl">Charger</span></div>
+          <div class="stb" id="stb56" onclick="pick(56)" style="background:#150028;border-color:#AA44FF">☄<span class="sl">Bomber</span></div>
+          <div class="stb" id="stb57" onclick="pick(57)" style="background:#001a14;border-color:#1D9E75">🕷<span class="sl">Climber</span></div>
+
+        </div>
+      </div>
+      <!-- MINI BOSS -->
+      <div class="fld" id="fld-miniboss">
+        <div class="fh" onclick="togF('miniboss')"><span class="arr">▶</span><span class="fi">💀</span><span class="fn">MINI BOSS</span></div>
+        <div class="fb" id="fb-miniboss">
+          <div class="stb" id="stb54" onclick="pick(54)" style="background:#1a0820;border-color:#FF4466">👁<span class="sl">Sentinel</span></div>
+          <div class="stb" id="stb58" onclick="pick(58)" style="background:#0a1a00;border-color:#639922">🐝<span class="sl">Hive</span></div>
+          <div class="stb" id="stb59" onclick="pick(59)" style="background:#1a0a00;border-color:#BA7517">⚔<span class="sl">Warden</span></div>
+        </div>
+      </div>
+      <!-- POWER-UPS -->
+      <div class="fld" id="fld-powerups">
+        <div class="fh" onclick="togF('powerups')"><span class="arr">▶</span><span class="fi">⚡</span><span class="fn">POWER-UPS</span></div>
+        <div class="fb" id="fb-powerups">
+          <div style="font-size:8px;color:#555;width:100%;padding:2px 0 3px">touch to collect</div>
+          <div class="stb" id="stb29" onclick="pick(29)" style="background:#1a1a00;border-color:#FFEE00">⚡<span class="sl">Speed</span></div>
+          <div class="stb" id="stb30" onclick="pick(30)" style="background:#001a1a;border-color:#00FFEE">🛡<span class="sl">Shield</span></div>
+          <div class="stb" id="stb31" onclick="pick(31)" style="background:#1a0028;border-color:#FF88FF">✦<span class="sl">Jump</span></div>
+          <div class="stb" id="stb32" onclick="pick(32)" style="background:#1a1000;border-color:#EF9F27">●<span class="sl">Coin</span></div>
+          <div class="stb" id="stb60" onclick="pick(60)" style="background:#06200c;border-color:#44DD66">1UP<span class="sl">Extra Life</span></div>
+          <div class="stb" id="stb61" onclick="pick(61)" style="background:#2a0010;border-color:#FF3366">❤<span class="sl">Extra Heart</span></div>
+        </div>
+      </div>
+      <!-- WEAPONS -->
+      <div class="fld" id="fld-weapons">
+        <div class="fh" onclick="togF('weapons')"><span class="arr">▶</span><span class="fi">🔫</span><span class="fn">WEAPONS</span></div>
+        <div class="fb" id="fb-weapons">
+          <div style="font-size:8px;color:#555;width:100%;padding:2px 0 3px">Q/E cycle · 1-7 hotkeys</div>
+          <div class="stb" id="stb39" onclick="pick(39)" style="background:#0d0d1a;border-color:#AFA9EC">🔵<span class="sl">Blaster</span></div>
+          <div class="stb" id="stb33" onclick="pick(33)" style="background:#1a0800;border-color:#FF8800">🟠<span class="sl">Shotgun</span></div>
+          <div class="stb" id="stb34" onclick="pick(34)" style="background:#001a1a;border-color:#00FFEE">🔷<span class="sl">Laser</span></div>
+          <div class="stb" id="stb35" onclick="pick(35)" style="background:#150028;border-color:#AA44FF">⚔️<span class="sl">Sword</span></div>
+          <div class="stb" id="stb36" onclick="pick(36)" style="background:#1a0a00;border-color:#FF5500">💣<span class="sl">Grenade</span></div>
+          <div class="stb" id="stb37" onclick="pick(37)" style="background:#001520;border-color:#88EEFF">❄️<span class="sl">Freeze</span></div>
+          <div class="stb" id="stb38" onclick="pick(38)" style="background:#1a001a;border-color:#FF44FF">⚡<span class="sl">Plasma</span></div>
+          <div class="stb" id="stb62" onclick="pick(62)" style="background:#00161c;border-color:#40e8ff">⚓<span class="sl">Grapple</span></div>
+        </div>
+      </div>
+      <div style="height:16px"></div>
+    </div>
+  </div>
+  <canvas id="c"></canvas>
+  <div id="touchCtrl">
+    <canvas id="tpad"></canvas>
+    <div class="tzone" id="tzoneL">
+      <div class="tbtn2" id="tb-left">&#8592;</div>
+      <div class="tbtn2 sm" id="tb-down">&#8595;</div>
+      <div class="tbtn2" id="tb-right">&#8594;</div>
+    </div>
+    <div class="tzone" id="tzoneR">
+      <div class="tbtn2 sm" id="tb-cycle">&#8644;</div>
+      <div class="tbtn2 hook" id="tb-hook">&#9875;</div>
+      <div class="tbtn2 fire" id="tb-fire">&#10022;</div>
+      <div class="tbtn2 lg" id="tb-jump">&#8593;</div>
+    </div>
+  </div>
+</div>
+<div id="foot"><b>arrows/WASD</b> move &nbsp;<b>↑/W/Space</b> jump &nbsp;<b>↓/S</b> ground pound &nbsp;<b>double-tap ←/→</b> dash &nbsp;<b>C/Shift</b> grapple &nbsp;<b>Z/X</b> fire &nbsp;<b>Q/E</b> switch weapon &nbsp;<b>1–7</b> hotkeys &nbsp;<b>ESC/P</b> pause &nbsp;| Edit: <b>scroll · arrows · mid-drag</b> pan &nbsp;right-click=erase</div>
+</div>
+<!-- V2.6 PAUSE MENU -->
+<div id="pauseMenu">
+  <div class="pmbox">
+    <div class="pmtitle">⏸ PAUSED</div>
+    <button class="pmbtn green" onclick="resumeGame()">▶ RESUME</button>
+    <div class="pmdiv"></div>
+    <button class="pmbtn" id="pmCheckpoint" onclick="pauseRestartCheckpoint()">🚩 RESTART FROM CHECKPOINT</button>
+    <button class="pmbtn" onclick="pauseRestartLevel()">↺ RESTART LEVEL</button>
+    <div class="pmdiv"></div>
+    <button class="pmbtn" onclick="pauseGoEdit()" style="color:#63c916;border-color:#1a3a08">&#9999; EDIT LEVEL</button>
+    <button class="pmbtn red" onclick="pauseGoMenu()">⏏ MAIN MENU</button>
+    <div class="pmhint">ESC or P to toggle pause</div>
+  </div>
+</div>
+<div id="win">
+  <h2 id="winTitle">LEVEL COMPLETE!</h2>
+  <div id="winRank"></div>
+  <div id="winRankLabel"></div>
+  <div id="winStats" style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:6px 0 14px"></div>
+  <p id="winTxt" style="display:none"></p>
+  <div id="winBtns" style="display:none;flex-direction:column;align-items:center;gap:10px">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button id="wbNext" onclick="winNext()" style="font-size:14px;padding:8px 24px;border-color:#63c916;color:#63c916">NEXT LEVEL →</button>
+      <button onclick="winRetry()" style="font-size:12px;padding:6px 18px;border-color:#7F77DD;color:#AFA9EC">↺ RETRY</button>
+      <button onclick="showLS()" style="font-size:12px;padding:6px 18px;border-color:#8a5e00;color:#EF9F27">🗺 LEVEL SELECT</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- LEVEL SELECT OVERLAY -->
+<div id="ls">
+  <h1>NEON PLATFORMER</h1>
+  <div class="sub">SELECT LEVEL</div>
+  <div class="grid" id="lsGrid"></div>
+  <button class="lsbtn hi" id="lsFree" onclick="freeBuild()" style="margin-top:16px">✏ FREE BUILD (no slot)</button>
+  <button class="lsbtn" onclick="hideLS()" style="margin-top:6px">✕ CLOSE</button>
+</div>
+<div id="menu">
+  <canvas id="menuBg"></canvas>
+  <div id="ms-intro" class="ms" onclick="window.introAdvance&&introAdvance()" ontouchend="window.introAdvance&&introAdvance()">
+    <div class="mlogo">NEON<br>PLATFORMER</div>
+    <div class="msub">V 4 . 0</div>
+    <div class="pkey">&#8212; PRESS ANY KEY &#8212;</div>
+    <div class="vbadge">V6.8</div>
+  </div>
+  <div id="ms-main" class="ms">
+    <div class="mlogsm" style="margin-bottom:4px">NEON PLATFORMER</div>
+    <div class="msub">MAIN MENU</div>
+    <div class="mitems">
+      <button class="mi c-new" onmouseenter="mhov()" onclick="mcl();doNew()">NEW GAME</button>
+      <button class="mi c-cont" id="miCont" onmouseenter="mhov()" onclick="mcl();doCont()">CONTINUE</button>
+      <button class="mi c-load" onmouseenter="mhov()" onclick="mcl();doLoad()">LOAD GAME</button>
+      <button class="mi" onmouseenter="mhov()" onclick="mcl();doSkin()" style="color:#22E6FF;border-color:#0a3040">&#9679; CUSTOMISE BLOB</button>
+      <div class="mdiv"></div>
+      <button class="mi" onmouseenter="mhov()" onclick="mcl();doEditor()" style="color:#63c916;border-color:#1a3a08">&#9999; LEVEL EDITOR</button>
+      <div class="mdiv"></div>
+      <button class="mi c-sett" onmouseenter="mhov()" onclick="mcl();doSett()">SETTINGS</button>
+      <button class="mi c-cred" onmouseenter="mhov()" onclick="mcl();var s=document.getElementById('credSub');if(s){s.textContent='';s.classList.remove('ending');}goMS('credits')">CREDITS</button>
+      <div class="mdiv"></div>
+      <button class="mi red" onmouseenter="mhov()" onclick="mcl();goMS('intro')" style="font-size:10px">EXIT TO INTRO</button>
+    </div>
+    <div class="vbadge">V6.8</div>
+  </div>
+  <div id="ms-newg" class="ms">
+    <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
+    <div class="mlogsm" style="margin-bottom:4px">NEW GAME</div>
+    <div class="msub">SELECT SAVE SLOT</div>
+    <div id="ng-slots" class="slots"></div>
+  </div>
+  <div id="ms-load" class="ms">
+    <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
+    <div class="mlogsm" style="margin-bottom:4px">LOAD GAME</div>
+    <div class="msub">SELECT SAVE FILE</div>
+    <div id="ld-slots" class="slots"></div>
+  </div>
+  <div id="ms-skin" class="ms">
+    <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
+    <div class="mlogsm" style="margin-bottom:2px">CUSTOMISE</div>
+    <div class="msub" id="sk-name" style="margin-bottom:6px"></div>
+    <div class="skwrap"><canvas id="sk-cv"></canvas><div id="sk-rows"></div></div>
+  </div>
+  <div id="ms-sett" class="ms">
+    <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
+    <div class="mlogsm" style="margin-bottom:4px">SETTINGS</div>
+    <div class="msub" style="margin-bottom:10px"></div>
+    <div class="sscroll">
+      <div class="ssec">
+        <div class="stitle">AUDIO</div>
+        <div class="srow"><span class="slbl">MASTER VOLUME</span><input type="range" class="nr" id="sm-master" min="0" max="1" step="0.05" oninput="updS('masterVol',+this.value)"><span class="sval" id="sv-master">80%</span></div>
+        <div class="srow"><span class="slbl">MUSIC VOLUME</span><input type="range" class="nr" id="sm-music" min="0" max="1" step="0.05" oninput="updS('musicVol',+this.value)"><span class="sval" id="sv-music">60%</span></div>
+        <div class="srow"><span class="slbl">SFX VOLUME</span><input type="range" class="nr" id="sm-sfx" min="0" max="1" step="0.05" oninput="updS('sfxVol',+this.value)"><span class="sval" id="sv-sfx">80%</span></div>
+      </div>
+      <div class="ssec">
+        <div class="stitle">GAMEPLAY</div>
+        <div class="srow"><span class="slbl">DIFFICULTY</span><div class="dg"><button class="tb" id="d-easy" onmouseenter="mhov()" onclick="mcl();setDif('easy')">EASY</button><button class="tb" id="d-norm" onmouseenter="mhov()" onclick="mcl();setDif('normal')">NORMAL</button><button class="tb" id="d-hard" onmouseenter="mhov()" onclick="mcl();setDif('hard')">HARD</button></div></div>
+        <div class="srow"><span class="slbl">TUTORIALS</span><button class="tb" id="t-tut" onmouseenter="mhov()" onclick="mcl();togS('tutorials','t-tut')">ON</button></div>
+        <div class="srow"><span class="slbl">AUTO-SAVE</span><button class="tb" id="t-auto" onmouseenter="mhov()" onclick="mcl();togS('autosave','t-auto')">ON</button></div>
+        <div class="srow"><span class="slbl">TILT CONTROLS</span><button class="tb" id="t-gyro" onmouseenter="mhov()" onclick="mcl();togGyro()">OFF</button></div>
+        <div class="srow"><span class="slbl">VIBRATION</span><button class="tb" id="t-hap" onmouseenter="mhov()" onclick="mcl();togS('haptics','t-hap')">ON</button></div>
+        <div class="srow"><span class="slbl">BACKGROUND</span><button class="tb on" id="t-bg" onmouseenter="mhov()" onclick="mcl();togS('bgLite','t-bg')">FULL</button></div>
+        <div class="srow"><span class="slbl">TOUCH MOVE</span><button class="tb on" id="t-tpad" onmouseenter="mhov()" onclick="mcl();togS('tpadArc','t-tpad')">SLIDER</button></div>
+        <div class="srow"><span class="slbl">LIGHTING</span><button class="tb on" id="t-light" onmouseenter="mhov()" onclick="mcl();togS('lighting','t-light')">ON</button></div>
+        <div class="srow"><span class="slbl">SCREEN SHAKE &amp; HIT FX</span><button class="tb on" id="t-feel" onmouseenter="mhov()" onclick="mcl();togS('feel','t-feel')">ON</button></div>
+      </div>
+      <div class="ssec">
+        <div class="stitle">CONTROLS</div>
+        <div class="cgrid">
+          <span class="ck">&#8592; &#8594; / A D</span><span class="cact">Move</span>
+          <span class="ck">&#8593; / W / Space</span><span class="cact">Jump</span>
+          <span class="ck">&#8595; / S</span><span class="cact">Stomp</span>
+          <span class="ck">Z</span><span class="cact">Fire Weapon</span>
+          <span class="ck">X (hold)</span><span class="cact">Charge Plasma</span>
+          <span class="ck">Q / E</span><span class="cact">Cycle Weapon</span>
+          <span class="ck">1 &#8211; 7</span><span class="cact">Weapon Hotkeys</span>
+          <span class="ck">R</span><span class="cact">Restart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="ms-credits" class="ms">
+    <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
+    <div class="mlogsm" style="margin-bottom:4px">CREDITS</div>
+    <div class="msub" id="credSub" style="margin-bottom:10px"></div>
+    <div class="cbody">
+      <div class="ce"><div class="cr">DESIGN, CODE &amp; ART</div><div class="cn">Jakub &#183; built with Claude</div></div>
+      <div class="ce"><div class="cr">ENGINE</div><div class="cn">Single-file HTML5 Canvas &#183; Vanilla JS</div></div>
+      <div class="ce"><div class="cr">CONTENT</div><div class="cn">50-Level Campaign + Level Editor</div></div>
+      <div class="ce"><div class="cr">WEAPONS</div><div class="cn">Blaster &#183; Shotgun &#183; Laser &#183; Sword<br>Grenade &#183; Freeze &#183; Plasma</div></div>
+      <div class="ce"><div class="cr">ENEMIES</div><div class="cn">Drone &#183; Turret &#183; Shield &#183; Walker<br>Sniper &#183; Charger &#183; Bomber &#183; Climber</div></div>
+      <div class="ce"><div class="cr">MINIBOSSES</div><div class="cn">Sentinel &#183; Hive &#183; Warden</div></div>
+      <div class="ce"><div class="cr" style="color:#EF9F27">VERSION</div><div class="cn" style="color:#AFA9EC">5.5 &#8212; Smooth &amp; Sharp</div></div>
+    </div>
+    <div class="vbadge">V6.8</div>
+  </div>
+</div>
+
+<!-- Levels: generated from levels/*.json by tools/build.py -->
+<script src="levels/campaign.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/core/state.js"></script>
+<script src="js/core/smooth.js"></script>
+<script src="js/game/level.js"></script>
+<script src="js/editor/saves.js"></script>
+<script src="js/game/campaign.js"></script>
+<script src="js/ui/hud.js"></script>
+<script src="js/game/weapons.js"></script>
+<script src="js/game/physics.js"></script>
+<script src="js/game/moves.js"></script>
+<script src="js/game/grapple.js"></script>
+<script src="js/game/twists.js"></script>
+<script src="js/game/enemies.js"></script>
+<script src="js/input/input.js"></script>
+<script src="js/editor/tools.js"></script>
+<script src="js/editor/heat.js"></script>
+<script src="js/editor/medit.js"></script>
+<script src="js/game/update.js"></script>
+<script src="js/render/draw.js"></script>
+<script src="js/render/tiles.js"></script>
+<script src="js/render/feel.js"></script>
+<script src="js/render/light.js"></script>
+<script src="js/render/skins.js"></script>
+<script src="js/render/player.js"></script>
+<script src="js/render/enemies.js"></script>
+<script src="js/render/backgrounds.js"></script>
+<script src="js/core/loop.js"></script>
+<script src="js/audio/audio.js"></script>
+<script src="js/input/gamepad.js"></script>
+<script src="js/ui/menu.js"></script>
+<script src="js/input/touch.js"></script>
+<script src="js/input/touchpad.js"></script>
+<script src="js/audio/sound-files.js"></script>
+<script src="js/main.js"></script>
+</body></html>
