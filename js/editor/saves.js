@@ -33,6 +33,10 @@ function namedDelete(name){
   LS.setItem('neon_named_list',JSON.stringify(list));
   LS.removeItem('neon_named_'+name);
 }
+// Levels that ship with the game (levels/ folder, via levels/campaign.js or campaign.json)
+function gameLevels(){return (BUILTIN_LEVELS||[]).map((d,i)=>{const data=_decLevel(d);return data&&data.grid?{i,name:data.name||('Game Level '+(i+1)),data}:null;}).filter(Boolean);}
+function gameLevelData(i){const d=_decLevel(BUILTIN_LEVELS[i]);return d?JSON.parse(JSON.stringify(d)):null;}
+function loadGameLevel(i){try{const d=gameLevelData(i);if(!d){toast('Not found');return;}applyData(d);toast('📂 Loaded "'+(d.name||'Game Level '+(i+1))+'"');}catch(e){toast('✗ '+e.message);}}
 function fmtDate(ts){const d=new Date(ts);return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'2-digit'});}
 
 // ── 💾 Save as Level ──
@@ -60,9 +64,27 @@ function renderLevelLibrary(){
   const asRaw=LS.getItem('neon_autosave');
   const recBtn=document.getElementById('btnRecover');
   if(recBtn)recBtn.style.display=asRaw?'inline-block':'none';
-  if(!list.length){grid2.innerHTML='';empty.style.display='block';return;}
+  const game=gameLevels();
+  if(!list.length&&!game.length){grid2.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
   grid2.innerHTML='';
+  game.forEach(g=>{
+    const sw=THEME_SWATCHES[g.data.theme||0]||'#7F77DD';
+    const card=document.createElement('div');card.className='lvcard';
+    card.innerHTML=`<div class="lvcard-thumb" style="display:flex;align-items:center;justify-content:center;color:#FFD700;font:10px monospace;letter-spacing:2px">GAME LEVEL ${g.i+1}</div>
+      <div class="lvcard-body">
+        <div class="lvcard-name" title="${g.name}">${g.name}</div>
+        <div class="lvcard-meta">
+          <span class="lvcard-swatch" style="background:${sw};margin-top:1px"></span>
+          <span>${g.data.cols||'?'}×${g.data.rows||'?'}</span>
+          <span>levels/ folder</span>
+        </div>
+        <div class="lvcard-acts">
+          <button onclick="loadGameLevel(${g.i});hideLevelLibrary()" style="color:#AFA9EC;border-color:#7F77DD;background:#0d0d1c">Load</button>
+        </div>
+      </div>`;
+    grid2.appendChild(card);
+  });
   list.forEach(name=>{
     const meta=namedGet(name);if(!meta)return;
     const sw=THEME_SWATCHES[meta.theme||0]||'#7F77DD';
@@ -149,7 +171,20 @@ function renderCBLib(){
   const list=namedList();
   const el=document.getElementById('cbLibList');
   el.innerHTML='';
-  if(!list.length){el.innerHTML='<div class="cb-empty">No saved levels.<br>Use 💾 Level to save some first.</div>';return;}
+  const btn='color:#63c916;border-color:#3B6D11;background:#030d03;border-radius:3px;padding:2px 8px;font-family:monospace;font-size:10px;cursor:pointer';
+  const game=gameLevels();
+  if(game.length){
+    const h=document.createElement('div');h.className='cb-ptitle';h.textContent='GAME LEVELS (levels/ folder)';el.appendChild(h);
+    game.forEach(g=>{
+      const row=document.createElement('div');row.className='cblv';
+      row.innerHTML=`<span style="width:60px;color:#FFD700;font:9px monospace;text-align:center">LVL ${g.i+1}</span>
+        <span class="cbn">${g.name}</span>
+        <button class="cbadd" onclick="addGameToCampaign(${g.i})" style="${btn}">+ Add</button>`;
+      el.appendChild(row);
+    });
+    const h2=document.createElement('div');h2.className='cb-ptitle';h2.textContent='SAVED IN THIS BROWSER';el.appendChild(h2);
+  }
+  if(!list.length){el.insertAdjacentHTML('beforeend','<div class="cb-empty">No saved levels.<br>Use 💾 Level to save some first.</div>');return;}
   list.forEach(name=>{
     const meta=namedGet(name);if(!meta)return;
     const row=document.createElement('div');row.className='cblv';
@@ -181,6 +216,11 @@ function renderCBSlots(){
 function addToCampaign(name){
   const meta=namedGet(name);if(!meta)return;
   _campSlots.push({name,thumb:meta.thumb||'',data:meta.data||meta});
+  renderCBSlots();saveCampState();toast('+ Added "'+name+'" to campaign');
+}
+function addGameToCampaign(i){
+  const d=gameLevelData(i);if(!d)return;const name=d.name||('Game Level '+(i+1));
+  _campSlots.push({name,thumb:'',data:d});
   renderCBSlots();saveCampState();toast('+ Added "'+name+'" to campaign');
 }
 function removeFromCampaign(i){_campSlots.splice(i,1);renderCBSlots();saveCampState();}
