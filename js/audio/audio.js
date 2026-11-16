@@ -1,5 +1,5 @@
 // Neon Platformer — Audio engine: sound files with synth fallback, music
-// ====== AUDIO ENGINE V5.0 ======
+// ====== AUDIO ENGINE ======
 // One shared AudioContext with master → sfx / music buses, so the settings
 // sliders actually work. Gameplay sounds are driven by watching game state
 // once per tick (audioWatch), which keeps the physics/enemy code untouched.

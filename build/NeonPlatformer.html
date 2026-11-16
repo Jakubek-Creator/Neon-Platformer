@@ -111,7 +111,7 @@ canvas{flex:1;display:block;background:#07070f;min-width:0;min-height:0}
 .lsbtn.hi{color:#AFA9EC;border-color:#7F77DD}
 
 
-/* ══ V1.4 TOUCH CONTROLS ══ */
+/* ══ TOUCH CONTROLS ══ */
 #touchCtrl{position:absolute;inset:0;pointer-events:none;z-index:40;display:none;touch-action:none}
 #touchCtrl.show{display:block}
 #tpad{background:transparent!important;box-shadow:none!important;border:0!important;opacity:.9;position:absolute;left:calc(8px + env(safe-area-inset-left));bottom:calc(8px + env(safe-area-inset-bottom));pointer-events:all;touch-action:none;display:none}
@@ -132,14 +132,14 @@ canvas{flex:1;display:block;background:#07070f;min-width:0;min-height:0}
 .tbtn2.fire.th{background:rgba(239,159,39,0.28);border-color:rgba(239,159,39,0.7);color:#EF9F27}
 
 
-/* ══ V1.6 THEMES ══ */
+/* ══ THEMES ══ */
 .thpick{display:inline-flex;align-items:center;gap:3px;padding:0 4px;border-left:1px solid #1a1a2a;margin-left:2px}
 .thlbl{font-size:8px;color:#333;letter-spacing:1px;margin-right:2px;font-family:monospace}
 .thsw{width:13px;height:13px;border-radius:50%;cursor:pointer;border:2px solid rgba(0,0,0,0.35);transition:all .12s;display:inline-block;flex-shrink:0}
 .thsw:hover{transform:scale(1.25);border-color:rgba(255,255,255,0.6)}
 .thsw.tson{transform:scale(1.3);border-color:white;box-shadow:0 0 5px rgba(255,255,255,0.6)}
 
-/* ══ MENU V1.3 ══ */
+/* ══ MENU ══ */
 #menu{position:absolute;inset:0;width:100%;height:100%;background:#07070f;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:monospace}
 #menuBg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .ms{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s}
@@ -163,7 +163,7 @@ canvas{flex:1;display:block;background:#07070f;min-width:0;min-height:0}
 .mi.off:hover::before,.mi.off.c-cont:hover::before{content:''}
 .mi.red:hover{color:#E24B4A;border-color:#8a2020;background:rgba(226,75,74,.05);text-shadow:0 0 8px #E24B4A}
 .mi.red:hover::before{color:#E24B4A}
-/* V4.0 per-button colour themes (rest tint + full-colour hover) */
+/* per-button colour themes (rest tint + full-colour hover) */
 .mi.c-new{color:#5DCAA5;border-color:#15463a}
 .mi.c-new:hover,.mi.c-new.sel{color:#7FFFD4;border-color:#2FBF94;background:rgba(95,202,165,.08);text-shadow:0 0 10px #2FBF94}
 .mi.c-new:hover::before{color:#2FBF94}
@@ -217,7 +217,7 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 .cr{font-size:7px;letter-spacing:3px;color:#7F77DD;margin-bottom:3px;font-family:monospace}
 .cn{font-size:10px;color:#666;font-family:monospace;line-height:1.7}
 .vbadge{position:absolute;bottom:14px;right:20px;font-size:8px;color:#181828;font-family:monospace;letter-spacing:2px}
-/* ══ V2.6 PAUSE MENU ══ */
+/* ══ PAUSE MENU ══ */
 #pauseMenu{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:8000;align-items:center;justify-content:center;flex-direction:column;gap:0;backdrop-filter:blur(3px)}
 #pauseMenu.open{display:flex}
 .pmbox{background:#0b0b1c;border:1px solid #2a2a50;border-radius:10px;padding:32px 44px;display:flex;flex-direction:column;align-items:center;gap:14px;min-width:280px}
@@ -275,7 +275,7 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 .cb-sbtns button{padding:2px 6px;font-size:9px;cursor:pointer;border-radius:3px;font-family:monospace}
 .cb-empty{font-size:10px;color:#2a2a44;font-family:monospace;text-align:center;padding:24px 12px}
 #autoSaveInd{font-size:9px;color:#3B6D11;font-family:monospace;opacity:0;transition:opacity .4s;padding:0 3px;letter-spacing:.5px}
-/* ══ V3.0 SLOT PICKER ══ */
+/* ══ SLOT PICKER ══ */
 #slotPickModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9500;align-items:center;justify-content:center}
 #slotPickModal.open{display:flex}
 .sp-box{background:#0d0d1c;border:1px solid #5a2280;border-radius:10px;padding:18px 22px;display:flex;flex-direction:column;gap:10px;max-width:520px;width:92vw;max-height:90vh;overflow-y:auto}
@@ -291,11 +291,11 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 .sp-slot.is-current{border-color:#FF88FF;background:#140018;color:#FF88FF;box-shadow:0 0 6px rgba(255,136,255,0.3)}
 .sp-dot{width:6px;height:6px;border-radius:50%;position:absolute;bottom:3px;right:3px}
 .sp-foot{display:flex;gap:8px;justify-content:flex-end;padding-top:4px;border-top:1px solid #111120}
-/* ══ V3.0 LEVEL SELECT WORLDS ══ */
+/* ══ LEVEL SELECT WORLDS ══ */
 .ls-whdr{grid-column:1/-1;font-size:8px;letter-spacing:2px;font-family:monospace;margin-top:14px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #111120}
 .ls-whdr:first-child{margin-top:0}
 
-/* V5.9 customise screen */
+/* customise screen */
 .skwrap{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;max-width:94vw;max-height:78vh;overflow:auto}
 #sk-cv{width:min(300px,38vw);height:min(230px,42vh);border:1px solid #2a2550;border-radius:8px;background:radial-gradient(ellipse at 50% 80%,#1a1640,#07060f 70%)}
 #sk-rows{display:flex;flex-direction:column;gap:10px;min-width:260px;max-width:min(460px,90vw)}
@@ -310,15 +310,15 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 .skc.lock{opacity:.35;cursor:default;border-style:dashed}
 .skc.lock.sw{background:#1a1830;box-shadow:none;color:#666;font-size:12px}
 
-/* V6.0 world twist toggle (editor) */
+/* world twist toggle (editor) */
 .thtw{margin-left:6px;padding:2px 6px;border:1px solid #63c916;border-radius:3px;color:#9cff4a;font:9px monospace;letter-spacing:1px;cursor:pointer;white-space:nowrap}
 .thtw.off{border-color:#444;color:#666;text-decoration:line-through}
 
-/* V6.1 grapple button */
+/* grapple button */
 .tbtn2.hook{background:rgba(64,232,255,0.12);border-color:rgba(64,232,255,0.45);color:#bff8ff}
 .tbtn2.hook.th{background:rgba(64,232,255,0.35);border-color:#7ff6ff}
 
-/* V6.7 editor tools */
+/* editor tools */
 #bar button:disabled{opacity:.3;cursor:default}
 #bar button.edon{background:rgba(34,230,255,.18)!important;box-shadow:0 0 10px rgba(34,230,255,.5);color:#fff!important}
 #selPanel{position:fixed;left:50%;transform:translateX(-50%);top:46px;z-index:60;display:none;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center;
@@ -333,7 +333,7 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 #selPanel.only button:not(.x),#selPanel.only #selHaz{display:none!important}
 #bUndo,#bRedo,#bSel,#bPaste,#bHere{white-space:nowrap}
 
-/* V6.7 heatmap panel */
+/* heatmap panel */
 #heatPanel{position:fixed;right:10px;top:100px;z-index:60;display:none;background:rgba(10,6,16,.94);border:1px solid #FF6A4A;border-radius:6px;padding:8px 10px;
   font:10px/1.6 monospace;color:#e8d8e0;box-shadow:0 0 16px rgba(255,80,60,.25);max-width:260px}
 #heatPanel .ht{color:#FF8A6A;font-weight:bold;letter-spacing:1px;margin-bottom:3px}
@@ -344,7 +344,7 @@ input[type=range].nr::-webkit-slider-thumb{-webkit-appearance:none;width:12px;he
 #heatPanel .hbtn{display:flex;gap:4px;margin-top:4px}
 #heatPanel button{font:10px monospace;color:#ffe0d8;background:rgba(255,106,74,.12);border:1px solid rgba(255,106,74,.45);border-radius:4px;padding:4px 7px;cursor:pointer}
 
-/* ═══ V6.8 mobile editor ═══ */
+/* ═══ mobile editor ═══ */
 #meTop,#meRail,#meHot{display:none}
 body.medit #bar,body.medit #foot,body.medit #touchCtrl,body.medit #tpad{display:none!important}
 body.medit #meTop{display:flex;position:absolute;left:6px;top:6px;z-index:55;gap:5px;align-items:center}
@@ -427,7 +427,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
   </span>
   <input type="file" id="fileIn"   accept=".json" style="display:none" onchange="importFile(event)">
   <input type="file" id="campFileIn" accept=".json" style="display:none" onchange="importCampaign(event)">
-  <!-- V3.0 SLOT PICKER MODAL -->
+  <!-- SLOT PICKER MODAL -->
   <div id="slotPickModal" onclick="if(event.target===this)hideSlotPicker()">
     <div class="sp-box">
       <div class="sp-title">📌 SAVE TO SLOT</div>
@@ -439,7 +439,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
     </div>
   </div>
 
-  <!-- V2.4 LEVEL LIBRARY -->
+  <!-- LEVEL LIBRARY -->
   <div id="lvLibModal" class="modal-ov">
     <div class="mbox">
       <div class="mhdr">
@@ -461,7 +461,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
     </div>
   </div>
 
-  <!-- V2.4 CAMPAIGN BUILDER -->
+  <!-- CAMPAIGN BUILDER -->
   <div id="campModal" class="modal-ov">
     <div class="mbox wide" style="height:82vh">
       <div class="mhdr">
@@ -654,7 +654,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
 </div>
 <div id="foot"><b>arrows/WASD</b> move &nbsp;<b>↑/W/Space</b> jump &nbsp;<b>↓/S</b> ground pound &nbsp;<b>double-tap ←/→</b> dash &nbsp;<b>C/Shift</b> grapple &nbsp;<b>Z/X</b> fire &nbsp;<b>Q/E</b> switch weapon &nbsp;<b>1–7</b> hotkeys &nbsp;<b>ESC/P</b> pause &nbsp;| Edit: <b>scroll · arrows · mid-drag</b> pan &nbsp;right-click=erase</div>
 </div>
-<!-- V2.6 PAUSE MENU -->
+<!-- PAUSE MENU -->
 <div id="pauseMenu">
   <div class="pmbox">
     <div class="pmtitle">⏸ PAUSED</div>
@@ -697,7 +697,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
     <div class="mlogo">NEON<br>PLATFORMER</div>
     <div class="msub">V 4 . 0</div>
     <div class="pkey">&#8212; PRESS ANY KEY &#8212;</div>
-    <div class="vbadge">V6.8</div>
+    <div class="vbadge">V2.0</div>
   </div>
   <div id="ms-main" class="ms">
     <div class="mlogsm" style="margin-bottom:4px">NEON PLATFORMER</div>
@@ -715,7 +715,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
       <div class="mdiv"></div>
       <button class="mi red" onmouseenter="mhov()" onclick="mcl();goMS('intro')" style="font-size:10px">EXIT TO INTRO</button>
     </div>
-    <div class="vbadge">V6.8</div>
+    <div class="vbadge">V2.0</div>
   </div>
   <div id="ms-newg" class="ms">
     <button class="mback" onmouseenter="mhov()" onclick="mcl();goMS('main')">&#9664; BACK</button>
@@ -786,7 +786,7 @@ body.medit.mmenu #meMenuBtn{background:rgba(127,119,221,.35)}
       <div class="ce"><div class="cr">MINIBOSSES</div><div class="cn">Sentinel &#183; Hive &#183; Warden</div></div>
       <div class="ce"><div class="cr" style="color:#EF9F27">VERSION</div><div class="cn" style="color:#AFA9EC">5.5 &#8212; Smooth &amp; Sharp</div></div>
     </div>
-    <div class="vbadge">V6.8</div>
+    <div class="vbadge">V2.0</div>
   </div>
 </div>
 
@@ -798,7 +798,7 @@ window.NEON_CAMPAIGN={"name":"Neon Platformer","levels":[]};
 </script>
 <script>/* js/core/storage.js */
 // Neon Platformer — Error reporter and safe browser storage
-// V4.1 mobile diagnostics: surface any load/runtime error visibly instead of a silent dead page
+// mobile diagnostics: surface any load/runtime error visibly instead of a silent dead page
 window.addEventListener('error',function(ev){
   try{
     var d=document.getElementById('__errbox');
@@ -808,7 +808,7 @@ window.addEventListener('error',function(ev){
     d.textContent+=(ev.message||'Script error')+' @ line '+(ev.lineno||'?')+'\n';
   }catch(e){}
 });
-// V4.1 safe-storage shim: sandboxed mobile contexts (file viewers, in-app browsers,
+// safe-storage shim: sandboxed mobile contexts (file viewers, in-app browsers,
 // private modes) throw SecurityError on ANY localStorage access, which would kill
 // the whole script. Fall back to in-memory storage so the game always runs.
 var LS=(function(){
@@ -849,55 +849,55 @@ const cv=document.getElementById('c'), cx=cv.getContext('2d');
 let W,H,ROWS=0,VCOLS,COLS=50,grid=[];
 let mode='play',pen=0,camX=0,camY=0;
 let score=0,hp=3,lives=3,won=false,frame=0,keys={};
-let runStartFrame=0,runDeaths=0,runCoins=0,runEndFrame=0;  // V4.0 level-complete stats
+let runStartFrame=0,runDeaths=0,runCoins=0,runEndFrame=0;  // level-complete stats
 let winTimer=0,winPhase=0,winParts=[],winDisplayScore=0,winTargetScore=0,winAudioCtx=null;
 let deathSeqTimer=0,deathBones=[],deathDebris=[],deathCloud=[],deathFlash=0,deathRing=0,deathAudioCtx=null;
 let deathSeqX=0,deathSeqY=0;
 let player={x:52,y:100,vx:0,vy:0,w:18,h:18,grounded:false,jumps:0,facing:1,inv:0,wet:false,_bounceJumps:false,_swCool:0,_stomping:false};
 let bullets=[],eBullets=[],parts=[],coins=[],movPlats=[],enemies=[],powerOrbs=[],trail=[];
-let coinPops=[]; // V4.1 floating +N text when collecting coins
-let startHintTimer=0; // V4.1 brief control hint shown at level start
-let enemyBombs=[];     // V3.9 Bomber dropped bombs
-let pendingEnemies=[]; // V4.0 enemies queued mid-update (e.g. Hive drones), appended after filter
+let coinPops=[]; // floating +N text when collecting coins
+let startHintTimer=0; // brief control hint shown at level start
+let enemyBombs=[];     // Bomber dropped bombs
+let pendingEnemies=[]; // enemies queued mid-update (e.g. Hive drones), appended after filter
 let grenades=[],explosions=[],laserBeams=[],swordSwing=0,plasmaCharge=0,plasmaCharging=false;
 let pups={speed:0,shield:0,jump:0};
-let hasHook=false;   // V6.1 grappling hook is found in the level (tile 62), like a weapon
+let hasHook=false;   // grappling hook is found in the level (tile 62), like a weapon
 let wAmmo={blaster:0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0};
 let curW='blaster',shootCd=0;
 let crumbleBlocks={};  // "col,row" → countdown timer (45→0 then tile deleted)
 let tpCool=0,selPlat=null,doorState={red:false,blue:false},crushers=[],checkpoint=null,activatedCPs=new Set();
 let sbOpen=false,recentTiles=[],openFolds=new Set(['terrain']);
 let currentSlot=0; // 0 = free build, 1-50 = campaign slot
-// V1.4 additions
+// additions
 let shakeAmt=0,shakeX=0,shakeY=0;
 let deathTimer=0;
 let pickupFlash={t:0,col:'#fff',name:''};
 let touchKeys={hook:false,reel:0,hookReq:null,hookAim:null,dashReq:0,aimV:null,aimV2:null,padFire:false,left:false,right:false,jump:false,fire:false,down:false,cycle:false,aimUp:false,_lf:false,_lc:false};
-let gyroKeys={left:false,right:false}; // V4.1 tilt controls
-let editZoom=1; // V4.1 editor pinch zoom (0.5–2.5)
+let gyroKeys={left:false,right:false}; // tilt controls
+let editZoom=1; // editor pinch zoom (0.5–2.5)
 let spawnPoint=null;
 let laserEmitters=[];
-let flameJets=[];      // V2.5 tile 49/50
-let dripBlocks=[];     // V3.3 tile 52/53 ceiling acid/lava drip (multi-drop)
-const DRIP_DEFAULT_SPEED=1.0; // V3.5 default when a block has no stored speed
-const LAVA_DEFAULT_RISE=0.10; // V4.0 px/frame the lava flood rises in Lava theme
-let lavaRiseSpeed=0;          // V4.0 per-level rise speed (0 = off); only used in Lava theme
-let lavaLevel=0;             // V4.0 current lava flood top (world Y); high number = low on screen
-let lavaCheckpointLevel=null;// V4.0 lava Y captured at last checkpoint (for death reset)
-let dripSpeeds={};     // V3.4/3.5 per-cell speed "r,c" -> multiplier (whole group shares value)
-let selDrip=null;      // V3.5 selected drip group: {cells:[{r,c}], minC,maxC,minR,lava}
-let hazOpts={};        // V6.7 per-cell hazard timing "r,c" -> {phase:0..1} (flame jets, lasers, crushers)
-let bossOpts={};       // V3.8 per-cell Sentinel options "r,c" -> {arc, shock}
-let selBoss=null;      // V3.8 selected boss tile in editor: {r,c}
-let _editGrid=null;    // V4.0 backup of the editor grid taken on TEST, restored on return to edit
+let flameJets=[];      // tile 49/50
+let dripBlocks=[];     // tile 52/53 ceiling acid/lava drip (multi-drop)
+const DRIP_DEFAULT_SPEED=1.0; // default when a block has no stored speed
+const LAVA_DEFAULT_RISE=0.10; // px/frame the lava flood rises in Lava theme
+let lavaRiseSpeed=0;          // per-level rise speed (0 = off); only used in Lava theme
+let lavaLevel=0;             // current lava flood top (world Y); high number = low on screen
+let lavaCheckpointLevel=null;// lava Y captured at last checkpoint (for death reset)
+let dripSpeeds={};     // /3.5 per-cell speed "r,c" -> multiplier (whole group shares value)
+let selDrip=null;      // selected drip group: {cells:[{r,c}], minC,maxC,minR,lava}
+let hazOpts={};        // per-cell hazard timing "r,c" -> {phase:0..1} (flame jets, lasers, crushers)
+let bossOpts={};       // per-cell Sentinel options "r,c" -> {arc, shock}
+let selBoss=null;      // selected boss tile in editor: {r,c}
+let _editGrid=null;    // backup of the editor grid taken on TEST, restored on return to edit
 const BOSS_DEFAULT_ARC=1.0, BOSS_DEFAULT_SHOCK=true;
-const HIVE_DEFAULT_SPAWN=2, WARDEN_DEFAULT_SWEEP=0.03;   // V4.0
-let fallingRocks=[];   // V2.5 tile 51
+const HIVE_DEFAULT_SPAWN=2, WARDEN_DEFAULT_SWEEP=0.03;
+let fallingRocks=[];   // tile 51
 let levelTheme = 0;
-let _savedEnemySpawns=[];   // V1.7 – persists spawn list for death-restart
-let _savedMovPlats=[];       // V1.7 – persists movplat list for death-restart
-let _savedCrumbles=[];       // V1.8 – persists crumble block positions for death-restart
-let paused=false;            // V2.6 – pause state
+let _savedEnemySpawns=[];   // – persists spawn list for death-restart
+let _savedMovPlats=[];       // – persists movplat list for death-restart
+let _savedCrumbles=[];       // – persists crumble block positions for death-restart
+let paused=false;            // – pause state
 // TC = current Theme Colors for solid tile drawing
 var TC = {fill:'#1a1830', stroke:'#7F77DD', glow:'#534AB7', line:'rgba(127,119,221,0.15)'};
 const THEMES = [
@@ -918,7 +918,7 @@ function setTheme(n){
   document.querySelectorAll('.thsw').forEach(function(el,i){
     el.className='thsw'+(i===n?' tson':'');
   });
-  // V4.0 show the lava rise slider only for Lava theme
+  // show the lava rise slider only for Lava theme
   var lc=document.getElementById('lavaRiseCtl');
   if(lc){lc.style.display=(n===2)?'inline-flex':'none';
     var sl=document.getElementById('lavaRiseSlider');if(sl)sl.value=lavaRiseSpeed;
@@ -980,7 +980,7 @@ function resize(){
   W=window.innerWidth;
   H=window.innerHeight-document.getElementById('bar').offsetHeight-document.getElementById('foot').offsetHeight;
   if(W<1)W=600;if(H<1)H=400;
-  applyCanvasSize(); // V5.5 sharp on high-density screens
+  applyCanvasSize(); // sharp on high-density screens
   const visR=Math.max(10,Math.floor(H/TS));
   VCOLS=Math.floor(W/TS);
   // Only grow ROWS – never shrink a custom level height on window resize
@@ -992,7 +992,7 @@ function resize(){
 window.addEventListener('resize',()=>resize());
 </script>
 <script>/* js/core/smooth.js */
-// Neon Platformer — Smooth, sharp rendering (V5.5)
+// Neon Platformer — Smooth, sharp rendering
 // 1) Sharp: the canvas is drawn at the screen's real pixel density (up to 2×)
 //    instead of being stretched by the browser.
 // 2) Smooth: the game still thinks at a fixed 60 ticks/sec, but every screen
@@ -1043,7 +1043,7 @@ function smoothPerf(frameMs){
   // a run of frames slower than ~45 fps means this device can't keep up at this sharpness
   _slowFrames=frameMs>22?_slowFrames+1:Math.max(0,_slowFrames-1);
   if(_slowFrames>45){_slowFrames=0;
-    // V6.6 stay sharp: first make the lighting cheaper, only drop the resolution as a last resort
+    // stay sharp: first make the lighting cheaper, only drop the resolution as a last resort
     if(typeof LIGHT!=='undefined'&&LIGHT.on&&LIGHT.sc>0.2){LIGHT.sc=0.2;return;}
     if(typeof MS!=='undefined'&&!MS.bgLite&&typeof togS==='function'&&!_bgAuto){_bgAuto=true;MS.bgLite=true;return;}
     _dprCap=DPR>1.5?1.5:1;applyCanvasSize();}
@@ -1053,7 +1053,7 @@ if(window.matchMedia)try{matchMedia('(resolution: '+(window.devicePixelRatio||1)
 <script>/* js/game/level.js */
 // Neon Platformer — Level setup, reset, pause menu, spawning
 // ── INIT ──
-// V3.7 Clear-all / new blank level with confirmation
+// Clear-all / new blank level with confirmation
 function newLevel(){
   if(confirm('Clear the entire level and start a blank one?\nThis cannot be undone.')){
     initLevel();
@@ -1066,7 +1066,7 @@ function initLevel(){
   W=window.innerWidth;
   H=window.innerHeight-document.getElementById('bar').offsetHeight-document.getElementById('foot').offsetHeight;
   if(W<1)W=600;if(H<1)H=400;
-  applyCanvasSize(); // V5.5
+  applyCanvasSize();
   VCOLS=Math.floor(W/TS);
   ROWS=Math.max(10,Math.floor(H/TS));  // reset to default window height
   COLS=100;
@@ -1075,8 +1075,8 @@ function initLevel(){
   grid=makeGrid(ROWS,COLS);
   for(let c=0;c<COLS;c++)grid[ROWS-1][c]=1;
   movPlats=[];
-  dripSpeeds={};selDrip=null;selPlat=null;  // V3.7 clear drip data on new level
-  bossOpts={};selBoss=null;_editGrid=null;   // V3.8/V4.0 clear boss data + grid backup on new level
+  dripSpeeds={};selDrip=null;selPlat=null;  // clear drip data on new level
+  bossOpts={};selBoss=null;_editGrid=null;   // /clear boss data + grid backup on new level
   hazOpts={};
   resetState();rebuildCrushers();spawnPlayer(true);updateHUD();updateDimsDisp();
 }
@@ -1089,9 +1089,9 @@ function resetState(){
   pups={speed:0,shield:0,jump:0};tpCool=0;shootCd=0;score=0;hp=DIFF_HP();won=false;camX=0;camY=0;frame=0;if(typeof clearTileFx==='function')clearTileFx();if(typeof feelReset==='function')feelReset();if(typeof movesReset==='function')movesReset();if(typeof twistInit==='function')twistInit();
   crumbleBlocks={};
   laserEmitters=[];
-  flameJets=[];dripBlocks=[];fallingRocks=[];   // V2.5
+  flameJets=[];dripBlocks=[];fallingRocks=[];
   doorState={red:false,blue:false};checkpoint=null;activatedCPs=new Set();
-  lavaLevel=ROWS*TS;lavaCheckpointLevel=null;  // V4.0 lava starts at the very bottom
+  lavaLevel=ROWS*TS;lavaCheckpointLevel=null;  // lava starts at the very bottom
   curW='blaster';wAmmo={blaster:0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0};hasHook=false;if(typeof _ghBtn==='function')_ghBtn();
   document.getElementById('win').style.display='none';
 }
@@ -1100,7 +1100,7 @@ function replayLevel(){
   resetState();spawnFromGrid();rebuildCrushers();spawnPlayer(true);updateHUD();
 }
 
-// ── V2.6 PAUSE ──
+// ── PAUSE ──
 function togglePause(){
   if(mode!=='play'||won||deathTimer>0)return;
   paused?resumeGame():openPause();
@@ -1124,7 +1124,7 @@ function pauseRestartLevel(){
   pups={speed:0,shield:0,jump:0};shootCd=0;
   curW='blaster';wAmmo={blaster:0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0};hasHook=false;if(typeof _ghBtn==='function')_ghBtn();
   crumbleBlocks={};doorState={red:false,blue:false};activatedCPs=new Set();camX=0;camY=0;
-  checkpoint=null;lavaLevel=ROWS*TS;lavaCheckpointLevel=null; // V4.0
+  checkpoint=null;lavaLevel=ROWS*TS;lavaCheckpointLevel=null;
   enemies=[];coins=[];powerOrbs=[];crushers=[];laserEmitters=[];flameJets=[];dripBlocks=[];
   resetFallingRocks();
   movPlats=JSON.parse(JSON.stringify(_savedMovPlats.length>0?_savedMovPlats:[]));
@@ -1143,7 +1143,7 @@ function pauseRestartCheckpoint(){
   player.x=checkpoint.x;player.y=checkpoint.y;player.vx=0;player.vy=0;
   player.grounded=false;player.jumps=0;player.inv=80;player.facing=1;
   player._stomping=false;player._bounceJumps=false;player._swCool=0;
-  if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel; // V4.0
+  if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel;
   updateHUD();
 }
 function pauseGoEdit(){
@@ -1174,9 +1174,9 @@ function spawnPlayer(fromStart){
   const sx=checkpoint?checkpoint.x:(fromStart&&spawnPoint?spawnPoint.x:52);
   const sy=checkpoint?checkpoint.y:(fromStart&&spawnPoint?spawnPoint.y:H-100);
   player={x:sx,y:sy,vx:0,vy:0,w:18,h:18,grounded:false,jumps:0,facing:1,inv:0,wet:false,_bounceJumps:false,_swCool:0,_stomping:false};
-  snapCamera(); // V3.8 centre view on spawn (prevents pan-from-top in tall levels)
+  snapCamera(); // centre view on spawn (prevents pan-from-top in tall levels)
 }
-// V6.7 hazard timing from the editor (SYNC / WAVE); otherwise the old random start
+// hazard timing from the editor (SYNC / WAVE); otherwise the old random start
 function _hazT(r,c,cycle,def){const o=hazOpts[r+','+c];return o&&o.phase!=null?Math.floor(o.phase*cycle)%cycle:def;}
 function spawnFromGrid(){
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){
@@ -1187,7 +1187,7 @@ function spawnFromGrid(){
     else if(t===27){enemies.push(mkShield(c*TS,r*TS-24));grid[r][c]=0;}
     else if(t===28){enemies.push(mkWalker(c*TS,r*TS-26));grid[r][c]=0;}
     else if(t===43){
-      // V4.0 Sniper anchors to the surface it's placed against
+      // Sniper anchors to the surface it's placed against
       const sn=mkSniper(c*TS+(TS-20)/2, r*TS+(TS-22)/2);
       const cc=c*TS+TS/2, rc=r*TS+TS/2;
       if(solid(tileAt(cc,(r-1)*TS+TS/2))){sn.surf='ceiling';sn.y=r*TS+1;sn.x=c*TS+(TS-20)/2;}
@@ -1198,23 +1198,23 @@ function spawnFromGrid(){
       sn.px=sn.x;sn.py=sn.y;
       enemies.push(sn);grid[r][c]=0;
     }
-    else if(t===55){enemies.push(mkCharger(c*TS,r*TS-28));grid[r][c]=0;}  // V3.9 Charger
-    else if(t===56){enemies.push(mkBomber(c*TS,r*TS+TS));grid[r][c]=0;}   // V3.9 Bomber (hovers near placement)
-    else if(t===57){enemies.push(mkClimber(c*TS+4,r*TS));grid[r][c]=0;}   // V3.9 Climber
-    else if(t===54){const bo=bossOpts[r+','+c]||{};enemies.push(mkSentinel(c*TS-6,r*TS-44,bo.arc,bo.shock!=null?bo.shock:BOSS_DEFAULT_SHOCK));grid[r][c]=0;}  // V3.8 Sentinel
-    else if(t===58){const bo=bossOpts[r+','+c]||{};enemies.push(mkHive(c*TS-12,r*TS-52,bo.spawnN));grid[r][c]=0;}  // V4.0 Hive
-    else if(t===59){const bo=bossOpts[r+','+c]||{};enemies.push(mkWarden(c*TS-3,r*TS-34,bo.sweepSpd));grid[r][c]=0;}  // V4.0 Warden
+    else if(t===55){enemies.push(mkCharger(c*TS,r*TS-28));grid[r][c]=0;}  // Charger
+    else if(t===56){enemies.push(mkBomber(c*TS,r*TS+TS));grid[r][c]=0;}   // Bomber (hovers near placement)
+    else if(t===57){enemies.push(mkClimber(c*TS+4,r*TS));grid[r][c]=0;}   // Climber
+    else if(t===54){const bo=bossOpts[r+','+c]||{};enemies.push(mkSentinel(c*TS-6,r*TS-44,bo.arc,bo.shock!=null?bo.shock:BOSS_DEFAULT_SHOCK));grid[r][c]=0;}  // Sentinel
+    else if(t===58){const bo=bossOpts[r+','+c]||{};enemies.push(mkHive(c*TS-12,r*TS-52,bo.spawnN));grid[r][c]=0;}  // Hive
+    else if(t===59){const bo=bossOpts[r+','+c]||{};enemies.push(mkWarden(c*TS-3,r*TS-34,bo.sweepSpd));grid[r][c]=0;}  // Warden
     else if(t===44){spawnPoint={x:c*TS+TS/2-9,y:r*TS-19};}
     else if(t===46||t===47){laserEmitters.push({gx:c,gy:r,dir:t===46?1:-1,timer:_hazT(r,c,180,Math.floor(Math.random()*140)),active:false,bx1:0,bx2:0,by:0});}
-    else if(t===49||t===50){flameJets.push({gx:c,gy:r,dir:t===49?-1:1,timer:_hazT(r,c,120,Math.floor(Math.random()*120)),active:false,reach:0});}  // V2.5
-    else if(t===52||t===53){const sp=dripSpeeds[r+','+c]||DRIP_DEFAULT_SPEED;dripBlocks.push({gx:c,gy:r,lava:t===53,drops:[],puddles:[],nextT:Math.floor(Math.random()*40),speed:sp});}  // V3.3/3.5
-    else if(t===51){fallingRocks.push(makeFallingRock(c,r));grid[r][c]=0;}  // V2.5
+    else if(t===49||t===50){flameJets.push({gx:c,gy:r,dir:t===49?-1:1,timer:_hazT(r,c,120,Math.floor(Math.random()*120)),active:false,reach:0});}
+    else if(t===52||t===53){const sp=dripSpeeds[r+','+c]||DRIP_DEFAULT_SPEED;dripBlocks.push({gx:c,gy:r,lava:t===53,drops:[],puddles:[],nextT:Math.floor(Math.random()*40),speed:sp});}  // /3.5
+    else if(t===51){fallingRocks.push(makeFallingRock(c,r));grid[r][c]=0;}
     else if(t===29){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'speed',life:99999,vy:null});}
     else if(t===30){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'shield',life:99999,vy:null});}
     else if(t===31){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'jump',life:99999,vy:null});}
     else if(t===32){coins.push({x:c*TS+TS/2,y:r*TS+TS/2,vy:null});}
     else if(t===60){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'life',life:99999,vy:null});grid[r][c]=0;}
-    else if(t===62){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'hook',life:99999,vy:null});grid[r][c]=0;}  // V6.1 grappling hook
+    else if(t===62){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'hook',life:99999,vy:null});grid[r][c]=0;}  // grappling hook
     else if(t===61){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'heart',life:99999,vy:null});grid[r][c]=0;}
     else if(WPICK[t]){powerOrbs.push({x:c*TS+TS/2,y:r*TS+TS/2,type:'wpick',weapon:WPICK[t],life:99999,vy:null});grid[r][c]=0;}
   }
@@ -1225,16 +1225,16 @@ function spawnFromGrid(){
 // ── SAVE/LOAD ──
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.opacity=1;clearTimeout(el._t);el._t=setTimeout(()=>el.style.opacity=0,2400);}
 
-// V2.3 single source of truth for level data
+// single source of truth for level data
 function currentLevelData(){
-  const gsrc=_editGrid||grid;  // V4.0 prefer pre-test grid so enemy/boss tiles aren't lost
+  const gsrc=_editGrid||grid;  // prefer pre-test grid so enemy/boss tiles aren't lost
   return {cols:COLS,rows:ROWS,grid:Array.from(gsrc,r=>Array.from(r)),movPlats,enemies:enemies.map(e=>({px:e.px,py:e.py,type:e.type})),spawnPoint,theme:levelTheme,dripSpeeds,bossOpts,hazOpts,lavaRise:lavaRiseSpeed,twist:levelTwist};
 }
 
-// V2.4 theme swatch colours
+// theme swatch colours
 const THEME_SWATCHES=['#7F77DD','#4488CC','#AA4466','#44DD55','#EE22EE','#FFAA11','#00CCEE'];
 
-// V2.4 capture tiny thumbnail of current canvas view
+// capture tiny thumbnail of current canvas view
 function captureThumb(){
   try{
     const tc=document.createElement('canvas');tc.width=120;tc.height=54;
@@ -1458,20 +1458,20 @@ function applyData(data){
   grid=data.grid.map(r=>new Uint8Array(r));
   while(grid.length<ROWS)grid.push(new Uint8Array(COLS));
   movPlats=data.movPlats||[];
-  dripSpeeds=data.dripSpeeds||{};             // V3.5
-  bossOpts=data.bossOpts||{};                 // V3.8
-  hazOpts=data.hazOpts||{};                   // V6.7
-  _editGrid=null;                             // V4.0 fresh load clears any test-session grid backup
-  lavaRiseSpeed=(data.lavaRise!=null)?data.lavaRise:0;  // V4.0
-  _savedMovPlats=JSON.parse(JSON.stringify(movPlats)); // V1.7
+  dripSpeeds=data.dripSpeeds||{};
+  bossOpts=data.bossOpts||{};
+  hazOpts=data.hazOpts||{};
+  _editGrid=null;                             // fresh load clears any test-session grid backup
+  lavaRiseSpeed=(data.lavaRise!=null)?data.lavaRise:0;
+  _savedMovPlats=JSON.parse(JSON.stringify(movPlats));
   spawnPoint=data.spawnPoint||null;
-  levelTwist=data.twist!==false;  // V6.0
+  levelTwist=data.twist!==false;
   setTheme(data.theme||0);
   resetState();spawnFromGrid();
-  // V1.7: if grid had no enemy tiles (level saved in play mode), spawn from saved enemy list
+  // if grid had no enemy tiles (level saved in play mode), spawn from saved enemy list
   if(enemies.length===0&&data.enemies&&data.enemies.length>0){var _mk={drone:mkDrone,turret:mkTurret,shield:mkShield,walker:mkWalker,sniper:mkSniper,charger:mkCharger,bomber:mkBomber,climber:mkClimber};data.enemies.forEach(function(e){if(e.type==="sentinel")enemies.push(mkSentinel(e.px,e.py,e.arc,e.shock));else if(e.type==="hive")enemies.push(mkHive(e.px,e.py,e.spawnN));else if(e.type==="warden")enemies.push(mkWarden(e.px,e.py,e.sweepSpd));else if(e.type==="sniper"){var _sn=mkSniper(e.px,e.py);_sn.surf=e.surf;enemies.push(_sn);}else if(_mk[e.type])enemies.push(_mk[e.type](e.px,e.py));});}
-  _savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};}); // V1.7
-  saveCrumbles(); // V1.8
+  _savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};});
+  saveCrumbles();
   rebuildCrushers();spawnPlayer(true);updateHUD();
 }
 </script>
@@ -1479,7 +1479,7 @@ function applyData(data){
 // Neon Platformer — Campaign: level loading, level select, save profiles, slot picker
 // ── LEVEL SELECT ──
 const TOTAL_SLOTS=50;
-// V5.0 progress lives inside the active save profile (1-3), so each save slot
+// progress lives inside the active save profile (1-3), so each save slot
 // keeps its own unlocks. With no profile active (editor) the old global keys are used.
 var activeProf=0;
 function _ap(){if(!activeProf)return null;var p=gProf(activeProf);if(!p){p={progress:1,score:0,date:Date.now(),campaignSlot:1};}if(!p.done){ // migrate pre-V5 saves from the old shared progress keys
@@ -1491,7 +1491,7 @@ function lsSetProgress(n){var p=_ap();if(p){p.progress=Math.max(p.progress||1,n)
 function lsDone(n){var p=_ap();if(p)return p.done.indexOf(n)>=0;return LS.getItem('neon_done_'+n)==='1';}
 function lsMarkDone(n){var p=_ap();if(p){if(p.done.indexOf(n)<0)p.done.push(n);sProf(activeProf,p);return;}LS.setItem('neon_done_'+n,'1');}
 function profNote(slot,addScore){var p=_ap();if(!p)return;if(slot)p.campaignSlot=slot;if(addScore)p.score=(p.score||0)+addScore;p.date=Date.now();sProf(activeProf,p);}
-// V5.1 the campaign lives in the levels/ folder: levels/campaign.json lists the
+// the campaign lives in the levels/ folder: levels/campaign.json lists the
 // level files in play order. When the game is served online it reads those files
 // directly; when opened from disk it uses levels/campaign.js, which tools/build.py
 // generates from the same files. Levels saved to slots in this browser still take
@@ -1535,7 +1535,7 @@ function renderLS(){
     {label:'World 4 — Toxic Swamp', col:THEME_SWATCHES[3]},
     {label:'World 5 — The Void',    col:THEME_SWATCHES[4]},
   ];
-  const shown=activeProf?Math.max(1,campaignLen()):TOTAL_SLOTS; // V5.0 players only see real levels
+  const shown=activeProf?Math.max(1,campaignLen()):TOTAL_SLOTS; // players only see real levels
   const lsb=document.getElementById('lsFree');if(lsb)lsb.style.display=activeProf?'none':'';
   for(let i=1;i<=shown;i++){
     if((i-1)%10===0){
@@ -1568,7 +1568,7 @@ function playSlot(n,keepLives){
     return;
   }
   currentSlot=n;profNote(n);
-  if(!keepLives)lives=DIFF_LIVES(); // V4.1 fresh start from menu resets lives; winNext carries them
+  if(!keepLives)lives=DIFF_LIVES(); // fresh start from menu resets lives; winNext carries them
   const data=lsGetData(n);
   hideLS();
   setMode('play');
@@ -1589,7 +1589,7 @@ function saveToSlot(){
   showSlotPicker();
 }
 
-// ── V3.0 SLOT PICKER ──
+// ── SLOT PICKER ──
 function showSlotPicker(){
   renderSlotPicker();
   document.getElementById('slotPickModal').classList.add('open');
@@ -1642,7 +1642,7 @@ function doPickSlot(n){
   toast('📌 Saved to slot '+n);
 }
 
-// ── V3.0 PUSH CAMPAIGN TO SLOTS ──
+// ── PUSH CAMPAIGN TO SLOTS ──
 function pushCampaignToSlots(){
   if(!_campSlots.length){toast('Add some levels first!');return;}
   if(!confirm('Write '+_campSlots.length+' campaign levels to slots 1–'+_campSlots.length+'?\n\nThis overwrites any existing data in those slots.'))return;
@@ -1655,7 +1655,7 @@ function pushCampaignToSlots(){
   toast('✓ '+_campSlots.length+' levels pushed to slots 1–'+_campSlots.length);
 }
 
-// ── V3.0 CAMPAIGN BUILDER PERSISTENCE ──
+// ── CAMPAIGN BUILDER PERSISTENCE ──
 function saveCampState(){
   try{
     // Store only name + thumb (strip full data to avoid quota; data already lives in namedSave)
@@ -1732,7 +1732,7 @@ function setMode(m){
   if(m==='play'){if(sbOpen)toggleSB();checkpoint=null;lavaLevel=ROWS*TS;lavaCheckpointLevel=null;runStartFrame=frame;runDeaths=0;runCoins=0;runEndFrame=0;laserEmitters=[];flameJets=[];dripBlocks=[];fallingRocks=[];if(!_editGrid)_editGrid=grid.map(r=>r.slice());else grid=_editGrid.map(r=>r.slice());spawnFromGrid();_savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};});_savedMovPlats=JSON.parse(JSON.stringify(movPlats));saveCrumbles();rebuildCrushers();spawnPlayer(true);startHintTimer=210;}
   if(m==='edit'){
     if(_editGrid){grid=_editGrid.map(r=>r.slice());_editGrid=null;}
-    // V4.0 clear all live runtime entities so editor shows spawn tiles, not spawned enemies
+    // clear all live runtime entities so editor shows spawn tiles, not spawned enemies
     enemies=[];bullets=[];eBullets=[];enemyBombs=[];pendingEnemies=[];grenades=[];explosions=[];laserBeams=[];parts=[];coins=[];powerOrbs=[];trail=[];crushers=[];coinPops=[];
     laserEmitters=[];flameJets=[];dripBlocks=[];fallingRocks=[];
     doorState={red:false,blue:false};activatedCPs=new Set();checkpoint=null;
@@ -1771,7 +1771,7 @@ function pick(n){
   document.getElementById('curTile').textContent=TLABELS[n]||('Tile '+n);
   if(n!==0){recentTiles=recentTiles.filter(t=>t!==n);recentTiles.unshift(n);if(recentTiles.length>6)recentTiles.pop();renderRecent();}
 }
-// V3.5 find a connected group of same-type drip blocks (4-dir flood fill in the grid)
+// find a connected group of same-type drip blocks (4-dir flood fill in the grid)
 function dripGroupAt(r,c){
   const type=grid[r]&&grid[r][c];
   if(type!==52&&type!==53)return null;
@@ -1830,10 +1830,10 @@ function fireSword(){
   enemies.forEach(e=>{if(e.x+e.w>sx&&e.x<sx+38&&e.y+e.h>sy&&e.y<sy+p.h){e.hp-=(e.type==='shield'?3:2);e.inv=25;spawnParts(e.x+e.w/2,e.y+e.h/2,'#CC88FF',8);}});
   spawnParts(p.x+p.w/2+(p.facing*18),p.y+p.h/2,'#AA44FF',6);
 }
-// V4.0 8-direction aim — aim with held movement keys; down-aim air-only (ground = stomp)
+// 8-direction aim — aim with held movement keys; down-aim air-only (ground = stomp)
 function getAimVector(){
   const p=player;
-  const ta=touchKeys.aimV2||touchKeys.aimV;if(ta)return{ax:ta.x,ay:ta.y};   // V5.8 touch aim (fire-button drag or arc)
+  const ta=touchKeys.aimV2||touchKeys.aimV;if(ta)return{ax:ta.x,ay:ta.y};   // touch aim (fire-button drag or arc)
   const up=keys['ArrowUp']||keys['KeyW']||touchKeys.aimUp;
   const down=(keys['ArrowDown']||keys['KeyS']||touchKeys.down)&&!p.grounded;
   const left=keys['ArrowLeft']||keys['KeyA']||touchKeys.left||gyroKeys.left;
@@ -1875,7 +1875,7 @@ function moveY(p){
   if(p.vy<0){for(const bx of[p.x+3,p.x+p.w-3]){if(solid(tileAt(bx,p.y))){const tr2=Math.floor(p.y/TS),tc2=Math.floor(bx/TS);if(tr2>=0&&tr2<ROWS&&tc2>=0&&tc2<COLS&&grid[tr2]&&grid[tr2][tc2]===6){grid[tr2][tc2]=0;spawnOrb(tc2*TS+TS/2,tr2*TS-8);spawnParts(tc2*TS+TS/2,tr2*TS,'#EF9F27',12);}p.y=Math.floor(p.y/TS)*TS+TS;p.vy=0;break;}}}
 }
 function spawnOrb(x,y){const types=['speed','shield','jump','coin'];const t=types[Math.floor(Math.random()*types.length)];if(t==='coin'){coins.push({x,y,vy:-5});return;}powerOrbs.push({x,y,vy:-4,type:t,life:300});}
-// V4.1 reusable vector heart (matches the extra-life preview); s = unit scale
+// reusable vector heart (matches the extra-life preview); s = unit scale
 function drawHeartShape(g,x,y,s,col){g.save();g.translate(x,y);g.scale(s,s);g.fillStyle=col;g.beginPath();g.moveTo(0,-2.2);g.bezierCurveTo(-3,-5.5,-8,-3.5,-8,0.4);g.bezierCurveTo(-8,3.8,-3.4,6.2,0,8.6);g.bezierCurveTo(3.4,6.2,8,3.8,8,0.4);g.bezierCurveTo(8,-3.5,3,-5.5,0,-2.2);g.closePath();g.fill();g.restore();}
 function spawnParts(x,y,col,n){for(let i=0;i<n;i++)parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-1.8)*5,life:30,col,r:1+Math.random()*2.2});if(parts.length>180)parts.splice(0,parts.length-180);}
 function spawnWinParts(wx,wy,col,n,spread){
@@ -2136,31 +2136,31 @@ function damage(){
   if(pups.shield>0){pups.shield=0;player.inv=80;spawnParts(player.x+player.w/2,player.y+player.h/2,'#00FFEE',12);updateHUD();return;}
   hp=Math.max(0,hp-1);player.inv=80;spawnParts(player.x+player.w/2,player.y+player.h/2,'#E24B4A',10);updateHUD();
   if(hp===0){deathTimer=72;runDeaths++;lives--;startDeathSequence(player.x+player.w/2,player.y+player.h/2);feelDeath();
-    const gameOver=lives<=0; // V4.1 out of lives -> restart level from the start, lives reset
+    const gameOver=lives<=0; // out of lives -> restart level from the start, lives reset
     if(gameOver)lives=DIFF_LIVES();
     updateHUD();
-    const _tok=_runToken; // V5.0 ignore this respawn if the player left/restarted the level meanwhile
+    const _tok=_runToken; // ignore this respawn if the player left/restarted the level meanwhile
     setTimeout(()=>{
       if(_tok!==_runToken)return;
-      deathTimer=0;hp=DIFF_HP();won=false; // V1.7: reset deathTimer so player unfreezes immediately on respawn
+      deathTimer=0;hp=DIFF_HP();won=false; // reset deathTimer so player unfreezes immediately on respawn
       bullets=[];eBullets=[];enemyBombs=[];pendingEnemies=[];parts=[];grenades=[];explosions=[];laserBeams=[];swordSwing=0;plasmaCharge=0;plasmaCharging=false;
       pups={speed:0,shield:0,jump:0};shootCd=0;
-      curW='blaster';wAmmo={blaster:wAmmo.blaster||0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0}; // V6.2 you keep the blaster you found
+      curW='blaster';wAmmo={blaster:wAmmo.blaster||0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0}; // you keep the blaster you found
       if(checkpoint&&!gameOver){
         // respawn at checkpoint — level state (tiles, enemies) stays intact
         player.x=checkpoint.x;player.y=checkpoint.y;player.vx=0;player.vy=0;player.grounded=false;player.jumps=0;player.inv=80;player.facing=1;player._stomping=false;player._bounceJumps=false;player._swCool=0;
-        if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel; // V4.0 lava back to checkpoint height
-        snapCamera(); // V3.8 recentre on checkpoint respawn
+        if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel; // lava back to checkpoint height
+        snapCamera(); // recentre on checkpoint respawn
       } else {
         // no checkpoint — full level restart
         crumbleBlocks={};doorState={red:false,blue:false};activatedCPs=new Set();checkpoint=null;camX=0;camY=0;
-        lavaLevel=ROWS*TS;lavaCheckpointLevel=null; // V4.0 lava back to bottom
-        enemies=[];coins=[];powerOrbs=[];crushers=[];laserEmitters=[];flameJets=[];dripBlocks=[];  // V2.5
-        resetFallingRocks(); // V2.5 reset rocks to home instead of rebuilding
-        restoreCrumbles(); // V1.8: puts tile-42 back in the grid before spawnFromGrid
-        movPlats=JSON.parse(JSON.stringify(_savedMovPlats.length>0?_savedMovPlats:[])); // V1.7 fixed
+        lavaLevel=ROWS*TS;lavaCheckpointLevel=null; // lava back to bottom
+        enemies=[];coins=[];powerOrbs=[];crushers=[];laserEmitters=[];flameJets=[];dripBlocks=[];
+        resetFallingRocks(); // reset rocks to home instead of rebuilding
+        restoreCrumbles(); // puts tile-42 back in the grid before spawnFromGrid
+        movPlats=JSON.parse(JSON.stringify(_savedMovPlats.length>0?_savedMovPlats:[])); // fixed
         spawnFromGrid();
-        // V1.7: re-spawn enemies from saved list if grid tiles were already consumed
+        // re-spawn enemies from saved list if grid tiles were already consumed
         if(enemies.length===0&&_savedEnemySpawns.length>0){var _mk={drone:mkDrone,turret:mkTurret,shield:mkShield,walker:mkWalker,sniper:mkSniper,charger:mkCharger,bomber:mkBomber,climber:mkClimber};_savedEnemySpawns.forEach(function(e){if(e.type==="sentinel")enemies.push(mkSentinel(e.px,e.py,e.arc,e.shock));else if(e.type==="hive")enemies.push(mkHive(e.px,e.py,e.spawnN));else if(e.type==="warden")enemies.push(mkWarden(e.px,e.py,e.sweepSpd));else if(e.type==="sniper"){var _sn=mkSniper(e.px,e.py);_sn.surf=e.surf;enemies.push(_sn);}else if(_mk[e.type])enemies.push(_mk[e.type](e.px,e.py));});}
         rebuildCrushers();spawnPlayer(true);
       }
@@ -2170,13 +2170,13 @@ function damage(){
     },1200);
   }
 }
-// V2.2: fast snappy spike — quick out, brief hold, quick back, pause
+// fast snappy spike — quick out, brief hold, quick back, pause
 function getSpikeExt(){const p=100,t=frame%p;if(t<10)return t/10;if(t<30)return 1;if(t<40)return 1-(t-30)/10;return 0;}
 function camMaxX(){return Math.max(0,COLS*TS-W/((mode==='edit')?editZoom:1));}
 function camMaxY(){return Math.max(0,ROWS*TS-H/((mode==='edit')?editZoom:1));}
-// V3.8 instantly centre the camera on the player (used on spawn/respawn so the
+// instantly centre the camera on the player (used on spawn/respawn so the
 // view doesn't pan down from the top of a tall level).
-// V4.2 camera anchor raised so the player sits above the thumbs on mobile
+// camera anchor raised so the player sits above the thumbs on mobile
 const CAM={anchorY:0.38,bandY:0.16,lerp:0.1};
 function snapCamera(){
   const p=player;
@@ -2238,7 +2238,7 @@ function updateDimsDisp(){const el=document.getElementById('dimsDisp');if(el)el.
 function updateColsDisp(){updateDimsDisp();}
 </script>
 <script>/* js/game/moves.js */
-// Neon Platformer — New moves (V5.8)
+// Neon Platformer — New moves
 //  DASH         Double-tap left or right. A quick burst in the facing direction. No gravity while
 //               dashing, you can't be hurt, and enemies you pass through take a hit.
 //               One dash in the air; it refills when you land or touch a wall.
@@ -2257,7 +2257,7 @@ function _mvRight(){return keys['ArrowRight']||keys['KeyD']||touchKeys.right||gy
 // called before the normal left/right input. Returns true to skip normal input this tick.
 function movesPre(p,grav,wet){
   if(p._dashReady===undefined){p._dashReady=true;p._dashCd=0;}
-  if(typeof grappleTick==='function'&&grappleTick(p,grav))return true;   // V6.1 grappling hook
+  if(typeof grappleTick==='function'&&grappleTick(p,grav))return true;   // grappling hook
   if(p._fling>0){                       // flying off the rope: keep your speed, steer a little
     if(p.grounded||wet){p._fling=0;}else{p._fling--;p.vy-=grav*0.3;   /* a little hang time after letting go */const l=_mvLeft(),r=_mvRight(),spd=4.8;
       if(l)p.vx=Math.max(p.vx-0.35,Math.min(p.vx,-spd));else if(r)p.vx=Math.min(p.vx+0.35,Math.max(p.vx,spd));else p.vx*=0.99;
@@ -2367,7 +2367,7 @@ function movesLights(){
 }
 </script>
 <script>/* js/game/grapple.js */
-// Neon Platformer — Grappling hook (V6.1)
+// Neon Platformer — Grappling hook
 // Own button: C or Shift (gamepad Y / triggers, touch: hook button).
 //   HOLD  → the hook catches a block and you SWING. ←/→ pump, ↑/↓ (W/S) reel in / out.
 //           Let go at any time: you fly off with a boost and a flip — throw again in
@@ -2515,7 +2515,7 @@ function _ghBtn(){const b=document.getElementById('tb-hook');if(b)b.style.displa
 window.addEventListener('load',()=>setTimeout(_ghBtn,0));
 </script>
 <script>/* js/game/twists.js */
-// Neon Platformer — World twists (V6.0)
+// Neon Platformer — World twists
 // Each theme plays a little differently. A level can switch its twist off in the editor
 // (TWIST button next to the theme colours); it is saved with the level as `twist`.
 //   NEON     — none (the home city)
@@ -2689,26 +2689,26 @@ function mkTurret(px,py){return{x:px,y:py,px,py,vx:1.8,vy:0,w:22,h:18,grounded:f
 function mkShield(px,py){return{x:px,y:py,px,py,vx:-0.8,vy:0,w:22,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'shield',facing:1};}
 function mkWalker(px,py){return{x:px,y:py,px,py,vx:1.2,vy:0,w:20,h:24,grounded:false,alert:0,hp:1,inv:0,frozen:0,type:'walker'};}
 function mkSniper(px,py){return{x:px,y:py,px,py,vx:0,vy:0,w:20,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'sniper',lockTimer:0,shootCd2:150,facing:1,surf:null};}
-// V3.9 Charger — paces, telegraphs, then dashes; stuns on wall impact
+// Charger — paces, telegraphs, then dashes; stuns on wall impact
 function mkCharger(px,py){return{x:px,y:py,px,py,vx:1.2,vy:0,w:24,h:26,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'charger',state:'patrol',timer:0,facing:1,dvx:0};}
-// V3.9 Bomber — hovers near ceiling, tracks player X, drops bombs
+// Bomber — hovers near ceiling, tracks player X, drops bombs
 function mkBomber(px,py){return{x:px,y:py,px,py,vx:1.4,vy:0,w:26,h:18,grounded:false,alert:0,hp:2,inv:0,frozen:0,type:'bomber',wob:Math.random()*6,timer:90,homeY:py};}
-// V3.9 Climber — clings to a wall, slides vertically, lobs arcing shots
+// Climber — clings to a wall, slides vertically, lobs arcing shots
 function mkClimber(px,py){return{x:px,y:py,px,py,vx:0,vy:1.4,w:20,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'climber',timer:90,side:1,minY:py-TS*3,maxY:py+TS*3,wallSide:-1};}
-// V3.8 Sentinel miniboss — slow arcing jumps, rotating shield, volley, two phases
+// Sentinel miniboss — slow arcing jumps, rotating shield, volley, two phases
 function mkSentinel(px,py,arc,shock){return{
   x:px,y:py,px,py,vx:0,vy:0,w:44,h:44,grounded:false,alert:0,hp:8,inv:0,frozen:0,type:'sentinel',
   ang:Math.random()*Math.PI*2, state:'wait', timer:90, crouch:0, targetX:px, shieldDown:0,
   volleyTimer:200, pounce:false,
   arc:(arc!=null?arc:BOSS_DEFAULT_ARC), shock:(shock!=null?shock:BOSS_DEFAULT_SHOCK)
 };}
-// V4.0 HIVE miniboss — sealed/invulnerable core that opens to spawn drones; weak point during open window
+// HIVE miniboss — sealed/invulnerable core that opens to spawn drones; weak point during open window
 function mkHive(px,py,spawnN){return{
   x:px,y:py,px,py,vx:0,vy:0,w:52,h:52,grounded:true,alert:0,hp:10,inv:0,frozen:0,type:'hive',
   state:'sealed', timer:130, open:0, pulse:0, homeY:py,
   spawnN:(spawnN!=null?spawnN:HIVE_DEFAULT_SPAWN)
 };}
-// V4.0 WARDEN miniboss — dashes wall-to-wall then plants and fires a rotating sweep beam; exposed after
+// WARDEN miniboss — dashes wall-to-wall then plants and fires a rotating sweep beam; exposed after
 function mkWarden(px,py,sweepSpd){return{
   x:px,y:py,px,py,vx:0,vy:0,w:34,h:34,grounded:false,alert:0,hp:9,inv:0,frozen:0,type:'warden',
   state:'idle', timer:80, facing:1, beam:0, sweep:0, dashCount:0,
@@ -2738,7 +2738,7 @@ function updateSniper(e){
 // ── CRUSHERS ──
 function makeCrusher(col,row){const o=hazOpts[row+','+col];return{col,row,x:col*TS,homeY:row*TS,y:row*TS,w:TS,h:TS*1.5,vy:0,state:'wait',timer:o&&o.phase!=null?60+Math.floor(o.phase*120):60+Math.floor(Math.random()*120)};}
 function rebuildCrushers(){crushers=[];for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(grid[r]&&grid[r][c]===22)crushers.push(makeCrusher(c,r));}}
-// V2.5 Falling Rocks
+// Falling Rocks
 function makeFallingRock(col,row){return{col,row,x:col*TS,homeY:row*TS,y:row*TS,w:TS,h:TS,vy:0,state:'idle',timer:0};}
 function resetFallingRocks(){fallingRocks.forEach(function(fr){fr.y=fr.homeY;fr.vy=0;fr.state='idle';fr.timer=0;});}
 function updateFallingRock(fr){
@@ -2760,7 +2760,7 @@ function updateFallingRock(fr){
     if(fr.timer<=0){fr.y=fr.homeY;fr.vy=0;fr.state='idle';}
   }
 }
-// V1.8: snapshot all tile-42 positions so they can be restored on respawn
+// snapshot all tile-42 positions so they can be restored on respawn
 function saveCrumbles(){_savedCrumbles=[];for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(grid[r]&&grid[r][c]===42)_savedCrumbles.push({r,c});}}
 function restoreCrumbles(){if(typeof twistInit==='function')twistInit();if(typeof movesReset==='function')movesReset();if(typeof feelReset==='function')feelReset();if(typeof clearTileFx==='function')clearTileFx();_savedCrumbles.forEach(function(pos){if(grid[pos.r])grid[pos.r][pos.c]=42;});crumbleBlocks={};}
 function getVentPhase(c,r){const period=240,offset=(c*37+r*17)%period,t=(frame+offset)%period;if(t<120)return 0;if(t<150)return(t-120)/30;if(t<180)return 1;return Math.max(0,1-(t-180)/30);}
@@ -2775,7 +2775,7 @@ function updateCrusher(cr){
   else if(cr.state==='rise'){cr.vy=Math.max(cr.vy-0.4,-4);cr.y+=cr.vy;if(cr.y<=cr.homeY){cr.y=cr.homeY;cr.vy=0;cr.state='wait';cr.timer=90+Math.floor(Math.random()*90);}}
 }
 
-// V3.9 CHARGER AI
+// CHARGER AI
 function updateCharger(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player,dx=(p.x+p.w/2)-(e.x+e.w/2),dy=(p.y+p.h/2)-(e.y+e.h/2),adx=Math.abs(dx);
@@ -2800,7 +2800,7 @@ function updateCharger(e){
   if(e.y>ROWS*TS+80){e.x=e.px;e.y=e.py;e.vy=0;e.state='patrol';}
   if(e.inv===0&&adx<(e.w/2+p.w/2)&&Math.abs(dy)<(e.h/2+p.h/2))damage();
 }
-// V3.9 BOMBER AI
+// BOMBER AI
 function updateBomber(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player;e.wob+=0.08;
@@ -2826,7 +2826,7 @@ function updateBombs(){
     }
   }
 }
-// V3.9 CLIMBER AI
+// CLIMBER AI
 function updateClimber(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player;
@@ -2901,7 +2901,7 @@ function updateWalker(e){
   const dist=Math.sqrt((player.x+player.w/2-e.x-e.w/2)**2+(player.y+player.h/2-e.y-e.h/2)**2);
   if(e.inv===0&&dist<(e.w/2+player.w/2)+2)damage();
 }
-// V3.8 SENTINEL miniboss AI
+// SENTINEL miniboss AI
 function updateSentinel(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -2948,7 +2948,7 @@ function updateSentinel(e){
   const cdx=(p.x+p.w/2)-(e.x+e.w/2), cdy=(p.y+p.h/2)-(e.y+e.h/2);
   if(e.inv===0 && Math.abs(cdx)<(e.w/2+p.w/2) && Math.abs(cdy)<(e.h/2+p.h/2))damage();
 }
-// V4.0 HIVE miniboss AI — sealed (invuln) → opens (weak point + spawns drones) → closes
+// HIVE miniboss AI — sealed (invuln) → opens (weak point + spawns drones) → closes
 function updateHive(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -2966,7 +2966,7 @@ function updateHive(e){
       e.cycle=(e.cycle||0)+1;
       // every 3rd open cycle (and always once enraged) one spawn is a turret instead of a drone
       const spawnTurret=(e.cycle%3===0)||p2;
-      // V5.0 cap living minions per hive so long fights can't flood the level
+      // cap living minions per hive so long fights can't flood the level
       const alive=enemies.filter(x=>x._hive===e).length+pendingEnemies.filter(x=>x._hive===e).length;
       const n=Math.max(0,Math.min((e.spawnN||HIVE_DEFAULT_SPAWN)+(p2?1:0),8-alive));
       for(let i=0;i<n;i++){
@@ -2995,7 +2995,7 @@ function updateHive(e){
   const p=player,cdx=(p.x+p.w/2)-(e.x+e.w/2),cdy=(p.y+p.h/2)-(e.y+e.h/2);
   if(e.inv===0&&Math.abs(cdx)<(e.w/2+p.w/2)&&Math.abs(cdy)<(e.h/2+p.h/2))damage();
 }
-// V4.0 WARDEN miniboss AI — idle → telegraph → dash(es) → plant → sweep beam → cooldown(exposed)
+// WARDEN miniboss AI — idle → telegraph → dash(es) → plant → sweep beam → cooldown(exposed)
 function updateWarden(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -3005,7 +3005,7 @@ function updateWarden(e){
   {const foot=e.y+e.h;for(const bx of[e.x+3,e.x+e.w-3]){if(solid(tileAt(bx,foot))){e.y=Math.floor(foot/TS)*TS-e.h;e.vy=0;e.grounded=true;break;}}}
   const spd=7;
   if(e.state==='idle'){
-    e.timer--;if(e.timer<=0){if(Math.abs(dx)<480){e.state='telegraph';e.timer=24;e.facing=dx>0?1:-1;}else e.timer=30;}   // V6.2 sleeps till you get close
+    e.timer--;if(e.timer<=0){if(Math.abs(dx)<480){e.state='telegraph';e.timer=24;e.facing=dx>0?1:-1;}else e.timer=30;}   // sleeps till you get close
   } else if(e.state==='telegraph'){
     e.timer--;if(e.timer<=0){e.state='dash';e.vx=e.facing*spd;e.dashCount=p2?2:1;}
   } else if(e.state==='dash'){
@@ -3024,7 +3024,7 @@ function updateWarden(e){
     const ang=Math.atan2((p.y+p.h/2)-by,(p.x+p.w/2)-bx);
     let diff=Math.abs(((ang-e.sweep+Math.PI*3)%(Math.PI*2))-Math.PI);
     const pdist=Math.hypot((p.x+p.w/2)-bx,(p.y+p.h/2)-by);
-    if(player.inv===0&&diff<0.16&&pdist>20&&pdist<540)damage();   // V6.2 the beam has a reach limit
+    if(player.inv===0&&diff<0.16&&pdist>20&&pdist<540)damage();   // the beam has a reach limit
     if(e.sweep>Math.PI*0.5){e.state='cooldown';e.timer=p2?42:62;e.beam=0;}
   } else if(e.state==='cooldown'){
     e.timer--;if(e.timer<=0){e.state='idle';e.timer=p2?42:78;}
@@ -3061,7 +3061,7 @@ cv.addEventListener('wheel',e=>{if(mode!=='edit')return;e.preventDefault();
     const z0=editZoom;const z=Math.max(0.5,Math.min(2.5,z0*(e.deltaY<0?1.1:0.9)));editZoom=z;
     camX=Math.max(0,Math.min(camMaxX(),camX+mx/z0-mx/z));camY=Math.max(0,Math.min(camMaxY(),camY+my/z0-my/z));return;}
   if(Math.abs(e.deltaX)>Math.abs(e.deltaY))camX=Math.max(0,Math.min(camMaxX(),camX+e.deltaX*0.8));else camY=Math.max(0,Math.min(camMaxY(),camY+e.deltaY*0.8));},{passive:false});
-// V4.1 editor touch: 1 finger paints, 2 fingers pinch-zoom + pan
+// editor touch: 1 finger paints, 2 fingers pinch-zoom + pan
 let _tPinch=null,_tPend=null,_tPaint=false;
 cv.addEventListener('touchstart',e=>{
   if(mode!=='edit')return;
@@ -3111,7 +3111,7 @@ function eraseAt(e){
   const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
   if(tc>=0&&tc<COLS&&tr>=0&&tr<ROWS&&grid[tr])grid[tr][tc]=0;
 }
-// V3.5 compute the on-canvas slider rect for a selected drip group (screen coords)
+// compute the on-canvas slider rect for a selected drip group (screen coords)
 function dripSliderRect(grp){
   const gx0=grp.minC*TS-camX, gx1=(grp.maxC+1)*TS-camX;
   const gw=gx1-gx0;
@@ -3123,7 +3123,7 @@ function dripSliderRect(grp){
   if(by<6) by=(grp.minR+1)*TS-camY+10;   // if no room above, put it just below top row
   return {bx,by,bw,bh:10};
 }
-// V3.8 Sentinel options panel geometry (screen coords): arc slider + shock toggle
+// Sentinel options panel geometry (screen coords): arc slider + shock toggle
 function bossPanelRect(sel){
   const pw=176, ph=64;
   let px=sel.c*TS-camX+TS+8;
@@ -3139,13 +3139,13 @@ function bossPanelRect(sel){
 function editClick(e){
   if(mode!=='edit')return;
   const{mx,my}=getCP(e),wx=mx+camX,wy=my+camY;
-  // V3.5 drip group slider drag
+  // drip group slider drag
   if(selDrip!==null){
     const sr=dripSliderRect(selDrip);
     if(mx>=sr.bx&&mx<=sr.bx+sr.bw&&my>=sr.by-6&&my<=sr.by+sr.bh+6){dragBar={drip:true,bx:sr.bx,bw:sr.bw};applyDrag(e);return;}
   }
   if(selPlat!==null){const mp=movPlats[selPlat],pw=180,ph=68,px2=Math.min(mp.x-camX,W-pw-4),py2=mp.y-camY-ph-8;if(mx>=px2+8&&mx<=px2+pw-8&&my>=py2+36&&my<=py2+44){dragBar={idx:selPlat,bar:'spd',bx:px2+8,bw:pw-16};applyDrag(e);return;}if(mx>=px2+8&&mx<=px2+pw-8&&my>=py2+50&&my<=py2+58){dragBar={idx:selPlat,bar:'dist',bx:px2+8,bw:pw-16};applyDrag(e);return;}}
-  // V3.8/V4.0 boss panel interaction
+  // /boss panel interaction
   if(selBoss!==null){
     const pr=bossPanelRect(selBoss), key=selBoss.r+','+selBoss.c;
     const bt=grid[selBoss.r]&&grid[selBoss.r][selBoss.c];
@@ -3164,20 +3164,20 @@ function editClick(e){
     if(mx>=pr.px&&mx<=pr.px+pr.pw&&my>=pr.py&&my<=pr.py+pr.ph)return;
   }
   for(let i=0;i<movPlats.length;i++){const mp=movPlats[i];if(wx>=mp.x&&wx<=mp.x+mp.w&&wy>=mp.y&&wy<=mp.y+mp.h){selPlat=i;selDrip=null;return;}}
-  // V3.5 select a placed drip block → selects its whole connected group (drip pen active)
+  // select a placed drip block → selects its whole connected group (drip pen active)
   {const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
    if((pen===52||pen===53)&&tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&(grid[tr][tc]===52||grid[tr][tc]===53)){selDrip=dripGroupAt(tr,tc);selPlat=null;selBoss=null;return;}}
-  // V3.8/V4.0 select a placed boss (boss pen active) → opens its options panel
+  // /select a placed boss (boss pen active) → opens its options panel
   {const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
    if((pen===54||pen===58||pen===59)&&tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&grid[tr][tc]===pen){selBoss={r:tr,c:tc};selPlat=null;selDrip=null;return;}}
   selDrip=null;selPlat=null;selBoss=null;paint(e);
 }
 function applyDrag(e){if(!dragBar)return;const{mx}=getCP(e);const t=Math.max(0,Math.min(1,(mx-dragBar.bx)/dragBar.bw));
   if(dragBar.boss){const bo=bossOpts[dragBar.boss]||(bossOpts[dragBar.boss]={});
-    if(dragBar.bt===58){bo.spawnN=Math.max(1,Math.round(1+t*3));return;}        // V4.0 Hive: 1–4 drones
-    if(dragBar.bt===59){bo.sweepSpd=Math.round((0.02+t*0.05)*1000)/1000;return;} // V4.0 Warden: 0.02–0.07
+    if(dragBar.bt===58){bo.spawnN=Math.max(1,Math.round(1+t*3));return;}        // Hive: 1–4 drones
+    if(dragBar.bt===59){bo.sweepSpd=Math.round((0.02+t*0.05)*1000)/1000;return;} // Warden: 0.02–0.07
     if(bo.arc==null)bo.arc=BOSS_DEFAULT_ARC; if(bo.shock==null)bo.shock=BOSS_DEFAULT_SHOCK;
-    bo.arc=Math.round((0.6+t*1.0)*100)/100;return;}  // V3.8 arc 0.6–1.6
+    bo.arc=Math.round((0.6+t*1.0)*100)/100;return;}  // arc 0.6–1.6
   if(dragBar.drip&&selDrip){const sp=Math.round((0.3+t*2.2)*10)/10;setDripGroupSpeed(selDrip,sp);return;}
   const mp=movPlats[dragBar.idx];if(dragBar.bar==='spd')mp.spd=Math.round(t*38+2)/10;if(dragBar.bar==='dist')mp.range=Math.max(1,Math.round(t*12))*TS;}
 function paint(e){
@@ -3189,7 +3189,7 @@ function paint(e){
   else {if((grid[tr][tc]===52||grid[tr][tc]===53)&&pen!==52&&pen!==53){delete dripSpeeds[tr+','+tc];if(selDrip&&selDrip.cells&&selDrip.cells.some(p=>p.r===tr&&p.c===tc))selDrip=null;}grid[tr][tc]=pen;}
 }
 document.addEventListener('keydown',e=>{
-  // V3.0 Ctrl+S quick-save (edit mode)
+  // Ctrl+S quick-save (edit mode)
   if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='S')){
     e.preventDefault();
     if(mode==='edit'){
@@ -3207,7 +3207,7 @@ document.addEventListener('keydown',e=>{
     }
     return;
   }
-  // V2.6 pause toggle
+  // pause toggle
   if((e.code==='Escape'||e.code==='KeyP')&&mode==='play'){togglePause();e.preventDefault();return;}
   if(paused)return; // block all input while paused
   if(mode==='edit'){
@@ -3232,7 +3232,7 @@ document.addEventListener('keyup',e=>{
 });
 </script>
 <script>/* js/editor/tools.js */
-// Neon Platformer — Editor tools (V6.7)
+// Neon Platformer — Editor tools
 //  UNDO / REDO      Ctrl+Z · Ctrl+Y (or Ctrl+Shift+Z) · ↶ ↷ buttons. 80 steps.
 //  SELECT           ⬚ button (or hold Shift and drag). Then: Copy, Cut, Delete, Fill with
 //                   the current block, Mirror ↔, Flip ↕, and hazard timing (SYNC / WAVE / RANDOM).
@@ -3428,7 +3428,7 @@ function edDraw(){
 }
 </script>
 <script>/* js/editor/heat.js */
-// Neon Platformer — Playtest heatmap (V6.7)
+// Neon Platformer — Playtest heatmap
 // While anyone plays, the game quietly notes per level:
 //   where the blob DIES (red), where it gets HURT (orange), and where it SPENDS TIME (blue —
 //   bright blue = players hang around or get stuck there), plus runs started / finished.
@@ -3527,7 +3527,7 @@ function heatDraw(){
 }
 </script>
 <script>/* js/editor/medit.js */
-// Neon Platformer — Mobile editor (V6.8)
+// Neon Platformer — Mobile editor
 // On phones/tablets the editor gets its own layout (the PC editor is unchanged):
 //   · the big toolbar and the hint footer are gone — the level gets the whole screen
 //   · top-left: ▶ TEST · ↶ ↷ · ☰ (everything else: theme, size, save, load, heatmap…)
@@ -3675,16 +3675,16 @@ function meDraw(){
 // Neon Platformer — Main game update (one 60Hz tick)
 // ── UPDATE ──
 function update(){
-  if(mode!=='play'||won||paused)return;  // V2.6 pause check
+  if(mode!=='play'||won||paused)return;  // pause check
   frame++;
-  // V1.4 shake
+  // shake
   if(FEEL.on){if(shakeAmt>0){feelShake(shakeAmt);shakeAmt=0;}}else if(shakeAmt>0){shakeX=(Math.random()-.5)*shakeAmt*2;shakeY=(Math.random()-.5)*shakeAmt*2;shakeAmt*=0.82;if(shakeAmt<0.3)shakeAmt=0;}else{shakeX=0;shakeY=0;}
-  // V1.7: freeze game logic during death animation (draw() still runs for the overlay)
+  // freeze game logic during death animation (draw() still runs for the overlay)
   updateDeathSeq();
   if(startHintTimer>0)startHintTimer--;
   if(deathTimer>0){deathTimer--;return;}
   if(pickupFlash.t>0)pickupFlash.t--;
-  // V4.0 rising lava (Lava theme only)
+  // rising lava (Lava theme only)
   if(levelTheme===2&&lavaRiseSpeed>0){
     lavaLevel-=lavaRiseSpeed;
     if(lavaLevel<-TS*2)lavaLevel=-TS*2;
@@ -3696,13 +3696,13 @@ function update(){
   if(!p._wasGnd&&p.grounded)p._landAnim=9;if(p._landAnim>0)p._landAnim--;p._wasGnd=p.grounded;
   if(plasmaCharging&&(keys['KeyZ']||keys['KeyX']))plasmaCharge=Math.min(plasmaCharge+1.2,60);
   const wet=tileAt(p.x+p.w/2,p.y+p.h*.6)===2||twistWet();p.wet=wet;
-  // V3.6: snappier feel — faster run, slightly stronger gravity + jump, higher fall cap
+  // snappier feel — faster run, slightly stronger gravity + jump, higher fall cap
   const spd=(wet?2.3:4.8)*(pups.speed>0?1.6:1),grav=wet?0.2:0.6,maxFall=wet?3.4:15;
   const maxJumps=p._bounceJumps?3:pups.jump>0?3:2;
   if(p.grounded)p._bounceJumps=false;
   const uf=tileAt(p.x+p.w/2,p.y+p.h+2);
   const onIce=(uf===8)||(levelTheme===1&&p.grounded&&solid(uf));
-  if(movesPre(p,grav,wet)){}  // V5.8 dash / pound hang / wall-jump push-off
+  if(movesPre(p,grav,wet)){}  // dash / pound hang / wall-jump push-off
   else if(keys['ArrowLeft']||keys['KeyA']||touchKeys.left||gyroKeys.left){const s2=spd*tpadSpeed();p.vx=onIce?Math.max(p.vx-(wet?0.5:0.55),-s2):-s2;p.facing=-1;}
   else if(keys['ArrowRight']||keys['KeyD']||touchKeys.right||gyroKeys.right){const s2=spd*tpadSpeed();p.vx=onIce?Math.min(p.vx+(wet?0.5:0.55),s2):s2;p.facing=1;}
   else p.vx*=onIce?0.985:(wet?0.80:0.68);
@@ -3735,15 +3735,15 @@ function update(){
       startWinSequence(p.x+p.w/2,p.y);
     }
   }
-  if(p.y>ROWS*TS+60)damage();  // V3.8 fall-death uses world height (camY may be scrolled)
+  if(p.y>ROWS*TS+60)damage();  // fall-death uses world height (camY may be scrolled)
   // keys
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(!grid[r])continue;const kt=grid[r][c];if(kt!==16&&kt!==17)continue;const kx=c*TS+TS/2,ky=r*TS+TS/2,dx=(p.x+p.w/2)-kx,dy=(p.y+p.h/2)-ky;if(dx*dx+dy*dy<(TS*1.3)**2){const col=kt===16?'red':'blue';grid[r][c]=0;doorState[col]=true;spawnParts(kx,ky,kt===16?'#FF5555':'#5555FF',15);toast((kt===16?'🔴':'🔵')+' key — '+col+' doors open!');}}
   // vents
   const pc=Math.floor((p.x+p.w/2)/TS);for(let dc=-1;dc<=1;dc++){const c=pc+dc;if(c<0||c>=COLS)continue;for(let r=0;r<ROWS;r++){if(!grid[r]||grid[r][c]!==23)continue;const ph=getVentPhase(c,r);if(ph<0.4)continue;if(p.x+p.w>c*TS&&p.x<c*TS+TS&&p.y+p.h>(r-4)*TS&&p.y<r*TS)damage();}}
-  // V2.5 SAW — always damages on contact
+  // SAW — always damages on contact
   if((mid===48||flo===48)&&player.inv===0)damage();
   crushers.forEach(updateCrusher);
-  // V2.5 FLAME JETS
+  // FLAME JETS
   flameJets.forEach(function(fj){
     fj.timer=(fj.timer+1)%120;
     fj.active=fj.timer>=80&&fj.timer<112;
@@ -3759,7 +3759,7 @@ function update(){
       if(player.x+player.w>fj.gx*TS&&player.x<fj.gx*TS+TS&&player.y+player.h>fy1&&player.y<fy2)damage();
     }
   });
-  // V3.3/3.4 DRIP BLOCKS (tile 52 acid / 53 lava) — multi-drop, droplet+underside damage, brief puddle on landing surface
+  // /3.4 DRIP BLOCKS (tile 52 acid / 53 lava) — multi-drop, droplet+underside damage, brief puddle on landing surface
   dripBlocks.forEach(function(db){
     const bx=db.gx*TS, byBottom=(db.gy+1)*TS;
     const spd=db.speed||1;
@@ -3783,7 +3783,7 @@ function update(){
       }
       // find first solid tile beneath the drop's column → land on its TOP surface
       const tc=Math.floor(d.x/TS), tr=Math.floor(d.y/TS);
-      const offWorld = d.y>ROWS*TS+20;  // V3.8 world height (camY may scroll)
+      const offWorld = d.y>ROWS*TS+20;  // world height (camY may scroll)
       const onSolid = tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&solid(grid[tr][tc]);
       if(onSolid||offWorld){
         const surfY = onSolid ? tr*TS : Math.floor(d.y/TS)*TS; // top of the block it lands on
@@ -3800,7 +3800,7 @@ function update(){
       if(pu.life<=0) db.puddles.splice(i,1);
     }
   });
-  // V2.5 FALLING ROCKS
+  // FALLING ROCKS
   fallingRocks.forEach(updateFallingRock);
   // ── CRUMBLE BLOCKS ──
   // Start crumbling when player stands on tile 42
@@ -3828,12 +3828,12 @@ function update(){
   }
   // camera
   const maxCam=Math.max(0,COLS*TS-W);camX+=(Math.max(0,Math.min(maxCam,p.x-W*0.35+(FEEL.on?FEEL.look:0)))-camX)*0.1;
-  // V3.8 vertical camera follow — only scrolls when the level is taller than the viewport.
+  // vertical camera follow — only scrolls when the level is taller than the viewport.
   // A deadzone band keeps small hops from jittering the view; eases toward the target like camX.
   const maxCamY=camMaxY();
   if(maxCamY>0){
     const pcy=p.y+p.h/2;                 // player centre Y (world)
-    const band=H*CAM.bandY;              // vertical deadzone half-height (V4.2)
+    const band=H*CAM.bandY;              // vertical deadzone half-height
     const top=camY+H*CAM.anchorY-band, bot=camY+H*CAM.anchorY+band;
     let wantY=camY;
     if(pcy<top)      wantY=camY+(pcy-top);
@@ -3863,13 +3863,13 @@ function update(){
       if(bdx*bdx+bdy*bdy<hitR*hitR){
         if(b.type==='freeze'){e.frozen=180;spawnParts(b.x,b.y,'#88EEFF',6);hit=true;return true;}
         if(e.type==='shield'&&b.type!=='sword'){const blocked=(e.facing===1&&b.vx<0)||(e.facing===-1&&b.vx>0);if(blocked){spawnParts(b.x,b.y,'#4488FF',4);hit=true;return true;}}
-        // V3.8 Sentinel: rotating shield blocks shots from the covered arc (unless dropped for a volley)
+        // Sentinel: rotating shield blocks shots from the covered arc (unless dropped for a volley)
         if(e.type==='sentinel'&&e.shieldDown<=0){
           const hitAng=Math.atan2(b.y-(e.y+e.h/2),b.x-(e.x+e.w/2));
           let diff=Math.abs(((hitAng-e.ang+Math.PI*3)%(Math.PI*2))-Math.PI);
           if(diff<1.1){spawnParts(b.x,b.y,'#4488FF',5);hit=true;return true;}
         }
-        // V4.0 Hive: armored shell blocks all damage while sealed (weak point only when open)
+        // Hive: armored shell blocks all damage while sealed (weak point only when open)
         if(e.type==='hive'&&e.state==='sealed'){spawnParts(b.x,b.y,'#639922',4);hit=true;return b.type==='plasma'?b.life>0:true;}
         e.hp-=(b.type==='plasma'?3:1);e.inv=20;spawnParts(b.x,b.y,'#FF4444',5);
         if(b.type==='plasma'){spawnExplosion(b.x,b.y,b.r*2.5,WDEFS.plasma.col);return e.hp>0;}
@@ -3890,7 +3890,7 @@ function update(){
   laserBeams=laserBeams.filter(lb=>{lb.life--;return lb.life>0;});
   eBullets=eBullets.filter(b=>{if(b.grav)b.vy+=b.grav;b.x+=b.vx;b.y+=b.vy;b.life--;if(b.life<=0)return false;if(solid(tileAt(b.x,b.y))){spawnParts(b.x,b.y,b.acid?'#5DCAA5':'#FF6600',3);return false;}const dx=b.x-(p.x+p.w/2),dy=b.y-(p.y+p.h/2);if(dx*dx+dy*dy<(p.w/2+4)**2){damage();return false;}return true;});
   coins=coins.filter(c=>{if(c.vy!=null){c.y+=c.vy;c.vy+=0.4;if(solid(tileAt(c.x,c.y+8)))c.vy=null;}const dx=(p.x+p.w/2)-c.x,dy=(p.y+p.h/2)-c.y;if(dx*dx+dy*dy<256){score+=10;runCoins++;updateHUD();spawnParts(c.x,c.y,'#EF9F27',8);coinPops.push({x:c.x,y:c.y,life:50,vy:-0.9});return false;}return true;});
-  // V4.1 advance coin pickup popups
+  // advance coin pickup popups
   for(let i=coinPops.length-1;i>=0;i--){const cp=coinPops[i];cp.y+=cp.vy;cp.vy*=0.96;cp.life--;if(cp.life<=0)coinPops.splice(i,1);}
   powerOrbs=powerOrbs.filter(o=>{
     if(o.vy!=null){o.y+=o.vy;o.vy+=0.3;if(solid(tileAt(o.x,o.y+8)))o.vy=null;}o.life--;
@@ -3907,7 +3907,7 @@ function update(){
     }
     return o.life>0;
   });
-  // V1.4 touch fire/cycle
+  // touch fire/cycle
   if(touchKeys.fire&&!touchKeys._lf&&mode==='play'&&!won)fireWeapon();
   touchKeys._lf=touchKeys.fire;
   if(touchKeys.cycle&&!touchKeys._lc&&mode==='play'&&!won)cycleW(1);
@@ -3938,7 +3938,7 @@ function update(){
 <script>/* js/render/draw.js */
 // Neon Platformer — All rendering: tiles, player, enemies, effects, HUD overlays, parallax
 // ── DRAWING ──
-// V4.0 perf: cache each glowing box (fill+blur+stroke) to an offscreen sprite, stamp with drawImage.
+// perf: cache each glowing box (fill+blur+stroke) to an offscreen sprite, stamp with drawImage.
 // shadowBlur is the most expensive canvas op; baking it once removes it from the per-frame hot path.
 const _nboxCache={};
 function _nboxSprite(w,h,f,s,g){
@@ -3957,8 +3957,8 @@ function nbox(x,y,w,h,f,s,g){
   cx.drawImage(sp.canvas, x-sp.pad, y-sp.pad);
 }
 function drawTile(t,sx,sy,c,r){
-  if(mode==='play'&&t>=29&&t<=32)return;   // V6.3 coins & power orbs are drawn as the real pickups in play, not as editor boxes
-  if(tileDraw(t,sx,sy,c,r))return; // V5.6: new block look (js/render/tiles.js)
+  if(mode==='play'&&t>=29&&t<=32)return;   // coins & power orbs are drawn as the real pickups in play, not as editor boxes
+  if(tileDraw(t,sx,sy,c,r))return; // new block look (js/render/tiles.js)
   if(t===1){nbox(sx,sy,TS,TS,TC.fill,TC.stroke,TC.glow);cx.strokeStyle=TC.line;cx.lineWidth=1;cx.beginPath();cx.moveTo(sx+4,sy+4);cx.lineTo(sx+TS-4,sy+4);cx.stroke();}
   else if(t===2){cx.fillStyle='#071626';cx.fillRect(sx,sy,TS,TS);const wo=Math.sin(frame*0.04+c*0.6)*3;cx.fillStyle='rgba(55,138,221,0.25)';cx.fillRect(sx,sy+8+wo,TS,TS-8);cx.fillStyle='rgba(55,138,221,0.12)';cx.fillRect(sx,sy+3+wo,TS,8);cx.strokeStyle='#378ADD';cx.lineWidth=1;cx.strokeRect(sx+.5,sy+.5,TS-1,TS-1);}
   else if(t===3){cx.fillStyle='#2a0600';cx.fillRect(sx,sy,TS,TS);const lo=Math.sin(frame*0.07+c*0.9)*4;cx.fillStyle='rgba(216,90,48,0.5)';cx.fillRect(sx,sy+6+lo,TS,TS-6);cx.strokeStyle='#D85A30';cx.lineWidth=1;cx.strokeRect(sx+.5,sy+.5,TS-1,TS-1);}
@@ -3978,7 +3978,7 @@ function drawTile(t,sx,sy,c,r){
       cx.restore();
     }
   }
-  // V2.5 SAW BLADE (48)
+  // SAW BLADE (48)
   else if(t===48){
     cx.fillStyle='#0a0a12';cx.fillRect(sx,sy,TS,TS);
     cx.save();cx.translate(sx+TS/2,sy+TS/2);cx.rotate(frame*0.09);
@@ -3998,7 +3998,7 @@ function drawTile(t,sx,sy,c,r){
     cx.fillStyle='#999';cx.beginPath();cx.arc(0,0,4,0,Math.PI*2);cx.fill();
     cx.shadowBlur=0;cx.restore();
   }
-  // V2.5 FLAME JET UP (49) / DOWN (50)
+  // FLAME JET UP (49) / DOWN (50)
   else if(t===49||t===50){
     const dir=t===49?-1:1;
     cx.fillStyle='#1a0800';cx.fillRect(sx,sy,TS,TS);
@@ -4180,7 +4180,7 @@ function drawTile(t,sx,sy,c,r){
     cx.shadowBlur=0;cx.font='6px monospace';cx.globalAlpha=0.6;cx.fillStyle=CFG.cl;cx.textAlign='center';cx.textBaseline='middle';cx.fillText(CFG.lb,sx+TS/2,sy+TS-5);cx.restore();
   }
   else if(t===54){
-    // V3.8 Sentinel miniboss editor marker
+    // Sentinel miniboss editor marker
     const bo=bossOpts[r+','+c]||{};
     cx.save();
     cx.shadowBlur=14;cx.shadowColor='#FF4466';
@@ -4201,7 +4201,7 @@ function drawTile(t,sx,sy,c,r){
     cx.restore();
   }
   else if(t===58){
-    // V4.0 Hive miniboss editor marker
+    // Hive miniboss editor marker
     cx.save();cx.shadowBlur=14;cx.shadowColor='#639922';
     cx.fillStyle='#0a1a00';cx.fillRect(sx+1,sy+1,TS-2,TS-2);
     cx.strokeStyle='#639922';cx.lineWidth=1.5;cx.setLineDash([3,3]);cx.strokeRect(sx+1.5,sy+1.5,TS-3,TS-3);cx.setLineDash([]);
@@ -4215,7 +4215,7 @@ function drawTile(t,sx,sy,c,r){
     cx.restore();
   }
   else if(t===59){
-    // V4.0 Warden miniboss editor marker
+    // Warden miniboss editor marker
     cx.save();cx.shadowBlur=14;cx.shadowColor='#BA7517';
     cx.fillStyle='#1a0a00';cx.fillRect(sx+1,sy+1,TS-2,TS-2);
     cx.strokeStyle='#BA7517';cx.lineWidth=1.5;cx.setLineDash([3,3]);cx.strokeRect(sx+1.5,sy+1.5,TS-3,TS-3);cx.setLineDash([]);
@@ -4230,20 +4230,20 @@ function drawTile(t,sx,sy,c,r){
   }
 }
 
-// V5.5: draw() snaps the camera to whole screen pixels; the frame itself is _drawFrame()
+// draw() snaps the camera to whole screen pixels; the frame itself is _drawFrame()
 function draw(){withPixelCamera(_drawFrame);}
 function _drawFrame(){
   const _ez=(mode==='edit'&&editZoom!==1)?editZoom:1;let _rw,_rh;
   cx.setTransform(DPR*_ez,0,0,DPR*_ez,0,0);
   if(_ez!==1){_rw=W;_rh=H;W=W/_ez;H=H/_ez;}
   cx.fillStyle='#07070f';cx.fillRect(0,0,W,H);
-  drawBackground(); // V5.4 layered scenes in js/render/backgrounds.js (old drawParallax kept below, unused)
+  drawBackground(); // layered scenes in js/render/backgrounds.js (old drawParallax kept below, unused)
   feelPreDraw();
   cx.save();cx.translate(Math.round(shakeX),Math.round(shakeY));
   cx.strokeStyle='rgba(100,80,200,0.035)';cx.lineWidth=1;
   for(let x=-(camX%TS);x<W;x+=TS){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,H);cx.stroke();}
   for(let y=-(camY%TS);y<H;y+=TS){cx.beginPath();cx.moveTo(0,y);cx.lineTo(W,y);cx.stroke();}
-  // trail (V6.5 removed — no motion blur behind the blob)
+  // trail (removed — no motion blur behind the blob)
   if(false)trail.forEach(s=>{cx.globalAlpha=s.alpha*0.6;cx.shadowBlur=7;cx.shadowColor=s.wet?'#1060A0':'#7F77DD';cx.fillStyle=s.wet?'#1a5FA5':'#534AB7';cx.beginPath();cx.arc(s.x-camX,s.y-camY,s.r,0,Math.PI*2);cx.fill();});cx.globalAlpha=1;cx.shadowBlur=0;
   // tiles
   const c0=Math.max(0,Math.floor(camX/TS)-1),c1=Math.min(COLS,c0+VCOLS+3);
@@ -4283,7 +4283,7 @@ function _drawFrame(){
     cx.save();cx.shadowBlur=14;cx.shadowColor=col;cx.fillStyle=col;cx.globalAlpha=pulse;cx.beginPath();cx.arc(sx,sy+bob,7,0,Math.PI*2);cx.fill();cx.fillStyle='rgba(0,0,0,0.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(ic,sx,sy+bob);cx.shadowBlur=0;cx.restore();});
   // coins
   coins.forEach(co=>{const sx=co.x-camX,sy=co.y-camY,spin=Math.cos(frame*0.15+co.x*0.05),bob=Math.sin(frame*0.1+co.x*0.04)*2.5;cx.save();cx.translate(sx,sy+bob);cx.shadowBlur=12;cx.shadowColor='#EF9F27';cx.fillStyle='#EF9F27';cx.beginPath();cx.ellipse(0,0,Math.max(0.5,Math.abs(spin)*5),5,0,0,Math.PI*2);cx.fill();if(spin>0.2){cx.fillStyle='rgba(255,220,100,0.6)';cx.beginPath();cx.ellipse(-1,0,Math.max(0.2,spin*2),3.5,0,0,Math.PI*2);cx.fill();}cx.shadowBlur=0;cx.restore();});
-  // V4.1 coin pickup popups
+  // coin pickup popups
   coinPops.forEach(cp=>{const sx=cp.x-camX,sy=cp.y-camY,al=Math.min(1,cp.life/30);const txt=cp.txt||'+10',col=cp.col||'#FFD24D';cx.save();cx.globalAlpha=al;cx.font='bold 12px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle=col;cx.shadowBlur=8;cx.shadowColor=col;cx.fillText(txt,sx,sy);cx.shadowBlur=0;cx.restore();});
   // enemy bullets
   eBullets.forEach(b=>{const sx=b.x-camX,sy=b.y-camY;cx.save();cx.shadowBlur=8;cx.shadowColor=b.acid?'#1D9E75':'#FF6600';cx.fillStyle=b.acid?'#5DCAA5':'#FF8844';cx.beginPath();cx.arc(sx,sy,4,0,Math.PI*2);cx.fill();cx.shadowBlur=0;cx.restore();});
@@ -4316,7 +4316,7 @@ function _drawFrame(){
     cx.restore();
   });
   laserBeams.forEach(lb=>{cx.save();cx.globalAlpha=lb.life/10;cx.shadowBlur=14;cx.shadowColor='#00FFEE';cx.strokeStyle='#00FFEE';cx.lineWidth=3;cx.beginPath();cx.moveTo(lb.x1-camX,lb.y1-camY);cx.lineTo(lb.x2-camX,lb.y2-camY);cx.stroke();cx.strokeStyle='#fff';cx.lineWidth=1;cx.beginPath();cx.moveTo(lb.x1-camX,lb.y1-camY);cx.lineTo(lb.x2-camX,lb.y2-camY);cx.stroke();cx.shadowBlur=0;cx.restore();});
-  // V2.5 FLAME JET overlays
+  // FLAME JET overlays
   flameJets.forEach(function(fj){
     if(!fj.active||fj.reach<1)return;
     const phase=fj.timer>=80?(fj.timer-80)/32:Math.max(0,1-(fj.timer-112)/8);
@@ -4341,7 +4341,7 @@ function _drawFrame(){
     cx.save();cx.globalAlpha=phase*0.35;cx.shadowBlur=20;cx.shadowColor='#FF6600';
     cx.fillStyle='#FF6600';cx.fillRect(fj.gx*TS-camX,tipR*TS-camY,TS,TS);cx.restore();
   });
-  // V3.3 DRIP BLOCKS — falling droplets + puddles
+  // DRIP BLOCKS — falling droplets + puddles
   dripBlocks.forEach(function(db){
     const cGlo=db.lava?'#ff6a2a':'#63ff2a', cDrop=db.lava?'#FF8A3C':'#7CFF3C';
     db.drops.forEach(function(d){
@@ -4362,7 +4362,7 @@ function _drawFrame(){
       cx.beginPath();cx.ellipse(px2,py2,7,2.5,0,0,Math.PI*2);cx.fill();cx.restore();
     });
   });
-  // V2.5 FALLING ROCKS
+  // FALLING ROCKS
   fallingRocks.forEach(function(fr){
     if(fr.state==='idle')return; // drawn as tile 51 placeholder... but we cleared it from grid. Draw at home.
     const ox=fr.shakeX||0;
@@ -4396,7 +4396,7 @@ function _drawFrame(){
   enemies.forEach(e=>{
     const sx=e.x-camX,sy=e.y-camY;cx.save();
     if(e.inv>0&&!ENEW.has(e.type)&&Math.floor(e.inv/4)%2===0)cx.globalAlpha=0.3;
-    // V5.3: walker, sniper, climber, sentinel, hive and warden use the new look in js/render/enemies.js
+    // walker, sniper, climber, sentinel, hive and warden use the new look in js/render/enemies.js
     // (their old drawing below is kept but no longer reached)
     if(ENEW.has(e.type)){drawEnemy(e);}
     else if(e.type==='turret'){cx.shadowBlur=10;cx.shadowColor='#FF8800';cx.fillStyle='#2a1000';cx.fillRect(sx,sy,e.w,e.h);cx.strokeStyle='#FF8800';cx.lineWidth=2;cx.strokeRect(sx+.5,sy+.5,e.w-1,e.h-1);const angle=Math.atan2((player.y+player.h/2)-(e.y+e.h/2),(player.x+player.w/2)-(e.x+e.w/2));cx.save();cx.translate(sx+e.w/2,sy+e.h/2);cx.rotate(angle);cx.fillStyle='#FF8800';cx.fillRect(2,-2.5,10,5);cx.restore();cx.fillStyle='#FFAA44';cx.beginPath();cx.arc(sx+e.w/2,sy+e.h/2,4,0,Math.PI*2);cx.fill();cx.shadowBlur=0;}
@@ -4536,12 +4536,12 @@ function _drawFrame(){
     else {var _mx=(e.type==='shield'||e.type==='sniper'||e.type==='charger'||e.type==='climber')?3:2;if(e.hp<_mx){cx.fillStyle='#331111';cx.fillRect(sx,sy-6,e.w,4);cx.fillStyle='#E24B4A';cx.fillRect(sx,sy-6,e.w*(e.hp/_mx),4);cx.strokeStyle='#555';cx.lineWidth=1;cx.strokeRect(sx,sy-6,e.w,4);}}
     if(e.frozen>0){cx.save();cx.globalAlpha=Math.min(1,e.frozen/40)*0.55;cx.fillStyle='#88EEFF';cx.fillRect(sx-1,sy-1,e.w+2,e.h+2);cx.strokeStyle='#00FFEE';cx.lineWidth=1;cx.shadowBlur=6;cx.shadowColor='#00FFEE';cx.strokeRect(sx-.5,sy-.5,e.w+1,e.h+1);cx.restore();}
   });
-  drawEnemyFx(); // V5.3 death pops
+  drawEnemyFx(); // death pops
   // sword swing
   if(swordSwing>0&&mode==='play'){const p2=player,t2=swordSwing/18,sx2=p2.x-camX,sy2=p2.y-camY,dir=p2.facing;cx.save();cx.globalAlpha=t2*0.8;cx.shadowBlur=16;cx.shadowColor='#AA44FF';cx.strokeStyle='#CC88FF';cx.lineWidth=3;const sa=dir>0?-Math.PI*0.6:Math.PI*0.4,ea=dir>0?Math.PI*0.1:Math.PI*1.6;cx.beginPath();cx.arc(sx2+p2.w/2,sy2+p2.h/2,32,sa,ea,dir<0);cx.stroke();cx.fillStyle='#DD99FF';cx.globalAlpha=t2*0.35;cx.beginPath();cx.moveTo(sx2+p2.w/2,sy2+p2.h/2);cx.arc(sx2+p2.w/2,sy2+p2.h/2,32,sa,ea,dir<0);cx.closePath();cx.fill();cx.shadowBlur=0;cx.restore();}
-  // V5.2 player blob: animation + weapon in hand live in js/render/player.js
+  // player blob: animation + weapon in hand live in js/render/player.js
   skinDrawTrail();movesDrawBehind();drawPlayerBlob();movesDrawFront();grappleDraw();if(typeof tpadDrawSight==='function')tpadDrawSight();
-  // V4.0 rising lava flood (Lava theme)
+  // rising lava flood (Lava theme)
   if(levelTheme===2&&lavaRiseSpeed>0){
     const surfY=lavaLevel-camY;
     if(surfY<H){
@@ -4571,11 +4571,11 @@ function _drawFrame(){
   twistDraw();feelDrawWorld();lightDraw();twistDarkness();
   cx.restore(); // end shake transform
   feelDrawOverlay();
-  // V1.4 death overlay
+  // death overlay
   if((deathTimer>0||deathSeqTimer>0)&&mode==='play'){drawDeathOverlay();}
-  // V1.4 weapon pickup flash
+  // weapon pickup flash
   if(pickupFlash.t>0){const ft=pickupFlash.t/55;cx.save();cx.globalAlpha=ft*0.22;cx.fillStyle=pickupFlash.col;cx.fillRect(0,0,W,H);if(pickupFlash.t>30){cx.globalAlpha=ft;cx.fillStyle=pickupFlash.col;cx.font='bold 18px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.shadowBlur=14;cx.shadowColor=pickupFlash.col;cx.fillText(pickupFlash.name+' EQUIPPED!',W/2,H/2-40);cx.shadowBlur=0;}cx.restore();}
-  // V4.1 brief control hint at level start (clean, player-facing, auto-fades)
+  // brief control hint at level start (clean, player-facing, auto-fades)
   if(mode==='play'&&MS.tutorials&&startHintTimer>0&&!won&&deathSeqTimer===0){
     const al=Math.min(1,startHintTimer/45);
     cx.save();cx.globalAlpha=al;cx.textAlign='center';cx.textBaseline='middle';
@@ -4607,8 +4607,8 @@ function _drawFrame(){
   if(mode==='edit'){
     cx.strokeStyle='rgba(127,119,221,0.15)';cx.lineWidth=1;
     for(let r=r0;r<r1;r++)for(let c=c0;c<c1;c++)cx.strokeRect(c*TS-camX,r*TS-camY,TS,TS);
-    if(typeof heatDraw==='function')heatDraw();   // V6.7 playtest heatmap
-    if(typeof edDraw==='function')edDraw();   // V6.7 selection / paste ghost / test-here marker
+    if(typeof heatDraw==='function')heatDraw();   // playtest heatmap
+    if(typeof edDraw==='function')edDraw();   // selection / paste ghost / test-here marker
     if(selPlat!==null&&movPlats[selPlat]){
       const mp=movPlats[selPlat],sx=mp.x-camX,sy=mp.y-camY;
       cx.save();cx.shadowBlur=8;cx.shadowColor='#fff';cx.strokeStyle='#fff';cx.lineWidth=2;cx.strokeRect(sx-2,sy-2,mp.w+4,mp.h+4);cx.shadowBlur=0;
@@ -4621,7 +4621,7 @@ function _drawFrame(){
       const rt=Math.max(0,Math.min(1,(mp.range/TS-1)/11));cx.fillStyle='#2a2a3a';cx.fillRect(px3+8,py3+58,pw-16,8);cx.fillStyle='#7F77DD';cx.fillRect(px3+8,py3+58,rt*(pw-16),8);
       cx.restore();
     }
-    // V3.5 drip GROUP selection: highlight all cells + a single slider over the group
+    // drip GROUP selection: highlight all cells + a single slider over the group
     if(selDrip!==null&&selDrip.cells){
       // verify group still valid (cells still drip tiles)
       const valid=selDrip.cells.every(p=>grid[p.r]&&(grid[p.r][p.c]===52||grid[p.r][p.c]===53));
@@ -4649,7 +4649,7 @@ function _drawFrame(){
         cx.restore();
       } else selDrip=null;
     }
-    // V3.8/V4.0 boss options panel
+    // /boss options panel
     if(selBoss!==null){
       const bt=grid[selBoss.r]&&grid[selBoss.r][selBoss.c];
       if(bt===54||bt===58||bt===59){
@@ -4795,7 +4795,7 @@ function drawParallax(){
 }
 </script>
 <script>/* js/render/tiles.js */
-// Neon Platformer — Block look & animation (V5.6)
+// Neon Platformer — Block look & animation
 // Solid ground is drawn as connected neon shapes: only the outer edges glow,
 // with a bright rim on top (where you stand), rounded outer corners and small
 // light nodes in the inside corners — no more box around every single tile.
@@ -5026,7 +5026,7 @@ function tilesDrawFx(){
 function clearTileFx(){TL.fx.length=0;TL.bounce={};TL.respawn.length=0;TL.grow={};}
 </script>
 <script>/* js/render/feel.js */
-// Neon Platformer — Game feel (V5.7)
+// Neon Platformer — Game feel
 // Smooth "trauma" screen shake, hit-stop (tiny freeze on hits), slow motion on boss
 // kills, a camera that looks ahead the way you run, hurt / flash overlays and
 // falling speed streaks. FEEL.on=false turns all of it off.
@@ -5034,7 +5034,7 @@ var FEEL={on:!(typeof MS!=='undefined'&&MS.feel===false),trauma:0,kx:0,ky:0,stop
   pg:false,pvy:0,streaks:[]};
 function feelShake(a){FEEL.trauma=Math.min(1,FEEL.trauma+a/16);}
 function feelKick(dx,dy){FEEL.kx+=dx;FEEL.ky+=dy;}
-function feelStop(n){}   // V6.4 hit-stop removed: the game never pauses on hits or kills
+function feelStop(n){}   // hit-stop removed: the game never pauses on hits or kills
 function feelSlow(scale,ticks){if(FEEL.on){FEEL.slow=scale;FEEL.slowT=FEEL.slowMax=ticks;}}
 function feelFlash(col,a){if(FEEL.on){FEEL.flash=Math.max(FEEL.flash,a);FEEL.flashCol=col;}}
 function feelReset(){FEEL.trauma=0;FEEL.kx=FEEL.ky=0;FEEL.stop=0;FEEL.slow=1;FEEL.slowT=0;FEEL.flash=0;FEEL.hurt=0;FEEL.streaks.length=0;}
@@ -5046,7 +5046,7 @@ function feelEnemyDied(e){if(!FEEL.on)return;
   const boss=e.type==='sentinel'||e.type==='hive'||e.type==='warden',big=e.w>40;
   if(boss){feelStop(10);feelShake(14);feelSlow(0.25,70);feelFlash('#ffffff',0.55);}
   else{feelStop(big?6:4);feelShake(big?7:4);feelFlash(ENEMY_COL&&ENEMY_COL[e.type]||'#ffffff',0.08);}}
-function feelHurt(){if(!FEEL.on)return;feelShake(5);   // V6.3 no freeze when you get hit
+function feelHurt(){if(!FEEL.on)return;feelShake(5);   // no freeze when you get hit
  FEEL.hurt=1;feelFlash('#ff2040',0.22);}
 function feelDeath(){if(!FEEL.on)return;feelSlow(0.35,45);feelShake(10);}
 // once per game tick
@@ -5100,7 +5100,7 @@ function feelDrawOverlay(){
 }
 </script>
 <script>/* js/render/light.js */
-// Neon Platformer — Live lighting (V5.7)
+// Neon Platformer — Live lighting
 // Glowing things (lava, acid, the exit, bullets, explosions, pickups, enemies, the
 // blob, sparks) cast coloured light. The light is drawn into a small buffer, then:
 //  · on blocks it is added strongly, so walls and floors light up near lava or a shot
@@ -5180,7 +5180,7 @@ function lightDraw(){
 }
 </script>
 <script>/* js/render/skins.js */
-// Neon Platformer — Blob customisation (V5.9)
+// Neon Platformer — Blob customisation
 // Colour, eyes, hat and trail. Every item has an id, a name and `free:true` for now;
 // the shop will later add items with a price — owned items are kept in SKIN_OWNED.
 const SKIN_ITEMS={
@@ -5306,7 +5306,7 @@ function skinPreviewDraw(){
 }
 </script>
 <script>/* js/render/player.js */
-// Neon Platformer — Player blob: animation and drawing (V5.2)
+// Neon Platformer — Player blob: animation and drawing
 // The look is the original V6 metaball slime. On top of it:
 //  • squash & stretch from the feet (landing, takeoff, air, running steps, turning)
 //  • eyes: slide when turning, follow the aim when holding a weapon, blink, squint, X when hit
@@ -5371,7 +5371,7 @@ function playerAnimTick(){
   A.lastStep=step;
   const leanT=_pclamp(p.vx*(p.grounded?0.03:0.016),-0.14,0.14)-A.kick*0.08*p.facing;A.lean+=(leanT-A.lean)*0.25;A.kick*=0.8;
   A.face+=(p.facing-A.face)*0.28;
-  // V5.8 moves: stretch while dashing, hug the wall while sliding, tuck before a ground pound
+  // moves: stretch while dashing, hug the wall while sliding, tuck before a ground pound
   if(p._dash>0){A.sq=Math.max(A.sq,0.95);A.lean=p._dashDir*0.12;}
   if(p._wall){A.lean+=(p._wall*0.24-A.lean)*0.35;A.sq=Math.min(A.sq,-0.3);}
   if(p._poundHang>0){A.sq=Math.max(A.sq,0.5);}else if(p._stomping&&p.vy>8){A.sq=Math.min(A.sq,-0.7);}
@@ -5522,7 +5522,7 @@ function _pDrawWeapon(A,W,cy,sx){
 }
 </script>
 <script>/* js/render/enemies.js */
-// Neon Platformer — Enemy look & animation (V5.3)
+// Neon Platformer — Enemy look & animation
 // New drawings for: walker, sniper, climber, sentinel, hive, warden.
 // Drone, turret, shield, charger and bomber keep their original look (in draw.js).
 // Same sizes, hitboxes and behaviour; only the drawing changes.
@@ -5708,7 +5708,7 @@ const EDRAW={
 };
 </script>
 <script>/* js/render/backgrounds.js */
-// Neon Platformer — Background engine (V5.4)
+// Neon Platformer — Background engine
 // Each theme is a scene of parallax layers. Still layers are painted once into
 // hidden canvases (re-made only when the theme or screen size changes) and copied
 // each frame; only the living details (cars, aurora, fish, embers…) are drawn live.
@@ -6177,9 +6177,9 @@ BG_THEMES[6]={name:'DEEPSEA',build(W,H,lite){
 <script>/* js/core/loop.js */
 // Neon Platformer — Fixed-timestep game loop
 // ── LOOP ──
-// V2.7: cap to ~60fps so 120/144Hz monitors don't run the game at double speed
+// cap to ~60fps so 120/144Hz monitors don't run the game at double speed
 let _lastFrameTime=0;
-// V5.0 fixed 60Hz simulation: physics is per-tick, so 90/120Hz screens no
+// fixed 60Hz simulation: physics is per-tick, so 90/120Hz screens no
 // longer slow the game down (90Hz used to run at ~45 ticks/sec) and
 // slow devices catch up instead of running in slow motion.
 function _isTouch(){return matchMedia('(pointer:coarse)').matches;}
@@ -6205,7 +6205,7 @@ function loop(ts){
   _acc+=Math.min(dt,100)*feelTimeScale();
   var n=0;
   try{
-    // V5.5: exact 60 Hz step (16.667 was a hair too long, so ~half of all 60 Hz frames
+    // exact 60 Hz step (16.667 was a hair too long, so ~half of all 60 Hz frames
     // ran no tick and the next ran two — a freeze then a jump)
     while(_acc>=TICK_MS-0.05&&n<4){smoothSnapshot();if(feelGate()){update();audioWatch();playerAnimTick();enemyAnimTick();tilesTick();movesTick();tpadTick();skinTick();twistTick();grappleTickFx();heatTick();}feelTick();_acc-=TICK_MS;n++;}
     if(n===4)_acc=0;
@@ -6217,7 +6217,7 @@ function loop(ts){
 </script>
 <script>/* js/audio/audio.js */
 // Neon Platformer — Audio engine: sound files with synth fallback, music
-// ====== AUDIO ENGINE V5.0 ======
+// ====== AUDIO ENGINE ======
 // One shared AudioContext with master → sfx / music buses, so the settings
 // sliders actually work. Gameplay sounds are driven by watching game state
 // once per tick (audioWatch), which keeps the physics/enemy code untouched.
@@ -6385,11 +6385,11 @@ function musicSync(){
 </script>
 <script>/* js/input/gamepad.js */
 // Neon Platformer — Difficulty values and gamepad support
-// ── V5.0 difficulty: starting hearts and lives ──
+// ── difficulty: starting hearts and lives ──
 function DIFF_HP(){var d=(typeof MS!=='undefined')?MS.difficulty:'normal';return d==='easy'?5:d==='hard'?2:3;}
 function DIFF_LIVES(){var d=(typeof MS!=='undefined')?MS.difficulty:'normal';return d==='easy'?5:d==='hard'?2:3;}
 
-// ── V5.0 gamepad: mapped onto the same key codes the keyboard uses ──
+// ── gamepad: mapped onto the same key codes the keyboard uses ──
 var _gpPrev={},_gpOff=false;
 var GP_MAP=[[14,'ArrowLeft'],[15,'ArrowRight'],[13,'ArrowDown'],[12,'ArrowUp'],[0,'Space'],[2,'KeyZ'],[1,'KeyZ'],[4,'KeyQ'],[5,'KeyE'],[9,'Escape'],[3,'KeyC'],[6,'KeyC'],[7,'KeyC']];
 function pollGamepad(){
@@ -6410,7 +6410,7 @@ function pollGamepad(){
 </script>
 <script>/* js/ui/menu.js */
 // Neon Platformer — Main menu, settings, save slots, credits
-// ====== MENU SYSTEM V1.3 ======
+// ====== MENU SYSTEM ======
 var mEl   = document.getElementById('menu');
 var mBg   = document.getElementById('menuBg');
 var mCtx  = mBg.getContext('2d');
@@ -6462,7 +6462,7 @@ function togS(k,id){
   if(k==='tpadArc'){if(b)b.textContent=MS.tpadArc?'SLIDER':'BUTTONS';if(typeof tpadApplySetting==='function')tpadApplySetting();}
   if(k==='bgLite'&&b){ b.className='tb'+(MS.bgLite?'':' on'); b.textContent=MS.bgLite?'LITE':'FULL'; }
 }
-// ── V4.1 GYRO TILT CONTROLS ──
+// ── GYRO TILT CONTROLS ──
 var _gyroBound=false;
 function _gyroHandler(e){
   if(!MS.gyro||mode!=='play'){gyroKeys.left=false;gyroKeys.right=false;return;}
@@ -6695,7 +6695,7 @@ function drawBg(){
   mCtx.save(); mCtx.globalAlpha=.022; mCtx.fillStyle='#000';
   for(var sy=0; sy<h; sy+=4) mCtx.fillRect(0,sy,w,2);
   mCtx.restore();
-  // V4.0 player blob hopping across the ground line — ties the title to the game
+  // player blob hopping across the ground line — ties the title to the game
   drawMenuBlob(w,h,t);
 }
 function drawMenuBlob(w,h,t){
@@ -6728,19 +6728,19 @@ function mLoop(){
   mRafId = requestAnimationFrame(mLoop);
 }
 
-// V5.7 apply saved lighting / game-feel settings
+// apply saved lighting / game-feel settings
 if(typeof LIGHT!=='undefined')LIGHT.on=MS.lighting;if(typeof FEEL!=='undefined')FEEL.on=MS.feel;
 </script>
 <script>/* js/input/touch.js */
 // Neon Platformer — On-screen touch buttons (multitouch)
-// ====== TOUCH CONTROLS V1.4 ======
-// V5.0 true multitouch: every finger is tracked on its own, buttons are hit-tested
+// ====== TOUCH CONTROLS ======
+// true multitouch: every finger is tracked on its own, buttons are hit-tested
 // with a forgiving margin, and a finger can slide from one button to another
 // (e.g. ← to →) without lifting. Run + jump + fire all work at the same time.
 var _tBtns=[['tb-left','left'],['tb-right','right'],['tb-down','down'],['tb-jump','jump'],['tb-fire','fire'],['tb-cycle','cycle'],['tb-hook','hook']];
 var _tTouches={};   // touch identifier -> key name (or null when between buttons)
-var _tHook={};      // V6.1 hook button: tap = throw, hold+drag = aim, release = throw that way
-var _tFire={};      // V5.8 fire button doubles as an aim stick: touch id -> start point
+var _tHook={};      // hook button: tap = throw, hold+drag = aim, release = throw that way
+var _tFire={};      // fire button doubles as an aim stick: touch id -> start point
 function _tHit(x,y){
   var best=null,bestD=1e9,M=14;
   for(var i=0;i<_tBtns.length;i++){
@@ -6817,7 +6817,7 @@ function initMenu(){
 }
 </script>
 <script>/* js/input/touchpad.js */
-// Neon Platformer — Arc touch pad (V5.8)
+// Neon Platformer — Arc touch pad
 // One control for the left thumb: a neon slider bar.
 //   BAR (bottom)   analog: put your thumb down anywhere and slide left / right to run — the
 //                  further you slide the faster. Quick TAP on a side = DASH that way.
@@ -7025,7 +7025,7 @@ musicSync=function(){
 </script>
 <script>/* js/main.js */
 // Neon Platformer — Boot: offline support and startup
-// ── V5.0 offline / installable (only when served over http/https) ──
+// ── offline / installable (only when served over http/https) ──
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){
   window.addEventListener('load',function(){try{navigator.serviceWorker.register('sw.js').catch(function(){});}catch(e){}});
 }
@@ -7034,8 +7034,8 @@ resize();
 openFolds.forEach(name=>{const fh=document.querySelector('#fld-'+name+' .fh'),fb=document.getElementById('fb-'+name);if(fh&&fb){fh.classList.add('open');fb.classList.add('open');}});
 pick(0);
 updateSlotBtn();
-startAutoSave(); // V2.4
-loadCampaignFolder(); // V5.1 read levels/ when served online
+startAutoSave();
+loadCampaignFolder(); // read levels/ when served online
 initMenu();
 </script>
 </body></html>

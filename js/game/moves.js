@@ -1,4 +1,4 @@
-// Neon Platformer — New moves (V5.8)
+// Neon Platformer — New moves
 //  DASH         Double-tap left or right. A quick burst in the facing direction. No gravity while
 //               dashing, you can't be hurt, and enemies you pass through take a hit.
 //               One dash in the air; it refills when you land or touch a wall.
@@ -17,7 +17,7 @@ function _mvRight(){return keys['ArrowRight']||keys['KeyD']||touchKeys.right||gy
 // called before the normal left/right input. Returns true to skip normal input this tick.
 function movesPre(p,grav,wet){
   if(p._dashReady===undefined){p._dashReady=true;p._dashCd=0;}
-  if(typeof grappleTick==='function'&&grappleTick(p,grav))return true;   // V6.1 grappling hook
+  if(typeof grappleTick==='function'&&grappleTick(p,grav))return true;   // grappling hook
   if(p._fling>0){                       // flying off the rope: keep your speed, steer a little
     if(p.grounded||wet){p._fling=0;}else{p._fling--;p.vy-=grav*0.3;   /* a little hang time after letting go */const l=_mvLeft(),r=_mvRight(),spd=4.8;
       if(l)p.vx=Math.max(p.vx-0.35,Math.min(p.vx,-spd));else if(r)p.vx=Math.min(p.vx+0.35,Math.max(p.vx,spd));else p.vx*=0.99;

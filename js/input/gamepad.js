@@ -1,9 +1,9 @@
 // Neon Platformer — Difficulty values and gamepad support
-// ── V5.0 difficulty: starting hearts and lives ──
+// ── difficulty: starting hearts and lives ──
 function DIFF_HP(){var d=(typeof MS!=='undefined')?MS.difficulty:'normal';return d==='easy'?5:d==='hard'?2:3;}
 function DIFF_LIVES(){var d=(typeof MS!=='undefined')?MS.difficulty:'normal';return d==='easy'?5:d==='hard'?2:3;}
 
-// ── V5.0 gamepad: mapped onto the same key codes the keyboard uses ──
+// ── gamepad: mapped onto the same key codes the keyboard uses ──
 var _gpPrev={},_gpOff=false;
 var GP_MAP=[[14,'ArrowLeft'],[15,'ArrowRight'],[13,'ArrowDown'],[12,'ArrowUp'],[0,'Space'],[2,'KeyZ'],[1,'KeyZ'],[4,'KeyQ'],[5,'KeyE'],[9,'Escape'],[3,'KeyC'],[6,'KeyC'],[7,'KeyC']];
 function pollGamepad(){

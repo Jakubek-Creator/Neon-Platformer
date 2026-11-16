@@ -5,26 +5,26 @@ function mkTurret(px,py){return{x:px,y:py,px,py,vx:1.8,vy:0,w:22,h:18,grounded:f
 function mkShield(px,py){return{x:px,y:py,px,py,vx:-0.8,vy:0,w:22,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'shield',facing:1};}
 function mkWalker(px,py){return{x:px,y:py,px,py,vx:1.2,vy:0,w:20,h:24,grounded:false,alert:0,hp:1,inv:0,frozen:0,type:'walker'};}
 function mkSniper(px,py){return{x:px,y:py,px,py,vx:0,vy:0,w:20,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'sniper',lockTimer:0,shootCd2:150,facing:1,surf:null};}
-// V3.9 Charger — paces, telegraphs, then dashes; stuns on wall impact
+// Charger — paces, telegraphs, then dashes; stuns on wall impact
 function mkCharger(px,py){return{x:px,y:py,px,py,vx:1.2,vy:0,w:24,h:26,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'charger',state:'patrol',timer:0,facing:1,dvx:0};}
-// V3.9 Bomber — hovers near ceiling, tracks player X, drops bombs
+// Bomber — hovers near ceiling, tracks player X, drops bombs
 function mkBomber(px,py){return{x:px,y:py,px,py,vx:1.4,vy:0,w:26,h:18,grounded:false,alert:0,hp:2,inv:0,frozen:0,type:'bomber',wob:Math.random()*6,timer:90,homeY:py};}
-// V3.9 Climber — clings to a wall, slides vertically, lobs arcing shots
+// Climber — clings to a wall, slides vertically, lobs arcing shots
 function mkClimber(px,py){return{x:px,y:py,px,py,vx:0,vy:1.4,w:20,h:22,grounded:false,alert:0,hp:3,inv:0,frozen:0,type:'climber',timer:90,side:1,minY:py-TS*3,maxY:py+TS*3,wallSide:-1};}
-// V3.8 Sentinel miniboss — slow arcing jumps, rotating shield, volley, two phases
+// Sentinel miniboss — slow arcing jumps, rotating shield, volley, two phases
 function mkSentinel(px,py,arc,shock){return{
   x:px,y:py,px,py,vx:0,vy:0,w:44,h:44,grounded:false,alert:0,hp:8,inv:0,frozen:0,type:'sentinel',
   ang:Math.random()*Math.PI*2, state:'wait', timer:90, crouch:0, targetX:px, shieldDown:0,
   volleyTimer:200, pounce:false,
   arc:(arc!=null?arc:BOSS_DEFAULT_ARC), shock:(shock!=null?shock:BOSS_DEFAULT_SHOCK)
 };}
-// V4.0 HIVE miniboss — sealed/invulnerable core that opens to spawn drones; weak point during open window
+// HIVE miniboss — sealed/invulnerable core that opens to spawn drones; weak point during open window
 function mkHive(px,py,spawnN){return{
   x:px,y:py,px,py,vx:0,vy:0,w:52,h:52,grounded:true,alert:0,hp:10,inv:0,frozen:0,type:'hive',
   state:'sealed', timer:130, open:0, pulse:0, homeY:py,
   spawnN:(spawnN!=null?spawnN:HIVE_DEFAULT_SPAWN)
 };}
-// V4.0 WARDEN miniboss — dashes wall-to-wall then plants and fires a rotating sweep beam; exposed after
+// WARDEN miniboss — dashes wall-to-wall then plants and fires a rotating sweep beam; exposed after
 function mkWarden(px,py,sweepSpd){return{
   x:px,y:py,px,py,vx:0,vy:0,w:34,h:34,grounded:false,alert:0,hp:9,inv:0,frozen:0,type:'warden',
   state:'idle', timer:80, facing:1, beam:0, sweep:0, dashCount:0,
@@ -54,7 +54,7 @@ function updateSniper(e){
 // ── CRUSHERS ──
 function makeCrusher(col,row){const o=hazOpts[row+','+col];return{col,row,x:col*TS,homeY:row*TS,y:row*TS,w:TS,h:TS*1.5,vy:0,state:'wait',timer:o&&o.phase!=null?60+Math.floor(o.phase*120):60+Math.floor(Math.random()*120)};}
 function rebuildCrushers(){crushers=[];for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(grid[r]&&grid[r][c]===22)crushers.push(makeCrusher(c,r));}}
-// V2.5 Falling Rocks
+// Falling Rocks
 function makeFallingRock(col,row){return{col,row,x:col*TS,homeY:row*TS,y:row*TS,w:TS,h:TS,vy:0,state:'idle',timer:0};}
 function resetFallingRocks(){fallingRocks.forEach(function(fr){fr.y=fr.homeY;fr.vy=0;fr.state='idle';fr.timer=0;});}
 function updateFallingRock(fr){
@@ -76,7 +76,7 @@ function updateFallingRock(fr){
     if(fr.timer<=0){fr.y=fr.homeY;fr.vy=0;fr.state='idle';}
   }
 }
-// V1.8: snapshot all tile-42 positions so they can be restored on respawn
+// snapshot all tile-42 positions so they can be restored on respawn
 function saveCrumbles(){_savedCrumbles=[];for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(grid[r]&&grid[r][c]===42)_savedCrumbles.push({r,c});}}
 function restoreCrumbles(){if(typeof twistInit==='function')twistInit();if(typeof movesReset==='function')movesReset();if(typeof feelReset==='function')feelReset();if(typeof clearTileFx==='function')clearTileFx();_savedCrumbles.forEach(function(pos){if(grid[pos.r])grid[pos.r][pos.c]=42;});crumbleBlocks={};}
 function getVentPhase(c,r){const period=240,offset=(c*37+r*17)%period,t=(frame+offset)%period;if(t<120)return 0;if(t<150)return(t-120)/30;if(t<180)return 1;return Math.max(0,1-(t-180)/30);}
@@ -91,7 +91,7 @@ function updateCrusher(cr){
   else if(cr.state==='rise'){cr.vy=Math.max(cr.vy-0.4,-4);cr.y+=cr.vy;if(cr.y<=cr.homeY){cr.y=cr.homeY;cr.vy=0;cr.state='wait';cr.timer=90+Math.floor(Math.random()*90);}}
 }
 
-// V3.9 CHARGER AI
+// CHARGER AI
 function updateCharger(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player,dx=(p.x+p.w/2)-(e.x+e.w/2),dy=(p.y+p.h/2)-(e.y+e.h/2),adx=Math.abs(dx);
@@ -116,7 +116,7 @@ function updateCharger(e){
   if(e.y>ROWS*TS+80){e.x=e.px;e.y=e.py;e.vy=0;e.state='patrol';}
   if(e.inv===0&&adx<(e.w/2+p.w/2)&&Math.abs(dy)<(e.h/2+p.h/2))damage();
 }
-// V3.9 BOMBER AI
+// BOMBER AI
 function updateBomber(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player;e.wob+=0.08;
@@ -142,7 +142,7 @@ function updateBombs(){
     }
   }
 }
-// V3.9 CLIMBER AI
+// CLIMBER AI
 function updateClimber(e){
   if(e.frozen>0){e.frozen--;return;}if(e.inv>0)e.inv--;
   const p=player;
@@ -217,7 +217,7 @@ function updateWalker(e){
   const dist=Math.sqrt((player.x+player.w/2-e.x-e.w/2)**2+(player.y+player.h/2-e.y-e.h/2)**2);
   if(e.inv===0&&dist<(e.w/2+player.w/2)+2)damage();
 }
-// V3.8 SENTINEL miniboss AI
+// SENTINEL miniboss AI
 function updateSentinel(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -264,7 +264,7 @@ function updateSentinel(e){
   const cdx=(p.x+p.w/2)-(e.x+e.w/2), cdy=(p.y+p.h/2)-(e.y+e.h/2);
   if(e.inv===0 && Math.abs(cdx)<(e.w/2+p.w/2) && Math.abs(cdy)<(e.h/2+p.h/2))damage();
 }
-// V4.0 HIVE miniboss AI — sealed (invuln) → opens (weak point + spawns drones) → closes
+// HIVE miniboss AI — sealed (invuln) → opens (weak point + spawns drones) → closes
 function updateHive(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -282,7 +282,7 @@ function updateHive(e){
       e.cycle=(e.cycle||0)+1;
       // every 3rd open cycle (and always once enraged) one spawn is a turret instead of a drone
       const spawnTurret=(e.cycle%3===0)||p2;
-      // V5.0 cap living minions per hive so long fights can't flood the level
+      // cap living minions per hive so long fights can't flood the level
       const alive=enemies.filter(x=>x._hive===e).length+pendingEnemies.filter(x=>x._hive===e).length;
       const n=Math.max(0,Math.min((e.spawnN||HIVE_DEFAULT_SPAWN)+(p2?1:0),8-alive));
       for(let i=0;i<n;i++){
@@ -311,7 +311,7 @@ function updateHive(e){
   const p=player,cdx=(p.x+p.w/2)-(e.x+e.w/2),cdy=(p.y+p.h/2)-(e.y+e.h/2);
   if(e.inv===0&&Math.abs(cdx)<(e.w/2+p.w/2)&&Math.abs(cdy)<(e.h/2+p.h/2))damage();
 }
-// V4.0 WARDEN miniboss AI — idle → telegraph → dash(es) → plant → sweep beam → cooldown(exposed)
+// WARDEN miniboss AI — idle → telegraph → dash(es) → plant → sweep beam → cooldown(exposed)
 function updateWarden(e){
   if(e.frozen>0){e.frozen--;return;}
   if(e.inv>0)e.inv--;
@@ -321,7 +321,7 @@ function updateWarden(e){
   {const foot=e.y+e.h;for(const bx of[e.x+3,e.x+e.w-3]){if(solid(tileAt(bx,foot))){e.y=Math.floor(foot/TS)*TS-e.h;e.vy=0;e.grounded=true;break;}}}
   const spd=7;
   if(e.state==='idle'){
-    e.timer--;if(e.timer<=0){if(Math.abs(dx)<480){e.state='telegraph';e.timer=24;e.facing=dx>0?1:-1;}else e.timer=30;}   // V6.2 sleeps till you get close
+    e.timer--;if(e.timer<=0){if(Math.abs(dx)<480){e.state='telegraph';e.timer=24;e.facing=dx>0?1:-1;}else e.timer=30;}   // sleeps till you get close
   } else if(e.state==='telegraph'){
     e.timer--;if(e.timer<=0){e.state='dash';e.vx=e.facing*spd;e.dashCount=p2?2:1;}
   } else if(e.state==='dash'){
@@ -340,7 +340,7 @@ function updateWarden(e){
     const ang=Math.atan2((p.y+p.h/2)-by,(p.x+p.w/2)-bx);
     let diff=Math.abs(((ang-e.sweep+Math.PI*3)%(Math.PI*2))-Math.PI);
     const pdist=Math.hypot((p.x+p.w/2)-bx,(p.y+p.h/2)-by);
-    if(player.inv===0&&diff<0.16&&pdist>20&&pdist<540)damage();   // V6.2 the beam has a reach limit
+    if(player.inv===0&&diff<0.16&&pdist>20&&pdist<540)damage();   // the beam has a reach limit
     if(e.sweep>Math.PI*0.5){e.state='cooldown';e.timer=p2?42:62;e.beam=0;}
   } else if(e.state==='cooldown'){
     e.timer--;if(e.timer<=0){e.state='idle';e.timer=p2?42:78;}

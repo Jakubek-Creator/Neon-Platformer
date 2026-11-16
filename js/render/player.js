@@ -1,4 +1,4 @@
-// Neon Platformer — Player blob: animation and drawing (V5.2)
+// Neon Platformer — Player blob: animation and drawing
 // The look is the original V6 metaball slime. On top of it:
 //  • squash & stretch from the feet (landing, takeoff, air, running steps, turning)
 //  • eyes: slide when turning, follow the aim when holding a weapon, blink, squint, X when hit
@@ -63,7 +63,7 @@ function playerAnimTick(){
   A.lastStep=step;
   const leanT=_pclamp(p.vx*(p.grounded?0.03:0.016),-0.14,0.14)-A.kick*0.08*p.facing;A.lean+=(leanT-A.lean)*0.25;A.kick*=0.8;
   A.face+=(p.facing-A.face)*0.28;
-  // V5.8 moves: stretch while dashing, hug the wall while sliding, tuck before a ground pound
+  // moves: stretch while dashing, hug the wall while sliding, tuck before a ground pound
   if(p._dash>0){A.sq=Math.max(A.sq,0.95);A.lean=p._dashDir*0.12;}
   if(p._wall){A.lean+=(p._wall*0.24-A.lean)*0.35;A.sq=Math.min(A.sq,-0.3);}
   if(p._poundHang>0){A.sq=Math.max(A.sq,0.5);}else if(p._stomping&&p.vy>8){A.sq=Math.min(A.sq,-0.7);}

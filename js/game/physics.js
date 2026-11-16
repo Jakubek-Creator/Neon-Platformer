@@ -7,7 +7,7 @@ function moveY(p){
   if(p.vy<0){for(const bx of[p.x+3,p.x+p.w-3]){if(solid(tileAt(bx,p.y))){const tr2=Math.floor(p.y/TS),tc2=Math.floor(bx/TS);if(tr2>=0&&tr2<ROWS&&tc2>=0&&tc2<COLS&&grid[tr2]&&grid[tr2][tc2]===6){grid[tr2][tc2]=0;spawnOrb(tc2*TS+TS/2,tr2*TS-8);spawnParts(tc2*TS+TS/2,tr2*TS,'#EF9F27',12);}p.y=Math.floor(p.y/TS)*TS+TS;p.vy=0;break;}}}
 }
 function spawnOrb(x,y){const types=['speed','shield','jump','coin'];const t=types[Math.floor(Math.random()*types.length)];if(t==='coin'){coins.push({x,y,vy:-5});return;}powerOrbs.push({x,y,vy:-4,type:t,life:300});}
-// V4.1 reusable vector heart (matches the extra-life preview); s = unit scale
+// reusable vector heart (matches the extra-life preview); s = unit scale
 function drawHeartShape(g,x,y,s,col){g.save();g.translate(x,y);g.scale(s,s);g.fillStyle=col;g.beginPath();g.moveTo(0,-2.2);g.bezierCurveTo(-3,-5.5,-8,-3.5,-8,0.4);g.bezierCurveTo(-8,3.8,-3.4,6.2,0,8.6);g.bezierCurveTo(3.4,6.2,8,3.8,8,0.4);g.bezierCurveTo(8,-3.5,3,-5.5,0,-2.2);g.closePath();g.fill();g.restore();}
 function spawnParts(x,y,col,n){for(let i=0;i<n;i++)parts.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-1.8)*5,life:30,col,r:1+Math.random()*2.2});if(parts.length>180)parts.splice(0,parts.length-180);}
 function spawnWinParts(wx,wy,col,n,spread){
@@ -268,31 +268,31 @@ function damage(){
   if(pups.shield>0){pups.shield=0;player.inv=80;spawnParts(player.x+player.w/2,player.y+player.h/2,'#00FFEE',12);updateHUD();return;}
   hp=Math.max(0,hp-1);player.inv=80;spawnParts(player.x+player.w/2,player.y+player.h/2,'#E24B4A',10);updateHUD();
   if(hp===0){deathTimer=72;runDeaths++;lives--;startDeathSequence(player.x+player.w/2,player.y+player.h/2);feelDeath();
-    const gameOver=lives<=0; // V4.1 out of lives -> restart level from the start, lives reset
+    const gameOver=lives<=0; // out of lives -> restart level from the start, lives reset
     if(gameOver)lives=DIFF_LIVES();
     updateHUD();
-    const _tok=_runToken; // V5.0 ignore this respawn if the player left/restarted the level meanwhile
+    const _tok=_runToken; // ignore this respawn if the player left/restarted the level meanwhile
     setTimeout(()=>{
       if(_tok!==_runToken)return;
-      deathTimer=0;hp=DIFF_HP();won=false; // V1.7: reset deathTimer so player unfreezes immediately on respawn
+      deathTimer=0;hp=DIFF_HP();won=false; // reset deathTimer so player unfreezes immediately on respawn
       bullets=[];eBullets=[];enemyBombs=[];pendingEnemies=[];parts=[];grenades=[];explosions=[];laserBeams=[];swordSwing=0;plasmaCharge=0;plasmaCharging=false;
       pups={speed:0,shield:0,jump:0};shootCd=0;
-      curW='blaster';wAmmo={blaster:wAmmo.blaster||0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0}; // V6.2 you keep the blaster you found
+      curW='blaster';wAmmo={blaster:wAmmo.blaster||0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0}; // you keep the blaster you found
       if(checkpoint&&!gameOver){
         // respawn at checkpoint — level state (tiles, enemies) stays intact
         player.x=checkpoint.x;player.y=checkpoint.y;player.vx=0;player.vy=0;player.grounded=false;player.jumps=0;player.inv=80;player.facing=1;player._stomping=false;player._bounceJumps=false;player._swCool=0;
-        if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel; // V4.0 lava back to checkpoint height
-        snapCamera(); // V3.8 recentre on checkpoint respawn
+        if(lavaCheckpointLevel!=null)lavaLevel=lavaCheckpointLevel; // lava back to checkpoint height
+        snapCamera(); // recentre on checkpoint respawn
       } else {
         // no checkpoint — full level restart
         crumbleBlocks={};doorState={red:false,blue:false};activatedCPs=new Set();checkpoint=null;camX=0;camY=0;
-        lavaLevel=ROWS*TS;lavaCheckpointLevel=null; // V4.0 lava back to bottom
-        enemies=[];coins=[];powerOrbs=[];crushers=[];laserEmitters=[];flameJets=[];dripBlocks=[];  // V2.5
-        resetFallingRocks(); // V2.5 reset rocks to home instead of rebuilding
-        restoreCrumbles(); // V1.8: puts tile-42 back in the grid before spawnFromGrid
-        movPlats=JSON.parse(JSON.stringify(_savedMovPlats.length>0?_savedMovPlats:[])); // V1.7 fixed
+        lavaLevel=ROWS*TS;lavaCheckpointLevel=null; // lava back to bottom
+        enemies=[];coins=[];powerOrbs=[];crushers=[];laserEmitters=[];flameJets=[];dripBlocks=[];
+        resetFallingRocks(); // reset rocks to home instead of rebuilding
+        restoreCrumbles(); // puts tile-42 back in the grid before spawnFromGrid
+        movPlats=JSON.parse(JSON.stringify(_savedMovPlats.length>0?_savedMovPlats:[])); // fixed
         spawnFromGrid();
-        // V1.7: re-spawn enemies from saved list if grid tiles were already consumed
+        // re-spawn enemies from saved list if grid tiles were already consumed
         if(enemies.length===0&&_savedEnemySpawns.length>0){var _mk={drone:mkDrone,turret:mkTurret,shield:mkShield,walker:mkWalker,sniper:mkSniper,charger:mkCharger,bomber:mkBomber,climber:mkClimber};_savedEnemySpawns.forEach(function(e){if(e.type==="sentinel")enemies.push(mkSentinel(e.px,e.py,e.arc,e.shock));else if(e.type==="hive")enemies.push(mkHive(e.px,e.py,e.spawnN));else if(e.type==="warden")enemies.push(mkWarden(e.px,e.py,e.sweepSpd));else if(e.type==="sniper"){var _sn=mkSniper(e.px,e.py);_sn.surf=e.surf;enemies.push(_sn);}else if(_mk[e.type])enemies.push(_mk[e.type](e.px,e.py));});}
         rebuildCrushers();spawnPlayer(true);
       }
@@ -302,13 +302,13 @@ function damage(){
     },1200);
   }
 }
-// V2.2: fast snappy spike — quick out, brief hold, quick back, pause
+// fast snappy spike — quick out, brief hold, quick back, pause
 function getSpikeExt(){const p=100,t=frame%p;if(t<10)return t/10;if(t<30)return 1;if(t<40)return 1-(t-30)/10;return 0;}
 function camMaxX(){return Math.max(0,COLS*TS-W/((mode==='edit')?editZoom:1));}
 function camMaxY(){return Math.max(0,ROWS*TS-H/((mode==='edit')?editZoom:1));}
-// V3.8 instantly centre the camera on the player (used on spawn/respawn so the
+// instantly centre the camera on the player (used on spawn/respawn so the
 // view doesn't pan down from the top of a tall level).
-// V4.2 camera anchor raised so the player sits above the thumbs on mobile
+// camera anchor raised so the player sits above the thumbs on mobile
 const CAM={anchorY:0.38,bandY:0.16,lerp:0.1};
 function snapCamera(){
   const p=player;

@@ -1,6 +1,6 @@
 // Neon Platformer — All rendering: tiles, player, enemies, effects, HUD overlays, parallax
 // ── DRAWING ──
-// V4.0 perf: cache each glowing box (fill+blur+stroke) to an offscreen sprite, stamp with drawImage.
+// perf: cache each glowing box (fill+blur+stroke) to an offscreen sprite, stamp with drawImage.
 // shadowBlur is the most expensive canvas op; baking it once removes it from the per-frame hot path.
 const _nboxCache={};
 function _nboxSprite(w,h,f,s,g){
@@ -19,8 +19,8 @@ function nbox(x,y,w,h,f,s,g){
   cx.drawImage(sp.canvas, x-sp.pad, y-sp.pad);
 }
 function drawTile(t,sx,sy,c,r){
-  if(mode==='play'&&t>=29&&t<=32)return;   // V6.3 coins & power orbs are drawn as the real pickups in play, not as editor boxes
-  if(tileDraw(t,sx,sy,c,r))return; // V5.6: new block look (js/render/tiles.js)
+  if(mode==='play'&&t>=29&&t<=32)return;   // coins & power orbs are drawn as the real pickups in play, not as editor boxes
+  if(tileDraw(t,sx,sy,c,r))return; // new block look (js/render/tiles.js)
   if(t===1){nbox(sx,sy,TS,TS,TC.fill,TC.stroke,TC.glow);cx.strokeStyle=TC.line;cx.lineWidth=1;cx.beginPath();cx.moveTo(sx+4,sy+4);cx.lineTo(sx+TS-4,sy+4);cx.stroke();}
   else if(t===2){cx.fillStyle='#071626';cx.fillRect(sx,sy,TS,TS);const wo=Math.sin(frame*0.04+c*0.6)*3;cx.fillStyle='rgba(55,138,221,0.25)';cx.fillRect(sx,sy+8+wo,TS,TS-8);cx.fillStyle='rgba(55,138,221,0.12)';cx.fillRect(sx,sy+3+wo,TS,8);cx.strokeStyle='#378ADD';cx.lineWidth=1;cx.strokeRect(sx+.5,sy+.5,TS-1,TS-1);}
   else if(t===3){cx.fillStyle='#2a0600';cx.fillRect(sx,sy,TS,TS);const lo=Math.sin(frame*0.07+c*0.9)*4;cx.fillStyle='rgba(216,90,48,0.5)';cx.fillRect(sx,sy+6+lo,TS,TS-6);cx.strokeStyle='#D85A30';cx.lineWidth=1;cx.strokeRect(sx+.5,sy+.5,TS-1,TS-1);}
@@ -40,7 +40,7 @@ function drawTile(t,sx,sy,c,r){
       cx.restore();
     }
   }
-  // V2.5 SAW BLADE (48)
+  // SAW BLADE (48)
   else if(t===48){
     cx.fillStyle='#0a0a12';cx.fillRect(sx,sy,TS,TS);
     cx.save();cx.translate(sx+TS/2,sy+TS/2);cx.rotate(frame*0.09);
@@ -60,7 +60,7 @@ function drawTile(t,sx,sy,c,r){
     cx.fillStyle='#999';cx.beginPath();cx.arc(0,0,4,0,Math.PI*2);cx.fill();
     cx.shadowBlur=0;cx.restore();
   }
-  // V2.5 FLAME JET UP (49) / DOWN (50)
+  // FLAME JET UP (49) / DOWN (50)
   else if(t===49||t===50){
     const dir=t===49?-1:1;
     cx.fillStyle='#1a0800';cx.fillRect(sx,sy,TS,TS);
@@ -242,7 +242,7 @@ function drawTile(t,sx,sy,c,r){
     cx.shadowBlur=0;cx.font='6px monospace';cx.globalAlpha=0.6;cx.fillStyle=CFG.cl;cx.textAlign='center';cx.textBaseline='middle';cx.fillText(CFG.lb,sx+TS/2,sy+TS-5);cx.restore();
   }
   else if(t===54){
-    // V3.8 Sentinel miniboss editor marker
+    // Sentinel miniboss editor marker
     const bo=bossOpts[r+','+c]||{};
     cx.save();
     cx.shadowBlur=14;cx.shadowColor='#FF4466';
@@ -263,7 +263,7 @@ function drawTile(t,sx,sy,c,r){
     cx.restore();
   }
   else if(t===58){
-    // V4.0 Hive miniboss editor marker
+    // Hive miniboss editor marker
     cx.save();cx.shadowBlur=14;cx.shadowColor='#639922';
     cx.fillStyle='#0a1a00';cx.fillRect(sx+1,sy+1,TS-2,TS-2);
     cx.strokeStyle='#639922';cx.lineWidth=1.5;cx.setLineDash([3,3]);cx.strokeRect(sx+1.5,sy+1.5,TS-3,TS-3);cx.setLineDash([]);
@@ -277,7 +277,7 @@ function drawTile(t,sx,sy,c,r){
     cx.restore();
   }
   else if(t===59){
-    // V4.0 Warden miniboss editor marker
+    // Warden miniboss editor marker
     cx.save();cx.shadowBlur=14;cx.shadowColor='#BA7517';
     cx.fillStyle='#1a0a00';cx.fillRect(sx+1,sy+1,TS-2,TS-2);
     cx.strokeStyle='#BA7517';cx.lineWidth=1.5;cx.setLineDash([3,3]);cx.strokeRect(sx+1.5,sy+1.5,TS-3,TS-3);cx.setLineDash([]);
@@ -292,20 +292,20 @@ function drawTile(t,sx,sy,c,r){
   }
 }
 
-// V5.5: draw() snaps the camera to whole screen pixels; the frame itself is _drawFrame()
+// draw() snaps the camera to whole screen pixels; the frame itself is _drawFrame()
 function draw(){withPixelCamera(_drawFrame);}
 function _drawFrame(){
   const _ez=(mode==='edit'&&editZoom!==1)?editZoom:1;let _rw,_rh;
   cx.setTransform(DPR*_ez,0,0,DPR*_ez,0,0);
   if(_ez!==1){_rw=W;_rh=H;W=W/_ez;H=H/_ez;}
   cx.fillStyle='#07070f';cx.fillRect(0,0,W,H);
-  drawBackground(); // V5.4 layered scenes in js/render/backgrounds.js (old drawParallax kept below, unused)
+  drawBackground(); // layered scenes in js/render/backgrounds.js (old drawParallax kept below, unused)
   feelPreDraw();
   cx.save();cx.translate(Math.round(shakeX),Math.round(shakeY));
   cx.strokeStyle='rgba(100,80,200,0.035)';cx.lineWidth=1;
   for(let x=-(camX%TS);x<W;x+=TS){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,H);cx.stroke();}
   for(let y=-(camY%TS);y<H;y+=TS){cx.beginPath();cx.moveTo(0,y);cx.lineTo(W,y);cx.stroke();}
-  // trail (V6.5 removed — no motion blur behind the blob)
+  // trail (removed — no motion blur behind the blob)
   if(false)trail.forEach(s=>{cx.globalAlpha=s.alpha*0.6;cx.shadowBlur=7;cx.shadowColor=s.wet?'#1060A0':'#7F77DD';cx.fillStyle=s.wet?'#1a5FA5':'#534AB7';cx.beginPath();cx.arc(s.x-camX,s.y-camY,s.r,0,Math.PI*2);cx.fill();});cx.globalAlpha=1;cx.shadowBlur=0;
   // tiles
   const c0=Math.max(0,Math.floor(camX/TS)-1),c1=Math.min(COLS,c0+VCOLS+3);
@@ -345,7 +345,7 @@ function _drawFrame(){
     cx.save();cx.shadowBlur=14;cx.shadowColor=col;cx.fillStyle=col;cx.globalAlpha=pulse;cx.beginPath();cx.arc(sx,sy+bob,7,0,Math.PI*2);cx.fill();cx.fillStyle='rgba(0,0,0,0.6)';cx.font='bold 8px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.fillText(ic,sx,sy+bob);cx.shadowBlur=0;cx.restore();});
   // coins
   coins.forEach(co=>{const sx=co.x-camX,sy=co.y-camY,spin=Math.cos(frame*0.15+co.x*0.05),bob=Math.sin(frame*0.1+co.x*0.04)*2.5;cx.save();cx.translate(sx,sy+bob);cx.shadowBlur=12;cx.shadowColor='#EF9F27';cx.fillStyle='#EF9F27';cx.beginPath();cx.ellipse(0,0,Math.max(0.5,Math.abs(spin)*5),5,0,0,Math.PI*2);cx.fill();if(spin>0.2){cx.fillStyle='rgba(255,220,100,0.6)';cx.beginPath();cx.ellipse(-1,0,Math.max(0.2,spin*2),3.5,0,0,Math.PI*2);cx.fill();}cx.shadowBlur=0;cx.restore();});
-  // V4.1 coin pickup popups
+  // coin pickup popups
   coinPops.forEach(cp=>{const sx=cp.x-camX,sy=cp.y-camY,al=Math.min(1,cp.life/30);const txt=cp.txt||'+10',col=cp.col||'#FFD24D';cx.save();cx.globalAlpha=al;cx.font='bold 12px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.fillStyle=col;cx.shadowBlur=8;cx.shadowColor=col;cx.fillText(txt,sx,sy);cx.shadowBlur=0;cx.restore();});
   // enemy bullets
   eBullets.forEach(b=>{const sx=b.x-camX,sy=b.y-camY;cx.save();cx.shadowBlur=8;cx.shadowColor=b.acid?'#1D9E75':'#FF6600';cx.fillStyle=b.acid?'#5DCAA5':'#FF8844';cx.beginPath();cx.arc(sx,sy,4,0,Math.PI*2);cx.fill();cx.shadowBlur=0;cx.restore();});
@@ -378,7 +378,7 @@ function _drawFrame(){
     cx.restore();
   });
   laserBeams.forEach(lb=>{cx.save();cx.globalAlpha=lb.life/10;cx.shadowBlur=14;cx.shadowColor='#00FFEE';cx.strokeStyle='#00FFEE';cx.lineWidth=3;cx.beginPath();cx.moveTo(lb.x1-camX,lb.y1-camY);cx.lineTo(lb.x2-camX,lb.y2-camY);cx.stroke();cx.strokeStyle='#fff';cx.lineWidth=1;cx.beginPath();cx.moveTo(lb.x1-camX,lb.y1-camY);cx.lineTo(lb.x2-camX,lb.y2-camY);cx.stroke();cx.shadowBlur=0;cx.restore();});
-  // V2.5 FLAME JET overlays
+  // FLAME JET overlays
   flameJets.forEach(function(fj){
     if(!fj.active||fj.reach<1)return;
     const phase=fj.timer>=80?(fj.timer-80)/32:Math.max(0,1-(fj.timer-112)/8);
@@ -403,7 +403,7 @@ function _drawFrame(){
     cx.save();cx.globalAlpha=phase*0.35;cx.shadowBlur=20;cx.shadowColor='#FF6600';
     cx.fillStyle='#FF6600';cx.fillRect(fj.gx*TS-camX,tipR*TS-camY,TS,TS);cx.restore();
   });
-  // V3.3 DRIP BLOCKS — falling droplets + puddles
+  // DRIP BLOCKS — falling droplets + puddles
   dripBlocks.forEach(function(db){
     const cGlo=db.lava?'#ff6a2a':'#63ff2a', cDrop=db.lava?'#FF8A3C':'#7CFF3C';
     db.drops.forEach(function(d){
@@ -424,7 +424,7 @@ function _drawFrame(){
       cx.beginPath();cx.ellipse(px2,py2,7,2.5,0,0,Math.PI*2);cx.fill();cx.restore();
     });
   });
-  // V2.5 FALLING ROCKS
+  // FALLING ROCKS
   fallingRocks.forEach(function(fr){
     if(fr.state==='idle')return; // drawn as tile 51 placeholder... but we cleared it from grid. Draw at home.
     const ox=fr.shakeX||0;
@@ -458,7 +458,7 @@ function _drawFrame(){
   enemies.forEach(e=>{
     const sx=e.x-camX,sy=e.y-camY;cx.save();
     if(e.inv>0&&!ENEW.has(e.type)&&Math.floor(e.inv/4)%2===0)cx.globalAlpha=0.3;
-    // V5.3: walker, sniper, climber, sentinel, hive and warden use the new look in js/render/enemies.js
+    // walker, sniper, climber, sentinel, hive and warden use the new look in js/render/enemies.js
     // (their old drawing below is kept but no longer reached)
     if(ENEW.has(e.type)){drawEnemy(e);}
     else if(e.type==='turret'){cx.shadowBlur=10;cx.shadowColor='#FF8800';cx.fillStyle='#2a1000';cx.fillRect(sx,sy,e.w,e.h);cx.strokeStyle='#FF8800';cx.lineWidth=2;cx.strokeRect(sx+.5,sy+.5,e.w-1,e.h-1);const angle=Math.atan2((player.y+player.h/2)-(e.y+e.h/2),(player.x+player.w/2)-(e.x+e.w/2));cx.save();cx.translate(sx+e.w/2,sy+e.h/2);cx.rotate(angle);cx.fillStyle='#FF8800';cx.fillRect(2,-2.5,10,5);cx.restore();cx.fillStyle='#FFAA44';cx.beginPath();cx.arc(sx+e.w/2,sy+e.h/2,4,0,Math.PI*2);cx.fill();cx.shadowBlur=0;}
@@ -598,12 +598,12 @@ function _drawFrame(){
     else {var _mx=(e.type==='shield'||e.type==='sniper'||e.type==='charger'||e.type==='climber')?3:2;if(e.hp<_mx){cx.fillStyle='#331111';cx.fillRect(sx,sy-6,e.w,4);cx.fillStyle='#E24B4A';cx.fillRect(sx,sy-6,e.w*(e.hp/_mx),4);cx.strokeStyle='#555';cx.lineWidth=1;cx.strokeRect(sx,sy-6,e.w,4);}}
     if(e.frozen>0){cx.save();cx.globalAlpha=Math.min(1,e.frozen/40)*0.55;cx.fillStyle='#88EEFF';cx.fillRect(sx-1,sy-1,e.w+2,e.h+2);cx.strokeStyle='#00FFEE';cx.lineWidth=1;cx.shadowBlur=6;cx.shadowColor='#00FFEE';cx.strokeRect(sx-.5,sy-.5,e.w+1,e.h+1);cx.restore();}
   });
-  drawEnemyFx(); // V5.3 death pops
+  drawEnemyFx(); // death pops
   // sword swing
   if(swordSwing>0&&mode==='play'){const p2=player,t2=swordSwing/18,sx2=p2.x-camX,sy2=p2.y-camY,dir=p2.facing;cx.save();cx.globalAlpha=t2*0.8;cx.shadowBlur=16;cx.shadowColor='#AA44FF';cx.strokeStyle='#CC88FF';cx.lineWidth=3;const sa=dir>0?-Math.PI*0.6:Math.PI*0.4,ea=dir>0?Math.PI*0.1:Math.PI*1.6;cx.beginPath();cx.arc(sx2+p2.w/2,sy2+p2.h/2,32,sa,ea,dir<0);cx.stroke();cx.fillStyle='#DD99FF';cx.globalAlpha=t2*0.35;cx.beginPath();cx.moveTo(sx2+p2.w/2,sy2+p2.h/2);cx.arc(sx2+p2.w/2,sy2+p2.h/2,32,sa,ea,dir<0);cx.closePath();cx.fill();cx.shadowBlur=0;cx.restore();}
-  // V5.2 player blob: animation + weapon in hand live in js/render/player.js
+  // player blob: animation + weapon in hand live in js/render/player.js
   skinDrawTrail();movesDrawBehind();drawPlayerBlob();movesDrawFront();grappleDraw();if(typeof tpadDrawSight==='function')tpadDrawSight();
-  // V4.0 rising lava flood (Lava theme)
+  // rising lava flood (Lava theme)
   if(levelTheme===2&&lavaRiseSpeed>0){
     const surfY=lavaLevel-camY;
     if(surfY<H){
@@ -633,11 +633,11 @@ function _drawFrame(){
   twistDraw();feelDrawWorld();lightDraw();twistDarkness();
   cx.restore(); // end shake transform
   feelDrawOverlay();
-  // V1.4 death overlay
+  // death overlay
   if((deathTimer>0||deathSeqTimer>0)&&mode==='play'){drawDeathOverlay();}
-  // V1.4 weapon pickup flash
+  // weapon pickup flash
   if(pickupFlash.t>0){const ft=pickupFlash.t/55;cx.save();cx.globalAlpha=ft*0.22;cx.fillStyle=pickupFlash.col;cx.fillRect(0,0,W,H);if(pickupFlash.t>30){cx.globalAlpha=ft;cx.fillStyle=pickupFlash.col;cx.font='bold 18px monospace';cx.textAlign='center';cx.textBaseline='middle';cx.shadowBlur=14;cx.shadowColor=pickupFlash.col;cx.fillText(pickupFlash.name+' EQUIPPED!',W/2,H/2-40);cx.shadowBlur=0;}cx.restore();}
-  // V4.1 brief control hint at level start (clean, player-facing, auto-fades)
+  // brief control hint at level start (clean, player-facing, auto-fades)
   if(mode==='play'&&MS.tutorials&&startHintTimer>0&&!won&&deathSeqTimer===0){
     const al=Math.min(1,startHintTimer/45);
     cx.save();cx.globalAlpha=al;cx.textAlign='center';cx.textBaseline='middle';
@@ -669,8 +669,8 @@ function _drawFrame(){
   if(mode==='edit'){
     cx.strokeStyle='rgba(127,119,221,0.15)';cx.lineWidth=1;
     for(let r=r0;r<r1;r++)for(let c=c0;c<c1;c++)cx.strokeRect(c*TS-camX,r*TS-camY,TS,TS);
-    if(typeof heatDraw==='function')heatDraw();   // V6.7 playtest heatmap
-    if(typeof edDraw==='function')edDraw();   // V6.7 selection / paste ghost / test-here marker
+    if(typeof heatDraw==='function')heatDraw();   // playtest heatmap
+    if(typeof edDraw==='function')edDraw();   // selection / paste ghost / test-here marker
     if(selPlat!==null&&movPlats[selPlat]){
       const mp=movPlats[selPlat],sx=mp.x-camX,sy=mp.y-camY;
       cx.save();cx.shadowBlur=8;cx.shadowColor='#fff';cx.strokeStyle='#fff';cx.lineWidth=2;cx.strokeRect(sx-2,sy-2,mp.w+4,mp.h+4);cx.shadowBlur=0;
@@ -683,7 +683,7 @@ function _drawFrame(){
       const rt=Math.max(0,Math.min(1,(mp.range/TS-1)/11));cx.fillStyle='#2a2a3a';cx.fillRect(px3+8,py3+58,pw-16,8);cx.fillStyle='#7F77DD';cx.fillRect(px3+8,py3+58,rt*(pw-16),8);
       cx.restore();
     }
-    // V3.5 drip GROUP selection: highlight all cells + a single slider over the group
+    // drip GROUP selection: highlight all cells + a single slider over the group
     if(selDrip!==null&&selDrip.cells){
       // verify group still valid (cells still drip tiles)
       const valid=selDrip.cells.every(p=>grid[p.r]&&(grid[p.r][p.c]===52||grid[p.r][p.c]===53));
@@ -711,7 +711,7 @@ function _drawFrame(){
         cx.restore();
       } else selDrip=null;
     }
-    // V3.8/V4.0 boss options panel
+    // /boss options panel
     if(selBoss!==null){
       const bt=grid[selBoss.r]&&grid[selBoss.r][selBoss.c];
       if(bt===54||bt===58||bt===59){

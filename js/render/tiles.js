@@ -1,4 +1,4 @@
-// Neon Platformer — Block look & animation (V5.6)
+// Neon Platformer — Block look & animation
 // Solid ground is drawn as connected neon shapes: only the outer edges glow,
 // with a bright rim on top (where you stand), rounded outer corners and small
 // light nodes in the inside corners — no more box around every single tile.

@@ -19,55 +19,55 @@ const cv=document.getElementById('c'), cx=cv.getContext('2d');
 let W,H,ROWS=0,VCOLS,COLS=50,grid=[];
 let mode='play',pen=0,camX=0,camY=0;
 let score=0,hp=3,lives=3,won=false,frame=0,keys={};
-let runStartFrame=0,runDeaths=0,runCoins=0,runEndFrame=0;  // V4.0 level-complete stats
+let runStartFrame=0,runDeaths=0,runCoins=0,runEndFrame=0;  // level-complete stats
 let winTimer=0,winPhase=0,winParts=[],winDisplayScore=0,winTargetScore=0,winAudioCtx=null;
 let deathSeqTimer=0,deathBones=[],deathDebris=[],deathCloud=[],deathFlash=0,deathRing=0,deathAudioCtx=null;
 let deathSeqX=0,deathSeqY=0;
 let player={x:52,y:100,vx:0,vy:0,w:18,h:18,grounded:false,jumps:0,facing:1,inv:0,wet:false,_bounceJumps:false,_swCool:0,_stomping:false};
 let bullets=[],eBullets=[],parts=[],coins=[],movPlats=[],enemies=[],powerOrbs=[],trail=[];
-let coinPops=[]; // V4.1 floating +N text when collecting coins
-let startHintTimer=0; // V4.1 brief control hint shown at level start
-let enemyBombs=[];     // V3.9 Bomber dropped bombs
-let pendingEnemies=[]; // V4.0 enemies queued mid-update (e.g. Hive drones), appended after filter
+let coinPops=[]; // floating +N text when collecting coins
+let startHintTimer=0; // brief control hint shown at level start
+let enemyBombs=[];     // Bomber dropped bombs
+let pendingEnemies=[]; // enemies queued mid-update (e.g. Hive drones), appended after filter
 let grenades=[],explosions=[],laserBeams=[],swordSwing=0,plasmaCharge=0,plasmaCharging=false;
 let pups={speed:0,shield:0,jump:0};
-let hasHook=false;   // V6.1 grappling hook is found in the level (tile 62), like a weapon
+let hasHook=false;   // grappling hook is found in the level (tile 62), like a weapon
 let wAmmo={blaster:0,shotgun:0,laser:0,sword:0,grenade:0,freeze:0,plasma:0};
 let curW='blaster',shootCd=0;
 let crumbleBlocks={};  // "col,row" → countdown timer (45→0 then tile deleted)
 let tpCool=0,selPlat=null,doorState={red:false,blue:false},crushers=[],checkpoint=null,activatedCPs=new Set();
 let sbOpen=false,recentTiles=[],openFolds=new Set(['terrain']);
 let currentSlot=0; // 0 = free build, 1-50 = campaign slot
-// V1.4 additions
+// additions
 let shakeAmt=0,shakeX=0,shakeY=0;
 let deathTimer=0;
 let pickupFlash={t:0,col:'#fff',name:''};
 let touchKeys={hook:false,reel:0,hookReq:null,hookAim:null,dashReq:0,aimV:null,aimV2:null,padFire:false,left:false,right:false,jump:false,fire:false,down:false,cycle:false,aimUp:false,_lf:false,_lc:false};
-let gyroKeys={left:false,right:false}; // V4.1 tilt controls
-let editZoom=1; // V4.1 editor pinch zoom (0.5–2.5)
+let gyroKeys={left:false,right:false}; // tilt controls
+let editZoom=1; // editor pinch zoom (0.5–2.5)
 let spawnPoint=null;
 let laserEmitters=[];
-let flameJets=[];      // V2.5 tile 49/50
-let dripBlocks=[];     // V3.3 tile 52/53 ceiling acid/lava drip (multi-drop)
-const DRIP_DEFAULT_SPEED=1.0; // V3.5 default when a block has no stored speed
-const LAVA_DEFAULT_RISE=0.10; // V4.0 px/frame the lava flood rises in Lava theme
-let lavaRiseSpeed=0;          // V4.0 per-level rise speed (0 = off); only used in Lava theme
-let lavaLevel=0;             // V4.0 current lava flood top (world Y); high number = low on screen
-let lavaCheckpointLevel=null;// V4.0 lava Y captured at last checkpoint (for death reset)
-let dripSpeeds={};     // V3.4/3.5 per-cell speed "r,c" -> multiplier (whole group shares value)
-let selDrip=null;      // V3.5 selected drip group: {cells:[{r,c}], minC,maxC,minR,lava}
-let hazOpts={};        // V6.7 per-cell hazard timing "r,c" -> {phase:0..1} (flame jets, lasers, crushers)
-let bossOpts={};       // V3.8 per-cell Sentinel options "r,c" -> {arc, shock}
-let selBoss=null;      // V3.8 selected boss tile in editor: {r,c}
-let _editGrid=null;    // V4.0 backup of the editor grid taken on TEST, restored on return to edit
+let flameJets=[];      // tile 49/50
+let dripBlocks=[];     // tile 52/53 ceiling acid/lava drip (multi-drop)
+const DRIP_DEFAULT_SPEED=1.0; // default when a block has no stored speed
+const LAVA_DEFAULT_RISE=0.10; // px/frame the lava flood rises in Lava theme
+let lavaRiseSpeed=0;          // per-level rise speed (0 = off); only used in Lava theme
+let lavaLevel=0;             // current lava flood top (world Y); high number = low on screen
+let lavaCheckpointLevel=null;// lava Y captured at last checkpoint (for death reset)
+let dripSpeeds={};     // /3.5 per-cell speed "r,c" -> multiplier (whole group shares value)
+let selDrip=null;      // selected drip group: {cells:[{r,c}], minC,maxC,minR,lava}
+let hazOpts={};        // per-cell hazard timing "r,c" -> {phase:0..1} (flame jets, lasers, crushers)
+let bossOpts={};       // per-cell Sentinel options "r,c" -> {arc, shock}
+let selBoss=null;      // selected boss tile in editor: {r,c}
+let _editGrid=null;    // backup of the editor grid taken on TEST, restored on return to edit
 const BOSS_DEFAULT_ARC=1.0, BOSS_DEFAULT_SHOCK=true;
-const HIVE_DEFAULT_SPAWN=2, WARDEN_DEFAULT_SWEEP=0.03;   // V4.0
-let fallingRocks=[];   // V2.5 tile 51
+const HIVE_DEFAULT_SPAWN=2, WARDEN_DEFAULT_SWEEP=0.03;
+let fallingRocks=[];   // tile 51
 let levelTheme = 0;
-let _savedEnemySpawns=[];   // V1.7 – persists spawn list for death-restart
-let _savedMovPlats=[];       // V1.7 – persists movplat list for death-restart
-let _savedCrumbles=[];       // V1.8 – persists crumble block positions for death-restart
-let paused=false;            // V2.6 – pause state
+let _savedEnemySpawns=[];   // – persists spawn list for death-restart
+let _savedMovPlats=[];       // – persists movplat list for death-restart
+let _savedCrumbles=[];       // – persists crumble block positions for death-restart
+let paused=false;            // – pause state
 // TC = current Theme Colors for solid tile drawing
 var TC = {fill:'#1a1830', stroke:'#7F77DD', glow:'#534AB7', line:'rgba(127,119,221,0.15)'};
 const THEMES = [
@@ -88,7 +88,7 @@ function setTheme(n){
   document.querySelectorAll('.thsw').forEach(function(el,i){
     el.className='thsw'+(i===n?' tson':'');
   });
-  // V4.0 show the lava rise slider only for Lava theme
+  // show the lava rise slider only for Lava theme
   var lc=document.getElementById('lavaRiseCtl');
   if(lc){lc.style.display=(n===2)?'inline-flex':'none';
     var sl=document.getElementById('lavaRiseSlider');if(sl)sl.value=lavaRiseSpeed;
@@ -150,7 +150,7 @@ function resize(){
   W=window.innerWidth;
   H=window.innerHeight-document.getElementById('bar').offsetHeight-document.getElementById('foot').offsetHeight;
   if(W<1)W=600;if(H<1)H=400;
-  applyCanvasSize(); // V5.5 sharp on high-density screens
+  applyCanvasSize(); // sharp on high-density screens
   const visR=Math.max(10,Math.floor(H/TS));
   VCOLS=Math.floor(W/TS);
   // Only grow ROWS – never shrink a custom level height on window resize

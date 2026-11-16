@@ -2,6 +2,7 @@
 
     python tools/build.py
 
+  0. version                   - copies the number in VERSION into the menu badges and README
   1. levels/campaign.js        - campaign bundled for playing straight from disk
   2. sw.js                     - offline file list + new cache version
   3. build/NeonPlatformer.html - the whole game in ONE file (share/email/double-click)
@@ -27,6 +28,16 @@ def rel_files():
                     out.append(os.path.relpath(os.path.join(d, f), ROOT).replace(os.sep, '/'))
     return sorted(out)
 
+# 0 ─ version: VERSION is the only place the version number lives
+ver = open(P('VERSION'), encoding='utf-8').read().strip()
+idx = open(P('index.html'), encoding='utf-8').read()
+idx = re.sub(r'<div class="vbadge">[^<]*</div>', f'<div class="vbadge">V{ver}</div>', idx)
+open(P('index.html'), 'w', encoding='utf-8').write(idx)
+rd = open(P('README.md'), encoding='utf-8').read()
+rd = re.sub(r'^# Neon Platformer.*$', f'# Neon Platformer V{ver}', rd, count=1, flags=re.M)
+open(P('README.md'), 'w', encoding='utf-8').write(rd)
+print(f'version     V{ver}')
+
 # 1 ─ levels
 camp = json.load(open(P('levels', 'campaign.json'), encoding='utf-8'))
 levels = []
@@ -43,10 +54,10 @@ print(f'levels      {len(levels)} in campaign')
 files = [f for f in rel_files() if f != 'sw.js']
 h = hashlib.sha1(b''.join(open(P(f), 'rb').read() for f in files)).hexdigest()[:10]
 sw = open(P('sw.js'), encoding='utf-8').read()
-sw = re.sub(r"const VERSION = '[^']*';", f"const VERSION = 'neon-{h}';", sw)
+sw = re.sub(r"const VERSION = '[^']*';", f"const VERSION = 'neon-{ver}-{h}';", sw)
 sw = re.sub(r"const FILES = \[[^\]]*\];", 'const FILES = ' + json.dumps(['./'] + files) + ';', sw)
 open(P('sw.js'), 'w', encoding='utf-8').write(sw)
-print(f'offline     {len(files)} files cached (version neon-{h})')
+print(f'offline     {len(files)} files cached (version neon-{ver}-{h})')
 
 # 3 ─ single file
 html = open(P('index.html'), encoding='utf-8').read()

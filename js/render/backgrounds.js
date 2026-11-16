@@ -1,4 +1,4 @@
-// Neon Platformer — Background engine (V5.4)
+// Neon Platformer — Background engine
 // Each theme is a scene of parallax layers. Still layers are painted once into
 // hidden canvases (re-made only when the theme or screen size changes) and copied
 // each frame; only the living details (cars, aurora, fish, embers…) are drawn live.

@@ -1,4 +1,4 @@
-// Neon Platformer — Live lighting (V5.7)
+// Neon Platformer — Live lighting
 // Glowing things (lava, acid, the exit, bullets, explosions, pickups, enemies, the
 // blob, sparks) cast coloured light. The light is drawn into a small buffer, then:
 //  · on blocks it is added strongly, so walls and floors light up near lava or a shot

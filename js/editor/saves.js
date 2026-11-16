@@ -2,16 +2,16 @@
 // ── SAVE/LOAD ──
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.opacity=1;clearTimeout(el._t);el._t=setTimeout(()=>el.style.opacity=0,2400);}
 
-// V2.3 single source of truth for level data
+// single source of truth for level data
 function currentLevelData(){
-  const gsrc=_editGrid||grid;  // V4.0 prefer pre-test grid so enemy/boss tiles aren't lost
+  const gsrc=_editGrid||grid;  // prefer pre-test grid so enemy/boss tiles aren't lost
   return {cols:COLS,rows:ROWS,grid:Array.from(gsrc,r=>Array.from(r)),movPlats,enemies:enemies.map(e=>({px:e.px,py:e.py,type:e.type})),spawnPoint,theme:levelTheme,dripSpeeds,bossOpts,hazOpts,lavaRise:lavaRiseSpeed,twist:levelTwist};
 }
 
-// V2.4 theme swatch colours
+// theme swatch colours
 const THEME_SWATCHES=['#7F77DD','#4488CC','#AA4466','#44DD55','#EE22EE','#FFAA11','#00CCEE'];
 
-// V2.4 capture tiny thumbnail of current canvas view
+// capture tiny thumbnail of current canvas view
 function captureThumb(){
   try{
     const tc=document.createElement('canvas');tc.width=120;tc.height=54;
@@ -235,19 +235,19 @@ function applyData(data){
   grid=data.grid.map(r=>new Uint8Array(r));
   while(grid.length<ROWS)grid.push(new Uint8Array(COLS));
   movPlats=data.movPlats||[];
-  dripSpeeds=data.dripSpeeds||{};             // V3.5
-  bossOpts=data.bossOpts||{};                 // V3.8
-  hazOpts=data.hazOpts||{};                   // V6.7
-  _editGrid=null;                             // V4.0 fresh load clears any test-session grid backup
-  lavaRiseSpeed=(data.lavaRise!=null)?data.lavaRise:0;  // V4.0
-  _savedMovPlats=JSON.parse(JSON.stringify(movPlats)); // V1.7
+  dripSpeeds=data.dripSpeeds||{};
+  bossOpts=data.bossOpts||{};
+  hazOpts=data.hazOpts||{};
+  _editGrid=null;                             // fresh load clears any test-session grid backup
+  lavaRiseSpeed=(data.lavaRise!=null)?data.lavaRise:0;
+  _savedMovPlats=JSON.parse(JSON.stringify(movPlats));
   spawnPoint=data.spawnPoint||null;
-  levelTwist=data.twist!==false;  // V6.0
+  levelTwist=data.twist!==false;
   setTheme(data.theme||0);
   resetState();spawnFromGrid();
-  // V1.7: if grid had no enemy tiles (level saved in play mode), spawn from saved enemy list
+  // if grid had no enemy tiles (level saved in play mode), spawn from saved enemy list
   if(enemies.length===0&&data.enemies&&data.enemies.length>0){var _mk={drone:mkDrone,turret:mkTurret,shield:mkShield,walker:mkWalker,sniper:mkSniper,charger:mkCharger,bomber:mkBomber,climber:mkClimber};data.enemies.forEach(function(e){if(e.type==="sentinel")enemies.push(mkSentinel(e.px,e.py,e.arc,e.shock));else if(e.type==="hive")enemies.push(mkHive(e.px,e.py,e.spawnN));else if(e.type==="warden")enemies.push(mkWarden(e.px,e.py,e.sweepSpd));else if(e.type==="sniper"){var _sn=mkSniper(e.px,e.py);_sn.surf=e.surf;enemies.push(_sn);}else if(_mk[e.type])enemies.push(_mk[e.type](e.px,e.py));});}
-  _savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};}); // V1.7
-  saveCrumbles(); // V1.8
+  _savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};});
+  saveCrumbles();
   rebuildCrushers();spawnPlayer(true);updateHUD();
 }

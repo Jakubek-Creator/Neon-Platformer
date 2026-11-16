@@ -1,4 +1,4 @@
-# Neon Platformer V5.5
+# Neon Platformer V2.0
 
 ## Play
 - **On this computer:** double-click `index.html`.

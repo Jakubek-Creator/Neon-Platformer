@@ -1,4 +1,4 @@
-// Neon Platformer — Mobile editor (V6.8)
+// Neon Platformer — Mobile editor
 // On phones/tablets the editor gets its own layout (the PC editor is unchanged):
 //   · the big toolbar and the hint footer are gone — the level gets the whole screen
 //   · top-left: ▶ TEST · ↶ ↷ · ☰ (everything else: theme, size, save, load, heatmap…)

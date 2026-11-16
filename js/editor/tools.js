@@ -1,4 +1,4 @@
-// Neon Platformer — Editor tools (V6.7)
+// Neon Platformer — Editor tools
 //  UNDO / REDO      Ctrl+Z · Ctrl+Y (or Ctrl+Shift+Z) · ↶ ↷ buttons. 80 steps.
 //  SELECT           ⬚ button (or hold Shift and drag). Then: Copy, Cut, Delete, Fill with
 //                   the current block, Mirror ↔, Flip ↕, and hazard timing (SYNC / WAVE / RANDOM).
