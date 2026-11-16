@@ -1,4 +1,4 @@
-// Neon Platformer — World twists (V6.0)
+// Neon Platformer — World twists
 // Each theme plays a little differently. A level can switch its twist off in the editor
 // (TWIST button next to the theme colours); it is saved with the level as `twist`.
 //   NEON     — none (the home city)

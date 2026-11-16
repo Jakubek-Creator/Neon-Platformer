@@ -29,7 +29,7 @@ function setMode(m){
   if(m==='play'){if(sbOpen)toggleSB();checkpoint=null;lavaLevel=ROWS*TS;lavaCheckpointLevel=null;runStartFrame=frame;runDeaths=0;runCoins=0;runEndFrame=0;laserEmitters=[];flameJets=[];dripBlocks=[];fallingRocks=[];if(!_editGrid)_editGrid=grid.map(r=>r.slice());else grid=_editGrid.map(r=>r.slice());spawnFromGrid();_savedEnemySpawns=enemies.map(function(e){return{px:e.px,py:e.py,type:e.type,arc:e.arc,shock:e.shock,spawnN:e.spawnN,sweepSpd:e.sweepSpd,surf:e.surf};});_savedMovPlats=JSON.parse(JSON.stringify(movPlats));saveCrumbles();rebuildCrushers();spawnPlayer(true);startHintTimer=210;}
   if(m==='edit'){
     if(_editGrid){grid=_editGrid.map(r=>r.slice());_editGrid=null;}
-    // V4.0 clear all live runtime entities so editor shows spawn tiles, not spawned enemies
+    // clear all live runtime entities so editor shows spawn tiles, not spawned enemies
     enemies=[];bullets=[];eBullets=[];enemyBombs=[];pendingEnemies=[];grenades=[];explosions=[];laserBeams=[];parts=[];coins=[];powerOrbs=[];trail=[];crushers=[];coinPops=[];
     laserEmitters=[];flameJets=[];dripBlocks=[];fallingRocks=[];
     doorState={red:false,blue:false};activatedCPs=new Set();checkpoint=null;
@@ -68,7 +68,7 @@ function pick(n){
   document.getElementById('curTile').textContent=TLABELS[n]||('Tile '+n);
   if(n!==0){recentTiles=recentTiles.filter(t=>t!==n);recentTiles.unshift(n);if(recentTiles.length>6)recentTiles.pop();renderRecent();}
 }
-// V3.5 find a connected group of same-type drip blocks (4-dir flood fill in the grid)
+// find a connected group of same-type drip blocks (4-dir flood fill in the grid)
 function dripGroupAt(r,c){
   const type=grid[r]&&grid[r][c];
   if(type!==52&&type!==53)return null;

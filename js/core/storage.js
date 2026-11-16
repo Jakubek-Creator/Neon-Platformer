@@ -1,5 +1,5 @@
 // Neon Platformer — Error reporter and safe browser storage
-// V4.1 mobile diagnostics: surface any load/runtime error visibly instead of a silent dead page
+// mobile diagnostics: surface any load/runtime error visibly instead of a silent dead page
 window.addEventListener('error',function(ev){
   try{
     var d=document.getElementById('__errbox');
@@ -9,7 +9,7 @@ window.addEventListener('error',function(ev){
     d.textContent+=(ev.message||'Script error')+' @ line '+(ev.lineno||'?')+'\n';
   }catch(e){}
 });
-// V4.1 safe-storage shim: sandboxed mobile contexts (file viewers, in-app browsers,
+// safe-storage shim: sandboxed mobile contexts (file viewers, in-app browsers,
 // private modes) throw SecurityError on ANY localStorage access, which would kill
 // the whole script. Fall back to in-memory storage so the game always runs.
 var LS=(function(){

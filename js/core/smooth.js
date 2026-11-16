@@ -1,4 +1,4 @@
-// Neon Platformer — Smooth, sharp rendering (V5.5)
+// Neon Platformer — Smooth, sharp rendering
 // 1) Sharp: the canvas is drawn at the screen's real pixel density (up to 2×)
 //    instead of being stretched by the browser.
 // 2) Smooth: the game still thinks at a fixed 60 ticks/sec, but every screen
@@ -49,7 +49,7 @@ function smoothPerf(frameMs){
   // a run of frames slower than ~45 fps means this device can't keep up at this sharpness
   _slowFrames=frameMs>22?_slowFrames+1:Math.max(0,_slowFrames-1);
   if(_slowFrames>45){_slowFrames=0;
-    // V6.6 stay sharp: first make the lighting cheaper, only drop the resolution as a last resort
+    // stay sharp: first make the lighting cheaper, only drop the resolution as a last resort
     if(typeof LIGHT!=='undefined'&&LIGHT.on&&LIGHT.sc>0.2){LIGHT.sc=0.2;return;}
     if(typeof MS!=='undefined'&&!MS.bgLite&&typeof togS==='function'&&!_bgAuto){_bgAuto=true;MS.bgLite=true;return;}
     _dprCap=DPR>1.5?1.5:1;applyCanvasSize();}

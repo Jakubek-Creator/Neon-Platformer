@@ -1,4 +1,4 @@
-// Neon Platformer — Arc touch pad (V5.8)
+// Neon Platformer — Arc touch pad
 // One control for the left thumb: a neon slider bar.
 //   BAR (bottom)   analog: put your thumb down anywhere and slide left / right to run — the
 //                  further you slide the faster. Quick TAP on a side = DASH that way.

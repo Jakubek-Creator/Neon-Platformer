@@ -1,12 +1,12 @@
 // Neon Platformer — On-screen touch buttons (multitouch)
-// ====== TOUCH CONTROLS V1.4 ======
-// V5.0 true multitouch: every finger is tracked on its own, buttons are hit-tested
+// ====== TOUCH CONTROLS ======
+// true multitouch: every finger is tracked on its own, buttons are hit-tested
 // with a forgiving margin, and a finger can slide from one button to another
 // (e.g. ← to →) without lifting. Run + jump + fire all work at the same time.
 var _tBtns=[['tb-left','left'],['tb-right','right'],['tb-down','down'],['tb-jump','jump'],['tb-fire','fire'],['tb-cycle','cycle'],['tb-hook','hook']];
 var _tTouches={};   // touch identifier -> key name (or null when between buttons)
-var _tHook={};      // V6.1 hook button: tap = throw, hold+drag = aim, release = throw that way
-var _tFire={};      // V5.8 fire button doubles as an aim stick: touch id -> start point
+var _tHook={};      // hook button: tap = throw, hold+drag = aim, release = throw that way
+var _tFire={};      // fire button doubles as an aim stick: touch id -> start point
 function _tHit(x,y){
   var best=null,bestD=1e9,M=14;
   for(var i=0;i<_tBtns.length;i++){

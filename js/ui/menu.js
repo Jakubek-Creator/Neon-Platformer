@@ -1,5 +1,5 @@
 // Neon Platformer — Main menu, settings, save slots, credits
-// ====== MENU SYSTEM V1.3 ======
+// ====== MENU SYSTEM ======
 var mEl   = document.getElementById('menu');
 var mBg   = document.getElementById('menuBg');
 var mCtx  = mBg.getContext('2d');
@@ -51,7 +51,7 @@ function togS(k,id){
   if(k==='tpadArc'){if(b)b.textContent=MS.tpadArc?'SLIDER':'BUTTONS';if(typeof tpadApplySetting==='function')tpadApplySetting();}
   if(k==='bgLite'&&b){ b.className='tb'+(MS.bgLite?'':' on'); b.textContent=MS.bgLite?'LITE':'FULL'; }
 }
-// ── V4.1 GYRO TILT CONTROLS ──
+// ── GYRO TILT CONTROLS ──
 var _gyroBound=false;
 function _gyroHandler(e){
   if(!MS.gyro||mode!=='play'){gyroKeys.left=false;gyroKeys.right=false;return;}
@@ -284,7 +284,7 @@ function drawBg(){
   mCtx.save(); mCtx.globalAlpha=.022; mCtx.fillStyle='#000';
   for(var sy=0; sy<h; sy+=4) mCtx.fillRect(0,sy,w,2);
   mCtx.restore();
-  // V4.0 player blob hopping across the ground line — ties the title to the game
+  // player blob hopping across the ground line — ties the title to the game
   drawMenuBlob(w,h,t);
 }
 function drawMenuBlob(w,h,t){
@@ -317,5 +317,5 @@ function mLoop(){
   mRafId = requestAnimationFrame(mLoop);
 }
 
-// V5.7 apply saved lighting / game-feel settings
+// apply saved lighting / game-feel settings
 if(typeof LIGHT!=='undefined')LIGHT.on=MS.lighting;if(typeof FEEL!=='undefined')FEEL.on=MS.feel;

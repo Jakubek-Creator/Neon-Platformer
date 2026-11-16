@@ -1,4 +1,4 @@
-// Neon Platformer — Blob customisation (V5.9)
+// Neon Platformer — Blob customisation
 // Colour, eyes, hat and trail. Every item has an id, a name and `free:true` for now;
 // the shop will later add items with a price — owned items are kept in SKIN_OWNED.
 const SKIN_ITEMS={

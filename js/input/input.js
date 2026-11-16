@@ -21,7 +21,7 @@ cv.addEventListener('wheel',e=>{if(mode!=='edit')return;e.preventDefault();
     const z0=editZoom;const z=Math.max(0.5,Math.min(2.5,z0*(e.deltaY<0?1.1:0.9)));editZoom=z;
     camX=Math.max(0,Math.min(camMaxX(),camX+mx/z0-mx/z));camY=Math.max(0,Math.min(camMaxY(),camY+my/z0-my/z));return;}
   if(Math.abs(e.deltaX)>Math.abs(e.deltaY))camX=Math.max(0,Math.min(camMaxX(),camX+e.deltaX*0.8));else camY=Math.max(0,Math.min(camMaxY(),camY+e.deltaY*0.8));},{passive:false});
-// V4.1 editor touch: 1 finger paints, 2 fingers pinch-zoom + pan
+// editor touch: 1 finger paints, 2 fingers pinch-zoom + pan
 let _tPinch=null,_tPend=null,_tPaint=false;
 cv.addEventListener('touchstart',e=>{
   if(mode!=='edit')return;
@@ -71,7 +71,7 @@ function eraseAt(e){
   const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
   if(tc>=0&&tc<COLS&&tr>=0&&tr<ROWS&&grid[tr])grid[tr][tc]=0;
 }
-// V3.5 compute the on-canvas slider rect for a selected drip group (screen coords)
+// compute the on-canvas slider rect for a selected drip group (screen coords)
 function dripSliderRect(grp){
   const gx0=grp.minC*TS-camX, gx1=(grp.maxC+1)*TS-camX;
   const gw=gx1-gx0;
@@ -83,7 +83,7 @@ function dripSliderRect(grp){
   if(by<6) by=(grp.minR+1)*TS-camY+10;   // if no room above, put it just below top row
   return {bx,by,bw,bh:10};
 }
-// V3.8 Sentinel options panel geometry (screen coords): arc slider + shock toggle
+// Sentinel options panel geometry (screen coords): arc slider + shock toggle
 function bossPanelRect(sel){
   const pw=176, ph=64;
   let px=sel.c*TS-camX+TS+8;
@@ -99,13 +99,13 @@ function bossPanelRect(sel){
 function editClick(e){
   if(mode!=='edit')return;
   const{mx,my}=getCP(e),wx=mx+camX,wy=my+camY;
-  // V3.5 drip group slider drag
+  // drip group slider drag
   if(selDrip!==null){
     const sr=dripSliderRect(selDrip);
     if(mx>=sr.bx&&mx<=sr.bx+sr.bw&&my>=sr.by-6&&my<=sr.by+sr.bh+6){dragBar={drip:true,bx:sr.bx,bw:sr.bw};applyDrag(e);return;}
   }
   if(selPlat!==null){const mp=movPlats[selPlat],pw=180,ph=68,px2=Math.min(mp.x-camX,W-pw-4),py2=mp.y-camY-ph-8;if(mx>=px2+8&&mx<=px2+pw-8&&my>=py2+36&&my<=py2+44){dragBar={idx:selPlat,bar:'spd',bx:px2+8,bw:pw-16};applyDrag(e);return;}if(mx>=px2+8&&mx<=px2+pw-8&&my>=py2+50&&my<=py2+58){dragBar={idx:selPlat,bar:'dist',bx:px2+8,bw:pw-16};applyDrag(e);return;}}
-  // V3.8/V4.0 boss panel interaction
+  // /boss panel interaction
   if(selBoss!==null){
     const pr=bossPanelRect(selBoss), key=selBoss.r+','+selBoss.c;
     const bt=grid[selBoss.r]&&grid[selBoss.r][selBoss.c];
@@ -124,20 +124,20 @@ function editClick(e){
     if(mx>=pr.px&&mx<=pr.px+pr.pw&&my>=pr.py&&my<=pr.py+pr.ph)return;
   }
   for(let i=0;i<movPlats.length;i++){const mp=movPlats[i];if(wx>=mp.x&&wx<=mp.x+mp.w&&wy>=mp.y&&wy<=mp.y+mp.h){selPlat=i;selDrip=null;return;}}
-  // V3.5 select a placed drip block → selects its whole connected group (drip pen active)
+  // select a placed drip block → selects its whole connected group (drip pen active)
   {const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
    if((pen===52||pen===53)&&tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&(grid[tr][tc]===52||grid[tr][tc]===53)){selDrip=dripGroupAt(tr,tc);selPlat=null;selBoss=null;return;}}
-  // V3.8/V4.0 select a placed boss (boss pen active) → opens its options panel
+  // /select a placed boss (boss pen active) → opens its options panel
   {const tc=Math.floor(wx/TS),tr=Math.floor(wy/TS);
    if((pen===54||pen===58||pen===59)&&tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&grid[tr][tc]===pen){selBoss={r:tr,c:tc};selPlat=null;selDrip=null;return;}}
   selDrip=null;selPlat=null;selBoss=null;paint(e);
 }
 function applyDrag(e){if(!dragBar)return;const{mx}=getCP(e);const t=Math.max(0,Math.min(1,(mx-dragBar.bx)/dragBar.bw));
   if(dragBar.boss){const bo=bossOpts[dragBar.boss]||(bossOpts[dragBar.boss]={});
-    if(dragBar.bt===58){bo.spawnN=Math.max(1,Math.round(1+t*3));return;}        // V4.0 Hive: 1–4 drones
-    if(dragBar.bt===59){bo.sweepSpd=Math.round((0.02+t*0.05)*1000)/1000;return;} // V4.0 Warden: 0.02–0.07
+    if(dragBar.bt===58){bo.spawnN=Math.max(1,Math.round(1+t*3));return;}        // Hive: 1–4 drones
+    if(dragBar.bt===59){bo.sweepSpd=Math.round((0.02+t*0.05)*1000)/1000;return;} // Warden: 0.02–0.07
     if(bo.arc==null)bo.arc=BOSS_DEFAULT_ARC; if(bo.shock==null)bo.shock=BOSS_DEFAULT_SHOCK;
-    bo.arc=Math.round((0.6+t*1.0)*100)/100;return;}  // V3.8 arc 0.6–1.6
+    bo.arc=Math.round((0.6+t*1.0)*100)/100;return;}  // arc 0.6–1.6
   if(dragBar.drip&&selDrip){const sp=Math.round((0.3+t*2.2)*10)/10;setDripGroupSpeed(selDrip,sp);return;}
   const mp=movPlats[dragBar.idx];if(dragBar.bar==='spd')mp.spd=Math.round(t*38+2)/10;if(dragBar.bar==='dist')mp.range=Math.max(1,Math.round(t*12))*TS;}
 function paint(e){
@@ -149,7 +149,7 @@ function paint(e){
   else {if((grid[tr][tc]===52||grid[tr][tc]===53)&&pen!==52&&pen!==53){delete dripSpeeds[tr+','+tc];if(selDrip&&selDrip.cells&&selDrip.cells.some(p=>p.r===tr&&p.c===tc))selDrip=null;}grid[tr][tc]=pen;}
 }
 document.addEventListener('keydown',e=>{
-  // V3.0 Ctrl+S quick-save (edit mode)
+  // Ctrl+S quick-save (edit mode)
   if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='S')){
     e.preventDefault();
     if(mode==='edit'){
@@ -167,7 +167,7 @@ document.addEventListener('keydown',e=>{
     }
     return;
   }
-  // V2.6 pause toggle
+  // pause toggle
   if((e.code==='Escape'||e.code==='KeyP')&&mode==='play'){togglePause();e.preventDefault();return;}
   if(paused)return; // block all input while paused
   if(mode==='edit'){

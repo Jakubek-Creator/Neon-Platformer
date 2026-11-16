@@ -1,7 +1,7 @@
 // Neon Platformer — Campaign: level loading, level select, save profiles, slot picker
 // ── LEVEL SELECT ──
 const TOTAL_SLOTS=50;
-// V5.0 progress lives inside the active save profile (1-3), so each save slot
+// progress lives inside the active save profile (1-3), so each save slot
 // keeps its own unlocks. With no profile active (editor) the old global keys are used.
 var activeProf=0;
 function _ap(){if(!activeProf)return null;var p=gProf(activeProf);if(!p){p={progress:1,score:0,date:Date.now(),campaignSlot:1};}if(!p.done){ // migrate pre-V5 saves from the old shared progress keys
@@ -13,7 +13,7 @@ function lsSetProgress(n){var p=_ap();if(p){p.progress=Math.max(p.progress||1,n)
 function lsDone(n){var p=_ap();if(p)return p.done.indexOf(n)>=0;return LS.getItem('neon_done_'+n)==='1';}
 function lsMarkDone(n){var p=_ap();if(p){if(p.done.indexOf(n)<0)p.done.push(n);sProf(activeProf,p);return;}LS.setItem('neon_done_'+n,'1');}
 function profNote(slot,addScore){var p=_ap();if(!p)return;if(slot)p.campaignSlot=slot;if(addScore)p.score=(p.score||0)+addScore;p.date=Date.now();sProf(activeProf,p);}
-// V5.1 the campaign lives in the levels/ folder: levels/campaign.json lists the
+// the campaign lives in the levels/ folder: levels/campaign.json lists the
 // level files in play order. When the game is served online it reads those files
 // directly; when opened from disk it uses levels/campaign.js, which tools/build.py
 // generates from the same files. Levels saved to slots in this browser still take
@@ -57,7 +57,7 @@ function renderLS(){
     {label:'World 4 — Toxic Swamp', col:THEME_SWATCHES[3]},
     {label:'World 5 — The Void',    col:THEME_SWATCHES[4]},
   ];
-  const shown=activeProf?Math.max(1,campaignLen()):TOTAL_SLOTS; // V5.0 players only see real levels
+  const shown=activeProf?Math.max(1,campaignLen()):TOTAL_SLOTS; // players only see real levels
   const lsb=document.getElementById('lsFree');if(lsb)lsb.style.display=activeProf?'none':'';
   for(let i=1;i<=shown;i++){
     if((i-1)%10===0){
@@ -90,7 +90,7 @@ function playSlot(n,keepLives){
     return;
   }
   currentSlot=n;profNote(n);
-  if(!keepLives)lives=DIFF_LIVES(); // V4.1 fresh start from menu resets lives; winNext carries them
+  if(!keepLives)lives=DIFF_LIVES(); // fresh start from menu resets lives; winNext carries them
   const data=lsGetData(n);
   hideLS();
   setMode('play');
@@ -111,7 +111,7 @@ function saveToSlot(){
   showSlotPicker();
 }
 
-// ── V3.0 SLOT PICKER ──
+// ── SLOT PICKER ──
 function showSlotPicker(){
   renderSlotPicker();
   document.getElementById('slotPickModal').classList.add('open');
@@ -164,7 +164,7 @@ function doPickSlot(n){
   toast('📌 Saved to slot '+n);
 }
 
-// ── V3.0 PUSH CAMPAIGN TO SLOTS ──
+// ── PUSH CAMPAIGN TO SLOTS ──
 function pushCampaignToSlots(){
   if(!_campSlots.length){toast('Add some levels first!');return;}
   if(!confirm('Write '+_campSlots.length+' campaign levels to slots 1–'+_campSlots.length+'?\n\nThis overwrites any existing data in those slots.'))return;
@@ -177,7 +177,7 @@ function pushCampaignToSlots(){
   toast('✓ '+_campSlots.length+' levels pushed to slots 1–'+_campSlots.length);
 }
 
-// ── V3.0 CAMPAIGN BUILDER PERSISTENCE ──
+// ── CAMPAIGN BUILDER PERSISTENCE ──
 function saveCampState(){
   try{
     // Store only name + thumb (strip full data to avoid quota; data already lives in namedSave)

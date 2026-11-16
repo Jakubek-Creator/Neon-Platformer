@@ -1,4 +1,4 @@
-// Neon Platformer — Grappling hook (V6.1)
+// Neon Platformer — Grappling hook
 // Own button: C or Shift (gamepad Y / triggers, touch: hook button).
 //   HOLD  → the hook catches a block and you SWING. ←/→ pump, ↑/↓ (W/S) reel in / out.
 //           Let go at any time: you fly off with a boost and a flip — throw again in

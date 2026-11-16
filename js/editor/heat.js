@@ -1,4 +1,4 @@
-// Neon Platformer — Playtest heatmap (V6.7)
+// Neon Platformer — Playtest heatmap
 // While anyone plays, the game quietly notes per level:
 //   where the blob DIES (red), where it gets HURT (orange), and where it SPENDS TIME (blue —
 //   bright blue = players hang around or get stuck there), plus runs started / finished.

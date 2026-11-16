@@ -1,4 +1,4 @@
-// Neon Platformer — Game feel (V5.7)
+// Neon Platformer — Game feel
 // Smooth "trauma" screen shake, hit-stop (tiny freeze on hits), slow motion on boss
 // kills, a camera that looks ahead the way you run, hurt / flash overlays and
 // falling speed streaks. FEEL.on=false turns all of it off.
@@ -6,7 +6,7 @@ var FEEL={on:!(typeof MS!=='undefined'&&MS.feel===false),trauma:0,kx:0,ky:0,stop
   pg:false,pvy:0,streaks:[]};
 function feelShake(a){FEEL.trauma=Math.min(1,FEEL.trauma+a/16);}
 function feelKick(dx,dy){FEEL.kx+=dx;FEEL.ky+=dy;}
-function feelStop(n){}   // V6.4 hit-stop removed: the game never pauses on hits or kills
+function feelStop(n){}   // hit-stop removed: the game never pauses on hits or kills
 function feelSlow(scale,ticks){if(FEEL.on){FEEL.slow=scale;FEEL.slowT=FEEL.slowMax=ticks;}}
 function feelFlash(col,a){if(FEEL.on){FEEL.flash=Math.max(FEEL.flash,a);FEEL.flashCol=col;}}
 function feelReset(){FEEL.trauma=0;FEEL.kx=FEEL.ky=0;FEEL.stop=0;FEEL.slow=1;FEEL.slowT=0;FEEL.flash=0;FEEL.hurt=0;FEEL.streaks.length=0;}
@@ -18,7 +18,7 @@ function feelEnemyDied(e){if(!FEEL.on)return;
   const boss=e.type==='sentinel'||e.type==='hive'||e.type==='warden',big=e.w>40;
   if(boss){feelStop(10);feelShake(14);feelSlow(0.25,70);feelFlash('#ffffff',0.55);}
   else{feelStop(big?6:4);feelShake(big?7:4);feelFlash(ENEMY_COL&&ENEMY_COL[e.type]||'#ffffff',0.08);}}
-function feelHurt(){if(!FEEL.on)return;feelShake(5);   // V6.3 no freeze when you get hit
+function feelHurt(){if(!FEEL.on)return;feelShake(5);   // no freeze when you get hit
  FEEL.hurt=1;feelFlash('#ff2040',0.22);}
 function feelDeath(){if(!FEEL.on)return;feelSlow(0.35,45);feelShake(10);}
 // once per game tick

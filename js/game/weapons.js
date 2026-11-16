@@ -29,10 +29,10 @@ function fireSword(){
   enemies.forEach(e=>{if(e.x+e.w>sx&&e.x<sx+38&&e.y+e.h>sy&&e.y<sy+p.h){e.hp-=(e.type==='shield'?3:2);e.inv=25;spawnParts(e.x+e.w/2,e.y+e.h/2,'#CC88FF',8);}});
   spawnParts(p.x+p.w/2+(p.facing*18),p.y+p.h/2,'#AA44FF',6);
 }
-// V4.0 8-direction aim — aim with held movement keys; down-aim air-only (ground = stomp)
+// 8-direction aim — aim with held movement keys; down-aim air-only (ground = stomp)
 function getAimVector(){
   const p=player;
-  const ta=touchKeys.aimV2||touchKeys.aimV;if(ta)return{ax:ta.x,ay:ta.y};   // V5.8 touch aim (fire-button drag or arc)
+  const ta=touchKeys.aimV2||touchKeys.aimV;if(ta)return{ax:ta.x,ay:ta.y};   // touch aim (fire-button drag or arc)
   const up=keys['ArrowUp']||keys['KeyW']||touchKeys.aimUp;
   const down=(keys['ArrowDown']||keys['KeyS']||touchKeys.down)&&!p.grounded;
   const left=keys['ArrowLeft']||keys['KeyA']||touchKeys.left||gyroKeys.left;

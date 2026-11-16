@@ -1,8 +1,8 @@
 // Neon Platformer — Fixed-timestep game loop
 // ── LOOP ──
-// V2.7: cap to ~60fps so 120/144Hz monitors don't run the game at double speed
+// cap to ~60fps so 120/144Hz monitors don't run the game at double speed
 let _lastFrameTime=0;
-// V5.0 fixed 60Hz simulation: physics is per-tick, so 90/120Hz screens no
+// fixed 60Hz simulation: physics is per-tick, so 90/120Hz screens no
 // longer slow the game down (90Hz used to run at ~45 ticks/sec) and
 // slow devices catch up instead of running in slow motion.
 function _isTouch(){return matchMedia('(pointer:coarse)').matches;}
@@ -28,7 +28,7 @@ function loop(ts){
   _acc+=Math.min(dt,100)*feelTimeScale();
   var n=0;
   try{
-    // V5.5: exact 60 Hz step (16.667 was a hair too long, so ~half of all 60 Hz frames
+    // exact 60 Hz step (16.667 was a hair too long, so ~half of all 60 Hz frames
     // ran no tick and the next ran two — a freeze then a jump)
     while(_acc>=TICK_MS-0.05&&n<4){smoothSnapshot();if(feelGate()){update();audioWatch();playerAnimTick();enemyAnimTick();tilesTick();movesTick();tpadTick();skinTick();twistTick();grappleTickFx();heatTick();}feelTick();_acc-=TICK_MS;n++;}
     if(n===4)_acc=0;

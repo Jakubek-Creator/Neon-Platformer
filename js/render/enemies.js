@@ -1,4 +1,4 @@
-// Neon Platformer — Enemy look & animation (V5.3)
+// Neon Platformer — Enemy look & animation
 // New drawings for: walker, sniper, climber, sentinel, hive, warden.
 // Drone, turret, shield, charger and bomber keep their original look (in draw.js).
 // Same sizes, hitboxes and behaviour; only the drawing changes.

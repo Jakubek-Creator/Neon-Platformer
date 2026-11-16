@@ -1,16 +1,16 @@
 // Neon Platformer — Main game update (one 60Hz tick)
 // ── UPDATE ──
 function update(){
-  if(mode!=='play'||won||paused)return;  // V2.6 pause check
+  if(mode!=='play'||won||paused)return;  // pause check
   frame++;
-  // V1.4 shake
+  // shake
   if(FEEL.on){if(shakeAmt>0){feelShake(shakeAmt);shakeAmt=0;}}else if(shakeAmt>0){shakeX=(Math.random()-.5)*shakeAmt*2;shakeY=(Math.random()-.5)*shakeAmt*2;shakeAmt*=0.82;if(shakeAmt<0.3)shakeAmt=0;}else{shakeX=0;shakeY=0;}
-  // V1.7: freeze game logic during death animation (draw() still runs for the overlay)
+  // freeze game logic during death animation (draw() still runs for the overlay)
   updateDeathSeq();
   if(startHintTimer>0)startHintTimer--;
   if(deathTimer>0){deathTimer--;return;}
   if(pickupFlash.t>0)pickupFlash.t--;
-  // V4.0 rising lava (Lava theme only)
+  // rising lava (Lava theme only)
   if(levelTheme===2&&lavaRiseSpeed>0){
     lavaLevel-=lavaRiseSpeed;
     if(lavaLevel<-TS*2)lavaLevel=-TS*2;
@@ -22,13 +22,13 @@ function update(){
   if(!p._wasGnd&&p.grounded)p._landAnim=9;if(p._landAnim>0)p._landAnim--;p._wasGnd=p.grounded;
   if(plasmaCharging&&(keys['KeyZ']||keys['KeyX']))plasmaCharge=Math.min(plasmaCharge+1.2,60);
   const wet=tileAt(p.x+p.w/2,p.y+p.h*.6)===2||twistWet();p.wet=wet;
-  // V3.6: snappier feel — faster run, slightly stronger gravity + jump, higher fall cap
+  // snappier feel — faster run, slightly stronger gravity + jump, higher fall cap
   const spd=(wet?2.3:4.8)*(pups.speed>0?1.6:1),grav=wet?0.2:0.6,maxFall=wet?3.4:15;
   const maxJumps=p._bounceJumps?3:pups.jump>0?3:2;
   if(p.grounded)p._bounceJumps=false;
   const uf=tileAt(p.x+p.w/2,p.y+p.h+2);
   const onIce=(uf===8)||(levelTheme===1&&p.grounded&&solid(uf));
-  if(movesPre(p,grav,wet)){}  // V5.8 dash / pound hang / wall-jump push-off
+  if(movesPre(p,grav,wet)){}  // dash / pound hang / wall-jump push-off
   else if(keys['ArrowLeft']||keys['KeyA']||touchKeys.left||gyroKeys.left){const s2=spd*tpadSpeed();p.vx=onIce?Math.max(p.vx-(wet?0.5:0.55),-s2):-s2;p.facing=-1;}
   else if(keys['ArrowRight']||keys['KeyD']||touchKeys.right||gyroKeys.right){const s2=spd*tpadSpeed();p.vx=onIce?Math.min(p.vx+(wet?0.5:0.55),s2):s2;p.facing=1;}
   else p.vx*=onIce?0.985:(wet?0.80:0.68);
@@ -61,15 +61,15 @@ function update(){
       startWinSequence(p.x+p.w/2,p.y);
     }
   }
-  if(p.y>ROWS*TS+60)damage();  // V3.8 fall-death uses world height (camY may be scrolled)
+  if(p.y>ROWS*TS+60)damage();  // fall-death uses world height (camY may be scrolled)
   // keys
   for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++){if(!grid[r])continue;const kt=grid[r][c];if(kt!==16&&kt!==17)continue;const kx=c*TS+TS/2,ky=r*TS+TS/2,dx=(p.x+p.w/2)-kx,dy=(p.y+p.h/2)-ky;if(dx*dx+dy*dy<(TS*1.3)**2){const col=kt===16?'red':'blue';grid[r][c]=0;doorState[col]=true;spawnParts(kx,ky,kt===16?'#FF5555':'#5555FF',15);toast((kt===16?'🔴':'🔵')+' key — '+col+' doors open!');}}
   // vents
   const pc=Math.floor((p.x+p.w/2)/TS);for(let dc=-1;dc<=1;dc++){const c=pc+dc;if(c<0||c>=COLS)continue;for(let r=0;r<ROWS;r++){if(!grid[r]||grid[r][c]!==23)continue;const ph=getVentPhase(c,r);if(ph<0.4)continue;if(p.x+p.w>c*TS&&p.x<c*TS+TS&&p.y+p.h>(r-4)*TS&&p.y<r*TS)damage();}}
-  // V2.5 SAW — always damages on contact
+  // SAW — always damages on contact
   if((mid===48||flo===48)&&player.inv===0)damage();
   crushers.forEach(updateCrusher);
-  // V2.5 FLAME JETS
+  // FLAME JETS
   flameJets.forEach(function(fj){
     fj.timer=(fj.timer+1)%120;
     fj.active=fj.timer>=80&&fj.timer<112;
@@ -85,7 +85,7 @@ function update(){
       if(player.x+player.w>fj.gx*TS&&player.x<fj.gx*TS+TS&&player.y+player.h>fy1&&player.y<fy2)damage();
     }
   });
-  // V3.3/3.4 DRIP BLOCKS (tile 52 acid / 53 lava) — multi-drop, droplet+underside damage, brief puddle on landing surface
+  // /3.4 DRIP BLOCKS (tile 52 acid / 53 lava) — multi-drop, droplet+underside damage, brief puddle on landing surface
   dripBlocks.forEach(function(db){
     const bx=db.gx*TS, byBottom=(db.gy+1)*TS;
     const spd=db.speed||1;
@@ -109,7 +109,7 @@ function update(){
       }
       // find first solid tile beneath the drop's column → land on its TOP surface
       const tc=Math.floor(d.x/TS), tr=Math.floor(d.y/TS);
-      const offWorld = d.y>ROWS*TS+20;  // V3.8 world height (camY may scroll)
+      const offWorld = d.y>ROWS*TS+20;  // world height (camY may scroll)
       const onSolid = tr>=0&&tr<ROWS&&tc>=0&&tc<COLS&&grid[tr]&&solid(grid[tr][tc]);
       if(onSolid||offWorld){
         const surfY = onSolid ? tr*TS : Math.floor(d.y/TS)*TS; // top of the block it lands on
@@ -126,7 +126,7 @@ function update(){
       if(pu.life<=0) db.puddles.splice(i,1);
     }
   });
-  // V2.5 FALLING ROCKS
+  // FALLING ROCKS
   fallingRocks.forEach(updateFallingRock);
   // ── CRUMBLE BLOCKS ──
   // Start crumbling when player stands on tile 42
@@ -154,12 +154,12 @@ function update(){
   }
   // camera
   const maxCam=Math.max(0,COLS*TS-W);camX+=(Math.max(0,Math.min(maxCam,p.x-W*0.35+(FEEL.on?FEEL.look:0)))-camX)*0.1;
-  // V3.8 vertical camera follow — only scrolls when the level is taller than the viewport.
+  // vertical camera follow — only scrolls when the level is taller than the viewport.
   // A deadzone band keeps small hops from jittering the view; eases toward the target like camX.
   const maxCamY=camMaxY();
   if(maxCamY>0){
     const pcy=p.y+p.h/2;                 // player centre Y (world)
-    const band=H*CAM.bandY;              // vertical deadzone half-height (V4.2)
+    const band=H*CAM.bandY;              // vertical deadzone half-height
     const top=camY+H*CAM.anchorY-band, bot=camY+H*CAM.anchorY+band;
     let wantY=camY;
     if(pcy<top)      wantY=camY+(pcy-top);
@@ -189,13 +189,13 @@ function update(){
       if(bdx*bdx+bdy*bdy<hitR*hitR){
         if(b.type==='freeze'){e.frozen=180;spawnParts(b.x,b.y,'#88EEFF',6);hit=true;return true;}
         if(e.type==='shield'&&b.type!=='sword'){const blocked=(e.facing===1&&b.vx<0)||(e.facing===-1&&b.vx>0);if(blocked){spawnParts(b.x,b.y,'#4488FF',4);hit=true;return true;}}
-        // V3.8 Sentinel: rotating shield blocks shots from the covered arc (unless dropped for a volley)
+        // Sentinel: rotating shield blocks shots from the covered arc (unless dropped for a volley)
         if(e.type==='sentinel'&&e.shieldDown<=0){
           const hitAng=Math.atan2(b.y-(e.y+e.h/2),b.x-(e.x+e.w/2));
           let diff=Math.abs(((hitAng-e.ang+Math.PI*3)%(Math.PI*2))-Math.PI);
           if(diff<1.1){spawnParts(b.x,b.y,'#4488FF',5);hit=true;return true;}
         }
-        // V4.0 Hive: armored shell blocks all damage while sealed (weak point only when open)
+        // Hive: armored shell blocks all damage while sealed (weak point only when open)
         if(e.type==='hive'&&e.state==='sealed'){spawnParts(b.x,b.y,'#639922',4);hit=true;return b.type==='plasma'?b.life>0:true;}
         e.hp-=(b.type==='plasma'?3:1);e.inv=20;spawnParts(b.x,b.y,'#FF4444',5);
         if(b.type==='plasma'){spawnExplosion(b.x,b.y,b.r*2.5,WDEFS.plasma.col);return e.hp>0;}
@@ -216,7 +216,7 @@ function update(){
   laserBeams=laserBeams.filter(lb=>{lb.life--;return lb.life>0;});
   eBullets=eBullets.filter(b=>{if(b.grav)b.vy+=b.grav;b.x+=b.vx;b.y+=b.vy;b.life--;if(b.life<=0)return false;if(solid(tileAt(b.x,b.y))){spawnParts(b.x,b.y,b.acid?'#5DCAA5':'#FF6600',3);return false;}const dx=b.x-(p.x+p.w/2),dy=b.y-(p.y+p.h/2);if(dx*dx+dy*dy<(p.w/2+4)**2){damage();return false;}return true;});
   coins=coins.filter(c=>{if(c.vy!=null){c.y+=c.vy;c.vy+=0.4;if(solid(tileAt(c.x,c.y+8)))c.vy=null;}const dx=(p.x+p.w/2)-c.x,dy=(p.y+p.h/2)-c.y;if(dx*dx+dy*dy<256){score+=10;runCoins++;updateHUD();spawnParts(c.x,c.y,'#EF9F27',8);coinPops.push({x:c.x,y:c.y,life:50,vy:-0.9});return false;}return true;});
-  // V4.1 advance coin pickup popups
+  // advance coin pickup popups
   for(let i=coinPops.length-1;i>=0;i--){const cp=coinPops[i];cp.y+=cp.vy;cp.vy*=0.96;cp.life--;if(cp.life<=0)coinPops.splice(i,1);}
   powerOrbs=powerOrbs.filter(o=>{
     if(o.vy!=null){o.y+=o.vy;o.vy+=0.3;if(solid(tileAt(o.x,o.y+8)))o.vy=null;}o.life--;
@@ -233,7 +233,7 @@ function update(){
     }
     return o.life>0;
   });
-  // V1.4 touch fire/cycle
+  // touch fire/cycle
   if(touchKeys.fire&&!touchKeys._lf&&mode==='play'&&!won)fireWeapon();
   touchKeys._lf=touchKeys.fire;
   if(touchKeys.cycle&&!touchKeys._lc&&mode==='play'&&!won)cycleW(1);
